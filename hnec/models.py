@@ -33,12 +33,13 @@ class Archive(models.Model):
         return self.name
 
 class Files(models.Model):
+    name = models.CharField(max_length = 50)
     path = models.URLField()
     create_date = models.DateTimeField(auto_now=False,auto_now_add=True)
     archive_id =  models.ForeignKey(Archive)
     status = models.BoolenField(default=True)
     def __unicode__(self):
-        return self.path
+        return self.name
 
 class Employee(models.Model):
     user = models.OneToOneField(User)
