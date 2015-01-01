@@ -7,6 +7,10 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+#importing json lib
+import json
+from pprint import pprint
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -55,8 +59,7 @@ WSGI_APPLICATION = 'archive.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-import json
-from pprint import pprint
+
 json_data=open('archive/config.json')
 data = json.load(json_data)
 json_data.close()
