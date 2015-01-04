@@ -1,230 +1,247 @@
 <!DOCTYPE html>
 {% block html %}
-<html dir="rtl">
-    {% block head %}
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
-        {% block title %}
-        <title>  </title>
+    <html dir="rtl">
+        {% block head %}
+            <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="description" content="">
+                <meta name="author" content="">
+                <link rel="icon" href="../../favicon.ico">
+                {% block title %}
+                <title>  </title>
+                {% endblock %}
+                <!-- Bootstrap core CSS -->
+                <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+                <link href="/static/css/jumbotron-narrow.css" rel="stylesheet">
+                <link href="/static/css/bootstrap-rtl.min.css" rel="stylesheet">
+                <link href="/static/css/bootstrap-editable.css" rel="stylesheet">
+                <link href="/static/css/style.css" rel="stylesheet"> 
+                <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+            </head>
         {% endblock %}
-        <!-- Bootstrap core CSS -->
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/static/css/jumbotron-narrow.css" rel="stylesheet">
-        <link href="/static/css/bootstrap-rtl.min.css" rel="stylesheet">
-        <link href="/static/css/bootstrap-editable.css" rel="stylesheet">
-        <link href="/static/css/style.css" rel="stylesheet"> 
-        <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    </head>
-    {% endblock %}
-    {% block body %}
-    <body class="bodyPaddingTop">
-        {% block navigationBar %}
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="row">
-                    <p></p>
-                    <div class="col-md-3 col-md-push-8 ">
-                        <img class="pull-left" src="/static/images/hnec_logo.png">
-                    </div>
-                    <div class="col-md-4 ">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Link</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </nav>
-        {% endblock %}
-        
-        {% block rowOne %}
-        <div class="row" >
-            {% block list %}
-            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-xs-offset-1 col-sm-offset-1">
-                <div class="panel panel-default" >
-                    <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
-                    <div class="panel-body">
-                         <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
-                    </div>
-                    <div class="list-group" class="list-block">
-                        <a href="#" class="list-group-item"><font size="4" >الــوارد </font></a>
-                        <a href="#" class="list-group-item"><font size="4" >الـصـادر </font></a>
-                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
-                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
-                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
-                    </div>
-                </div>
-            </div>
-            {% endblock %}
-            {% block table %}
-            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4  ">
-                                <font size="4" >الارشـيـف </font></a>
+        {% block body %}
+            <body id="home" class="bodyPaddingTop">
+                {% block navigationBar %}
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <p></p>
+                                <div class="col-md-3 col-md-push-8 ">
+                                    <img class="pull-left" src="/static/images/hnec_logo.png">
+                                </div>
+                                <div class="col-md-4 ">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">addArchive</a></li>
+                                            <li><a href="#">department</a></li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
+                                                    <li><a href="#">Action</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">Separated link</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div><!-- /.navbar-collapse -->
+                                </div>
                             </div>
-                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                                <font size="4" >الرقم الاشاري </font></a>
-                                <input type="text" placeholder="البحث">
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <th id="name">Name</th>
-                            <th id="email">Email</th>
-                            <th id="phone">Phone</th>
-                            <th id="addr">Address</th>
-                            <th id="addr">Address</th>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                        <tr>
-                            <td headers="name">John Doe</td>
-                            <td headers="email">someone@example.com</td>
-                            <td headers="phone">+45342323</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                        </tr>
-                    </table>
-                </div>
-                {% block pagination %}
-                    <nav pull-center>
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        </ul>
+                        </div><!-- /.container-fluid -->
                     </nav>
                 {% endblock %}
-            </div>
-            {% endblock %}
-            {% block buttonList %}
-            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                <div class="panel panel-primary" >
-                    <div class="panel-body ">
-                        <button type="button" class="btn btn-block btn-primary "><font size="4" >إضـافـة ارشـيـف جديد </font></button>
-                        <button type="button" class="btn btn-block btn-primary ">Small button</button>
-                        {% block date %}
-                        <form action="" class="form"  role="form">
-                            <div class="form-group">
-                                <label for="dtp_input2" >Date Picking</label>
-                                <div class="input-group date form_date " data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input size="13" type="text" value="" readonly>
-                                    <span class="input-group-addon ">
-                                        <span class="glyphicon glyphicon-remove">
-                                            
-                                        </span>
-                                    </span>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar">
-                                            
-                                        </span>
-                                    </span>
-                                </div>
-                                <input type="hidden" id="dtp_input2" value="" />
-                            </div>
-                        </form>
-                        {% endblock %}
+                {% block search %}
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel-body">
+                            <nav class="navbar navbar-default">
+                                <form class="form-inline">
+                                    <div class="row">
+                                        <div class="col-md-6"> 
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' class="form-control" data-date-format="YYYY/MM/DD"/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker3'>
+                                                    <input type='text' class="form-control" data-date-format="YYYY/MM/DD"/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <button type="button" class="btn btn-primary btn-block">Block level button</button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endblock %}
-        </div>
+                {% endblock %}
+                {% block rowOne %}
+                    <div class="panel-body">
+                        <div class="row" >
+                            {% block list %}
+                            <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
+                                <div class="panel panel-default" >
+                                    <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
+                                    <div class="panel-body">
+                                         <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
+                                    </div>
+                                    <div class="list-group" class="list-block">
+                                        <a href="#" class="list-group-item"><font size="4" >الــوارد </font></a>
+                                        <a href="#" class="list-group-item"><font size="4" >الـصـادر </font></a>
+                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
+                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
+                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endblock %}
+                            {% block table %}
+                            <div class="  col-md-6 col-sm-6   ">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="  col-md-3 col-sm-3 col-xs-3  ">
+                                                <font size="4" >الارشـيـف </font></a>
+                                            </div>
+                                            <div class="  col-md-8 col-sm-8 col-xs-8  ">
+                                                <font size="4" >الرقم الاشاري </font></a>
+                                                <input type="text" placeholder="البحث">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <tr>
+                                            <th id="name">Name</th>
+                                            <th id="email">Email</th>
+                                            <th id="phone">Phone</th>
+                                            <th id="addr">Address</th>
+                                            <th id="addr">Address</th>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                        <tr>
+                                            <td headers="name">John Doe</td>
+                                            <td headers="email">someone@example.com</td>
+                                            <td headers="phone">+45342323</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                {% block pagination %}
+                                    <nav pull-center>
+                                        <ul class="pagination">
+                                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        </ul>
+                                    </nav>
+                                {% endblock %}
+                            </div>
+                            {% endblock %}
+                            {% block buttonList %}
+                                <!-- <div class="col-md-3 col-sm-3 ">
+                                    <div class="panel panel-primary" >
+                                        
+                                    </div>
+                                </div> -->
+                            {% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+                            
+                {% block footer %}
+                    <div class="panel">
+                        <div class="row">
+                            <footer class="nav">
+                                <nav class="col-lg-12">
+                                    <ul class="breadcrumb">
+                                        <li><a href="#">Hello world</a></li>
+                                        <li><a href="#">Thank you for use the website</a></li>
+                                        <li><a href="#">Thank you for use the website</a></li>
+                                        <li><a href="#">Thank you for use the website</a></li>
+                                        <li><a href="#">Good </a></li>
+                                        <li><a href="#">بداية الصفحه</a></li>
+                                    </ul>
+                                </nav>
+                            </footer>
+                        </div>
+                    </div>
+                {% endblock %}
+                {% block script %}
+                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+                    <script src = "/static/js/bootstrap.min.js"></script>
+                    <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
+                    <script src = "/static/js/jquery.validate.min.js"></script>
+                    <script src = "/static/js/script_nav.js"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+                {% endblock %}
+            </body>
         {% endblock %}
-        
-        {% block footer %}
-        <div class="row footer nav">
-        </div>
-        {% endblock %}
-        <script src = "/static/js/jquery-1.11.1.min.js"></script>
-        <script src = "/static/js/bootstrap.min.js"></script>
-        <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
-        <script src = "/static/js/jquery.validate.min.js"></script>
-        <script src = "/static/js/script_nav.js"></script>
-        <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-    </body>
-    {% endblock %}
-</html>
+    </html>
 {% endblock %}

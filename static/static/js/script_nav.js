@@ -1,4 +1,11 @@
 $(function(){
+	//highlight the current nav
+	$("#home a:contains('Home')").parent().addClass('active');
+	$("#home a:contains('addActive')").parent().addClass('active');
+	$("#home a:contains('department')").parent().addClass('active');
+	// $("#home a:contains('Home')").parent().addClass('active');
+	// $("#home a:contains('Home')").parent().addClass('active');
+
 	//Make menus drop automatically
 	$('ul.nav li.dropdown').hover(function() {
 		$('.dropdown-menu',this).fadeIn();
@@ -6,37 +13,25 @@ $(function(){
 		$('.dropdown-menu',this).fadeOut('fast');
 	}); //hover
 
-
-	$('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
+	$(function () {
+		$('#datetimepicker1').datetimepicker({
+			pickTime: false
+		});
+	});
+	$(function () {
+		$('#datetimepicker3').datetimepicker({
+			pickTime: false
+		});
+	});
+    $(function () {
+    	$('#datetimepicker9').datetimepicker({
+			pickTime: false
+		});
+	});
+	$(function () {
+    	$('#datetimepicker10').datetimepicker({
+			pickTime: false
+		});
     });
-	$('.form_date').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
-	$('.form_time').datetimepicker({
-        language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 1,
-		minView: 0,
-		maxView: 1,
-		forceParse: 0
-    });
-
+	
 }); //jQuery is loaded

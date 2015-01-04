@@ -12,31 +12,29 @@ def home(request):
     c.update(csrf(request))
     return render_to_response('base.html',c)
 
+def addFolder(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('base.html',c)
+
+def logIn(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('logIn.html',c)
+
+
+def editArchive(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('editArchive.html',c)
+
+
+def addArchive(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('addArchive.html',c)
+
 def department(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('department.html',c)
-
-def auth_view(request):
-    email = request.POST.get('email','')
-    password = request.POST.get('password','')
-    user = auth.authenticate(username=email, password=password)
-    if user is not None:
-        auth.login(request,user) #this login tell django that we want this user to login
-        return HttpResponseRedirect('/loggedin/')
-    else:
-        return HttpResponseRedirect('/invaild_login/')
-
-@login_required(login_url='/')
-def loggedin(request):
-    print("it worked")
-    return render_to_response('loggedin.html',
-        {'full_name': request.user.last_name}
-        )
-
-def invaild_login(request):
-    return render_to_response('invaild_login.html')
-
-def logout(request):
-    auth.logout(request)
-    return HttpResponseRedirect('/')
