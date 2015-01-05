@@ -1,6 +1,6 @@
 {
 	"ENGINE":"django.db.backends.postgresql_psycopg2",
-	"NAME":"db",
-	"USER":"faisal",
-	"PASSWORD":"1314ff"
+	"NAME":"***",
+	"USER":"***",
+	"PASSWORD":"***"
 }
