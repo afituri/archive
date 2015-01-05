@@ -92,8 +92,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3 ">
-                                            <button type="button" class="btn btn-info btn-lg btn-block">إضافة أرشيف جديد</button>
-
+                                            <button type="button" class="btn btn-block btn-success "><font size="4" >إضافة أرشيف جديد </font> </button>
                                         </div>
                                     </div>
                                 </form>
@@ -109,9 +108,11 @@
                             <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
                                 <div class="panel panel-default" >
                                     <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
+                                    {% block addFolder %}
                                     <div class="panel-body">
                                          <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
                                     </div>
+                                    {% endblock %}
                                     <div class="list-group" class="list-block">
                                         <a href="#" class="list-group-item"><font size="4" >الــوارد </font></a>
                                         <a href="#" class="list-group-item"><font size="4" >الـصـادر </font></a>

@@ -23,15 +23,6 @@ $(function(){
 			pickTime: false
 		});
 	});
-    $(function () {
-    	$('#datetimepicker9').datetimepicker({
-			pickTime: false
-		});
-	});
-	$(function () {
-    	$('#datetimepicker10').datetimepicker({
-			pickTime: false
-		});
-    });
+    
 	
 }); //jQuery is loaded
