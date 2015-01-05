@@ -1,12 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User 
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
  
 
-
-def upload_file(instance,name):
-    return os.path.join(os.path.dirname(BASE_DIR),"learn_django", "static")+"/up/"+name
 
 class Department(models.Model):
     name = models.CharField(max_length = 50)
@@ -46,7 +41,7 @@ class Archive(models.Model):
 
 class Files(models.Model):
     name = models.CharField(max_length = 50)
-    path = models.FileField(upload_to=upload_file)
+    path = models.CharField(max_length = 300)
     create_date = models.DateTimeField(auto_now=False,auto_now_add=True)
     archive_id =  models.ForeignKey(Archive)
     status = models.BoolenField(default=True)
