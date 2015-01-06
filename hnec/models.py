@@ -54,8 +54,6 @@ class Employee(models.Model):
     user = models.OneToOneField(User)
     department_id = models.ForeignKey(Department)
 
-    def __unicode__(self):
-        return self.department_id
 
 
 class Log(models.Model):
