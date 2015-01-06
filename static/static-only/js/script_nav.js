@@ -1,4 +1,10 @@
 $(function(){
+	//highlight the current nav
+	$("#home a:contains('Home')").parent().addClass('active');
+	$("#home a:contains('addActive')").parent().addClass('active');
+	$("#home a:contains('department')").parent().addClass('active');
+	// $("#home a:contains('Home')").parent().addClass('active');
+	// $("#home a:contains('Home')").parent().addClass('active');
 
 	//Make menus drop automatically
 	$('ul.nav li.dropdown').hover(function() {
