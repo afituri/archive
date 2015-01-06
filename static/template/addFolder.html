@@ -1,4 +1,66 @@
 {% extends "base.html" %}
-{% block table %}{% endblock %}
+{% block table %}
+    <div class="  col-md-6 col-sm-6   ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="  col-md-3 col-sm-3 col-xs-3  ">
+                        <font size="4" >الارشـيـف </font></a>
+                    </div>
+                    <div class="  col-md-8 col-sm-8 col-xs-8  ">
+                        <font size="4" >الرقم الاشاري </font></a>
+                        <input type="text" placeholder="البحث">
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th id="name">الاسـم </th>
+                    <th id="number">العدد</th>
+                    <th id="edit">تعديل</th>
+                    <th id="delete">حذف</th>
+                </tr>
+                <tr>
+                    <td headers="name">John Doe</td>
+                    <td headers="email">one@example.com</td>
+                    <td headers="phone">+45342323</td>
+                    <td headers="addr">Sandnes,Norway</td>
+                </tr>
+                <tr>
+                    <td headers="name">John Doe</td>
+                    <td headers="email">one@example.com</td>
+                    <td headers="phone">+45342323</td>
+                    <td headers="addr">Sandnes,Norway</td>
+                </tr>
+                <tr>
+                    <td headers="name">John Doe</td>
+                    <td headers="email">one@example.com</td>
+                    <td headers="phone">+45342323</td>
+                    <td headers="addr">Sandnes,Norway</td>
+                </tr>
+                <tr>
+                    <td headers="name">John Doe</td>
+                    <td headers="email">one@example.com</td>
+                    <td headers="phone">+45342323</td>
+                    <td headers="addr">Sandnes,Norway</td>
+                </tr>
+                <tr>
+                    <td headers="name">John Doe</td>
+                    <td headers="email">one@example.com</td>
+                    <td headers="phone">+45342323</td>
+                    <td headers="addr">Sandnes,Norway</td>
+                </tr>
+            </table>
+        </div>
+        {% block pagination %}
+            <nav pull-center>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                </ul>
+            </nav>
+        {% endblock %}
+    </div>
+{% endblock %}
 {% block pagination %}{% endblock %}
 {% block buttonList %}{% endblock %}

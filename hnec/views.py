@@ -12,10 +12,10 @@ from django.contrib.auth.decorators import login_required
 #     c.update(csrf(request))
 #     return render_to_response('base.html',c)
 
-# def addFolder(request):
-#     c = {}
-#     c.update(csrf(request))
-#     return render_to_response('base.html',c)
+def addFolder(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('base.html',c)
 
 def home(request):
     c = {}
