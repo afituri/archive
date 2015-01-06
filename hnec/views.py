@@ -41,4 +41,3 @@ def department(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('department.html',c)
-
