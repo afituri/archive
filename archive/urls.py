@@ -4,10 +4,12 @@ from hnec.views import *
 
 urlpatterns = patterns('',
 
-	url(r'^$', home),
+	url(r'^$', logIn),
     url(r'^department/$', department),
     url(r'^addArchive/$', addArchive),
     url(r'^editArchive/$', editArchive),
     url(r'^addFolder/$', addFolder),
+    url(r'^addDepartment/$', addDepartment),
+    url(r'^cpanel/$', cpanel),
 
 )

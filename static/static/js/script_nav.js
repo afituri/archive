@@ -1,10 +1,11 @@
 $(function(){
 	//highlight the current nav
-	$("#home a:contains('Home')").parent().addClass('active');
-	$("#home a:contains('addActive')").parent().addClass('active');
-	$("#home a:contains('department')").parent().addClass('active');
-	// $("#home a:contains('Home')").parent().addClass('active');
-	// $("#home a:contains('Home')").parent().addClass('active');
+	$("#addFolder a:contains('addFolder')").parent().addClass('active');
+	$("#addDepartment a:contains('addDepartment')").parent().addClass('active');
+	$("#addArchive a:contains('addArchive')").parent().addClass('active');
+	$("#editArchive a:contains('editArchive')").parent().addClass('active');
+	$("#department a:contains('department')").parent().addClass('active');
+	$("#cpanel a:contains('cpanel')").parent().addClass('active');
 
 	//Make menus drop automatically
 	$('ul.nav li.dropdown').hover(function() {

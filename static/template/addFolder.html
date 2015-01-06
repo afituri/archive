@@ -1,5 +1,15 @@
 {% extends "base.html" %}
-{% block table %}
+            {% block bodyId %}
+                <body id="addFolder" class="bodyPaddingTop">
+            {% endblock %}
+            {% block navbarList %}
+            	<li><a href="../addFolder">addFolder</a></li>
+                <li><a href="../addArchive">addArchive</a></li>
+                <li><a href="../editArchive">editArchive</a></li>
+                <li><a href="../department">department</a></li>
+            {% endblock %}
+{% block search %}{% endblock %}
+{% block table %}	
     <div class="  col-md-6 col-sm-6   ">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -62,5 +72,4 @@
         {% endblock %}
     </div>
 {% endblock %}
-{% block pagination %}{% endblock %}
-{% block buttonList %}{% endblock %}
+

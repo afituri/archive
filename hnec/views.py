@@ -7,27 +7,30 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-# def home(request):
-#     c = {}
-#     c.update(csrf(request))
-#     return render_to_response('base.html',c)
+def cpanel(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('cpanel.html',c)
 
 def addFolder(request):
     c = {}
     c.update(csrf(request))
-    return render_to_response('base.html',c)
+    return render_to_response('addFolder.html',c)
 
-def home(request):
+def addDepartment(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('addDepartment.html',c)
+
+def logIn(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('logIn.html',c)
-
 
 def editArchive(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('editArchive.html',c)
-
 
 def addArchive(request):
     c = {}
