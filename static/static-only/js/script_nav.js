@@ -1,10 +1,4 @@
 $(function(){
-	//highlight the current nav
-	$("#home a:contains('Home')").parent().addClass('active');
-	$("#home a:contains('addActive')").parent().addClass('active');
-	$("#home a:contains('department')").parent().addClass('active');
-	// $("#home a:contains('Home')").parent().addClass('active');
-	// $("#home a:contains('Home')").parent().addClass('active');
 
 	//Make menus drop automatically
 	$('ul.nav li.dropdown').hover(function() {
@@ -24,5 +18,24 @@ $(function(){
 		});
 	});
     
-	
+    $('#myModal').on('shown.bs.modal', function () {
+    	$('#myInput').focus()
+    })
+
+    $('#myModalTwo').on('shown.bs.modal', function () {
+    	$('#myInput').focus()
+    })
+
+    // $('body').on('click', '#delete ', function () {
+    // 	var id = $(this).val();
+    // 	$('#confdelete').val(id);
+    // });
+
+    // $('#confdelete').click(function() {
+    // 	var id = $(this).val();
+    // 	$.get('/root/deleteUser/'+id, function(result){
+    // 		window.location.href="/root";
+    // 	});
+    // });
+
 }); //jQuery is loaded
