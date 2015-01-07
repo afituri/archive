@@ -11,10 +11,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import *
 
 # Create your views here.
-
+@login_required(login_url='/')
 def cpanel(request):
     if request.user.is_staff:
-        print Department.objects.all()
         return render_to_response('cpanel.html',{'department':Department.objects.all()})
     else:
         return HttpResponseRedirect('/')
