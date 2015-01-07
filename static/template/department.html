@@ -4,7 +4,10 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel-body">
                 <nav class="navbar navbar-default">
-					<p class="h3">{{department.name}}</p>
+                    <p> {{department.name[0]}} </p>
+                    {% for archive in department %}
+                    <p class="h3">{{archive.department_id.name}}</p>
+                    {% endfor %}
                 </nav>
             </div>
         </div>
@@ -14,7 +17,7 @@
     <li><a href="../../addFolder">addFolder</a></li>
     <li><a href="../../addArchive">addArchive</a></li>
     <li><a href="../../editArchive">editArchive</a></li>
-    <li class="active"><a href="../department">department</a></li>
+    <li class="active"><a href="../../department">department</a></li>
 {% endblock %}
 {% block navTwo %}
 	<div class="row">

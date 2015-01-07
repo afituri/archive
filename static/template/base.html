@@ -123,11 +123,9 @@
                                     </div>
                                     {% endblock %}
                                     <div class="list-group" class="list-block">
-                                        <a href="#" class="list-group-item"><font size="4" >الــوارد </font></a>
-                                        <a href="#" class="list-group-item"><font size="4" >الـصـادر </font></a>
-                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
-                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
-                                        <a href="#" class="list-group-item"><font size="4" >Cras justo odio</font></a>
+                                        {% for sectidon in list %}
+                                            <a href="{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

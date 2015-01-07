@@ -47,8 +47,9 @@ def addArchive(request):
 def department(request, department_id=1):
     c = {}
     c.update(csrf(request))
+    print Archive.objects.filter(department_id=department_id)
     return render_to_response('department.html',
-                                {'department': Department.objects.get(id=department_id)},    )
+                                {'department': Archive.objects.filter(department_id=department_id),'list':Section.objects.filter(Department_id=department_id)},    )
 
 
 def auth_view(request):
