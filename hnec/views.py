@@ -68,6 +68,11 @@ def auth_view(request):
             return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
     else:
         return HttpResponseRedirect('/invaild_login/')
+        
+def sign(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('sign.html',c)
 
 #@staff_member_required for cpanel
 
