@@ -13,9 +13,11 @@ from .models import *
 # Create your views here.
 
 def cpanel(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('cpanel.html',c)
+    if request.user.is_staff:
+        print Department.objects.all()
+        return render_to_response('cpanel.html',{'department':Department.objects.all()})
+    else:
+        return HttpResponseRedirect('/')
 
 def addFolder(request):
     c = {}
