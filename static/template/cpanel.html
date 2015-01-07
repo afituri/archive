@@ -2,7 +2,7 @@
 {% block footer %}{% endblock %}
 {% block nav %}{% endblock %}
 {% block rowOne %}
-	{% block logIn %}
+  {% block logIn %}
       <div class="container">
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -15,7 +15,7 @@
                 <p></p>
               </div>
               {% for dep in department %}
-                	<div class="col-xs-6 col-md-6"><a href="../department/{{dep.id}}" role="button" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-user"></span><br>{{dep.name}}</a>
+                  <div class="col-xs-6 col-md-6"><a href="../department/{{dep.id}}" role="button" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-user"></span><br>{{dep.name}}</a>
                 <p></p>
               </div>
               {% endfor %}
@@ -27,6 +27,6 @@
 </div>
 
     
-	{% endblock %}
+  {% endblock %}
 {% endblock %}
 {% block search %}{% endblock %}

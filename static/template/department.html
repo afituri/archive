@@ -5,6 +5,7 @@
             <div class="panel-body">
                 <nav class="navbar navbar-default">
                     <p>  </p>
+                    <p> {{department.name}} </p>
                     {% for archive in department %}
                     <p class="h3">{{archive.department_id.name}}</p>
                     {% endfor %}
@@ -28,3 +29,5 @@
 		</div>
 	</div>
 {% endblock %}
+{% block footer %}{% endblock %}
+
