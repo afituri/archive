@@ -20,10 +20,12 @@ def cpanel(request):
     else:
         return HttpResponseRedirect('/')
 
-def addFolder(request):
+def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    return render_to_response('addFolder.html',c)
+    return render_to_response('addFolder.html',
+        {'sections':Section.objects.filter(Department_id=department_id)},)
+        
 
 def addDepartment(request):
     c = {}
