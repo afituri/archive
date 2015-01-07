@@ -14,9 +14,11 @@ from django.contrib import messages
 # Create your views here.
 
 def cpanel(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('cpanel.html',c)
+    if request.user.is_staff:
+        print Department.objects.all()
+        return render_to_response('cpanel.html',{'department':Department.objects.all()})
+    else:
+        return HttpResponseRedirect('/')
 
 def addFolder(request):
     c = {}
@@ -69,6 +71,11 @@ def auth_view(request):
         messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
         return render_to_response('logIn.html', locals(), 
         context_instance=RequestContext(request))
+        
+def sign(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('sign.html',c)
 
 #@staff_member_required for cpanel
 
