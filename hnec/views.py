@@ -50,11 +50,14 @@ def addArchive(request):
 def department(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    print Archive.objects.filter(department_id=department_id)
-    return render_to_response('department.html',{
-                                'department': Archive.objects.filter(department_id=department_id),
-                                'list':Section.objects.filter(Department_id=department_id),
-                                },    )
+    if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
+        return render_to_response('department.html',{
+                                    'department': Archive.objects.filter(department_id=department_id),
+                                    'list':Section.objects.filter(Department_id=department_id),
+                                    },    )
+    else:
+        return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+
 
 
 def auth_view(request):
