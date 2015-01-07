@@ -18,5 +18,24 @@ $(function(){
 		});
 	});
     
-	
+    $('#myModal').on('shown.bs.modal', function () {
+    	$('#myInput').focus()
+    })
+
+    $('#myModalTwo').on('shown.bs.modal', function () {
+    	$('#myInput').focus()
+    })
+
+    // $('body').on('click', '#delete ', function () {
+    // 	var id = $(this).val();
+    // 	$('#confdelete').val(id);
+    // });
+
+    // $('#confdelete').click(function() {
+    // 	var id = $(this).val();
+    // 	$.get('/root/deleteUser/'+id, function(result){
+    // 		window.location.href="/root";
+    // 	});
+    // });
+
 }); //jQuery is loaded

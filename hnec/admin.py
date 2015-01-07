@@ -4,7 +4,7 @@ from django.contrib import admin
 
 
 # Register your models here.
-from .models import Employee, Department
+from .models import *
 
 class EmployeeAdmin(admin.ModelAdmin):
 	list_display=('user','department_id')
@@ -16,5 +16,17 @@ class DepartmentAdmin(admin.ModelAdmin):
 	class Meta:
 		model = Department
 
+class SectionAdmin(admin.ModelAdmin):
+	list_display=('name',)
+	class Meta:
+		model = Section
+
+class ArchiveAdmin(admin.ModelAdmin):
+	list_display=('name',)
+	class Meta:
+		model = Archive
+
+admin.site.register(Archive, ArchiveAdmin)
 admin.site.register(Department, DepartmentAdmin)
+admin.site.register(Section, SectionAdmin)
 admin.site.register(Employee, EmployeeAdmin)
