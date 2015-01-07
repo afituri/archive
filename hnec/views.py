@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.shortcuts import render_to_response, render, redirect
+# -*- coding: utf-8 -*-
+from django.shortcuts import render_to_response, render, redirect, RequestContext
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django.http import HttpResponseRedirect
@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import *
+from django.contrib import messages
 
 # Create your views here.
 @login_required(login_url='/')
@@ -66,7 +67,14 @@ def auth_view(request):
         else:
             return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
     else:
-        return HttpResponseRedirect('/invaild_login/')
+        messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
+        return render_to_response('logIn.html', locals(), 
+        context_instance=RequestContext(request))
+        
+def sign(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('sign.html',c)
 
 #@staff_member_required for cpanel
 
