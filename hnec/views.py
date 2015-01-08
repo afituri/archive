@@ -24,22 +24,25 @@ def addFolder(request, department_id=1):
     c.update(csrf(request))
     return render_to_response('addFolder.html',
         {'sections':Section.objects.filter(Department_id=department_id)},)
-        
+
 
 def addDepartment(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('addDepartment.html',c)
 
+
 def logIn(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('logIn.html',c)
 
+
 def editArchive(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('editArchive.html',c)
+
 
 def addArchive(request):
     c = {}
@@ -73,10 +76,44 @@ def auth_view(request):
         return render_to_response('logIn.html', locals(), 
         context_instance=RequestContext(request))
         
+
 def sign(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('sign.html',c)
+
+
+def users(request):
+    c = {}
+    c.update(csrf(request))
+    c['useres']=User.objects.filter(is_active=True)
+    c['department']=Department.objects.filter(status=True)
+    return render_to_response('useres.html',c)
+
+
+@login_required(login_url='/')   
+def addUser(request):
+    username=request.POST['username']
+    first_name=request.POST['first_name']
+    last_name=request.POST['last_name']
+    email=request.POST['email']
+    password=request.POST['password']
+    usertype=request.POST['usertype']
+    user = User.objects.create_user(username,email,password)
+    user.first_name=first_name
+    user.last_name=last_name
+    user.is_staff=True
+    user.is_superuser=True
+    user.save()
+    if int(usertype) > 0: 
+        user.is_staff=False
+        user.is_superuser=False
+        user.save()
+        deptname=request.POST['deptname']
+        department=Department.objects.get(id=deptname)
+        employee=Employee(department_id=department,user=user)
+        employee.save()
+    return HttpResponseRedirect('/',)
 
 #@staff_member_required for cpanel
 

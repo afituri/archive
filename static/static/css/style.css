@@ -3,5 +3,9 @@
 }
 .dropdown-menu{
   right: auto;
-
+}
+label.error {	
+	color: red;
+	font-style: italic;
+  font-size: 90%;
 }
