@@ -52,10 +52,12 @@ def editArchive(request):
 
 
 @login_required(login_url='/')
-def addArchive(request):
+def addArchive(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    return render_to_response('addArchive.html',c)
+    return render_to_response('addArchive.html',{
+                                    'list':Section.objects.filter(Department_id=department_id),
+                                    },    )
 
 
 
