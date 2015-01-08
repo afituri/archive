@@ -108,27 +108,30 @@
                     </div>
                 </div>
                 {% endblock %}
-        
+                {% block backButton %}{% endblock %}
                 {% block rowOne %}
                     <div class="panel-body">
                         <div class="row" >
                             {% block list %}
-                            <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
-                                <div class="panel panel-default" >
-                                    <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
-                                    {% block addFolder %}
-                                    <div class="panel-body">
-                                         <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
-                                    </div>
-                                    {% endblock %}
-                                    <div class="list-group" class="list-block">
-                                        {% for sectidon in list %}
-                                            <a href="{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
-                                        {% endfor %}
+                                <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
+                                    <div class="panel panel-default" >
+                                        <div class="panel-heading ">
+                                            <font size="4" >أنـواع المجلدات</font>
+                                        </div>
+                                        {% block addFolder %}
+                                        <div class="panel-body">
+                                             <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
+                                        </div>
+                                        {% endblock %}
+                                        <div class="list-group" class="list-block">
+                                            {% for sectidon in list %}
+                                                <a href="{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endblock %}
+
                             {% block table %}
                             <div class="  col-md-6 col-sm-6   ">
                                 <div class="panel panel-default">
@@ -170,13 +173,6 @@
                                 {% endblock %}
                             </div>
                             {% endblock %}
-                            {% block buttonList %}
-                                <!-- <div class="col-md-3 col-sm-3 ">
-                                    <div class="panel panel-primary" >
-                                        
-                                    </div>
-                                </div> -->
-                            {% endblock %}
                         </div>
                     </div>
                 {% endblock %}
@@ -205,6 +201,7 @@
                     <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
+                    <script src = "/static/js/editArchive.js"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
                     <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
                 {% endblock %}
