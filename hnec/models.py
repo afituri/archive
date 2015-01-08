@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User 
- 
-
 
 class Department(models.Model):
     name = models.CharField(max_length = 50)
@@ -55,7 +53,6 @@ class Employee(models.Model):
     department_id = models.ForeignKey(Department)
 
 
-
 class Log(models.Model):
     id_user = models.ForeignKey(User)
     action_type = models.CharField(max_length = 50)
@@ -67,4 +64,3 @@ class Log(models.Model):
 
     def __unicode__(self):
         return self.action_type
-

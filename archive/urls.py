@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^cpanel/$', cpanel),
     url(r'^useres/$', users),
     url(r'^addUser/$', addUser),
+    url(r'^logout/$', logout),
 
 )
