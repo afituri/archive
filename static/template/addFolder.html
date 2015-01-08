@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block search %}{% endblock %}
+{% block addFolder %}{% endblock %}
+
 {% block departmentName %}
 	<div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -10,13 +13,13 @@
         </div>
     </div>
 {% endblock %}
+
 {% block navbarList %}
-	<li class="active"><a href="../addFolder">addFolder</a></li>
-    <li><a href="../addArchive">addArchive</a></li>
-    <li><a href="../editArchive">editArchive</a></li>
-    <li><a href="../department">department</a></li>
+	<li class="active"><a href="../addFolder">الـمجـلدات</a></li>
+    <li><a href="../addArchive">الارشـيف</a></li>
+    <li><a href="../department">قـسم</a></li>
 {% endblock %}
-{% block search %}{% endblock %}
+
 {% block table %}	
     <div class="  col-md-6 col-sm-6   ">
         <div class="panel panel-default">
@@ -34,14 +37,12 @@
             <table class="table">
                 <tr>
                     <th id="name">الاسـم </th>
-                    <th id="number">العدد</th>
                     <th id="edit">تعديل</th>
                     <th id="delete">حذف</th>
                 </tr>
                 {% for section in sections %}
                 <tr>
                     <td headers="name">{{section.name}}</td>
-                    <td headers="number">ggggg</td>
                     <td headers="edit">
                     	<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal" >
                     		<span class="glyphicon glyphicon-eye-open"></span>
@@ -66,24 +67,26 @@
         {% endblock %}
     </div>
 {% endblock %}
-{% block test %}
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        Good Good Good Good Good Good Good Good Good 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+{% block test %}
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    Good Good Good Good Good Good Good Good Good 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 {% endblock %}

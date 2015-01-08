@@ -5,21 +5,62 @@
             <div class="panel-body">
                 <nav class="navbar navbar-default">
                     <p> {{department}} </p>
-                    <p>  </p>
-                    <p> {{department.name}} </p>
-                    {% for archive in department %}
-                    <p class="h3">{{archive.department_id.name}}</p>
-                    {% endfor %}
                 </nav>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block navbarList %}
-    <li><a href="../../addFolder">addFolder</a></li>
-    <li><a href="../../addArchive">addArchive</a></li>
-    <li><a href="../../editArchive">editArchive</a></li>
-    <li class="active"><a href="../../department">department</a></li>
+    <li><a href="../../addFolder">الـمجـلدات</a></li>
+    <li><a href="../../addArchive">الارشـيف</a></li>
+    <li class="active"><a href="../../department">قـسم</a></li>
+{% endblock %}
+{% block table %}
+    <div class="  col-md-6 col-sm-6   ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="  col-md-3 col-sm-3 col-xs-3  ">
+                        <font size="4" >الارشـيـف </font></a>
+                    </div>
+                    <div class="  col-md-8 col-sm-8 col-xs-8  ">
+                        <font size="4" >الرقم الاشاري </font></a>
+                        <input type="text" placeholder="البحث">
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th id="name">الاسـم</th>
+                    <th id="type">النـوع</th>
+                    <th id="date">التـاريـخ</th>
+                    <th id="refNum">الـرقم الاشاري</th>
+                    <th id="edit">عـرض</th>
+                </tr>
+                {% for archive in department %}
+                    <tr>
+                        <td headers="name">{{archive.name}}</td>
+                        <td headers="type">{{archive.section_id.name}}</td>
+                        <td headers="date">{{archive.real_date}}</td>
+                        <td headers="refNum">{{archive.ref_num}}</td>
+                        <td headers="edit">
+                            <button class="btn btn-xs btn-primary" href="../editArchive">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </button>
+                        </td>                    
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block pagination %}
+    <nav pull-center>
+        <ul class="pagination">
+            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        </ul>
+    </nav>
 {% endblock %}
 {% block navTwo %}
 	<div class="row">
