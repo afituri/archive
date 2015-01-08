@@ -10,16 +10,19 @@ from django.contrib.auth import authenticate
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import *
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
+# Create your views here. @staffonly @staff_member_required(login_url='/')
 
-# Create your views here.
-
+@login_required(login_url='/')
 def cpanel(request):
     if request.user.is_staff:
         print Department.objects.all()
         return render_to_response('cpanel.html',{'department':Department.objects.all()})
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
+
+@login_required(login_url='/')
 def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
@@ -27,36 +30,47 @@ def addFolder(request, department_id=1):
         {'sections':Section.objects.filter(Department_id=department_id)},)
         
 
+@login_required(login_url='/')
 def addDepartment(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('addDepartment.html',c)
+
+
 
 def logIn(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('logIn.html',c)
 
+
+@login_required(login_url='/')
 def editArchive(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('editArchive.html',c)
 
+
+@login_required(login_url='/')
 def addArchive(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('addArchive.html',c)
 
 
+
 @login_required(login_url='/')
 def department(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    print Archive.objects.filter(department_id=department_id)
-    return render_to_response('department.html',{
-                                'department': Archive.objects.filter(department_id=department_id),
-                                'list':Section.objects.filter(Department_id=department_id),
-                                },    )
+    if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
+        return render_to_response('department.html',{
+                                    'department': Archive.objects.filter(department_id=department_id),
+                                    'list':Section.objects.filter(Department_id=department_id),
+                                    },    )
+    else:
+        return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+
 
 
 def auth_view(request):
@@ -73,11 +87,17 @@ def auth_view(request):
         messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
         return render_to_response('logIn.html', locals(), 
         context_instance=RequestContext(request))
-        
+
+
+@login_required(login_url='/')        
 def sign(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('sign.html',c)
 
-#@staff_member_required for cpanel
 
+
+@login_required(login_url='/')
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
