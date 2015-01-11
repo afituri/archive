@@ -41,10 +41,15 @@ def logIn(request):
 
 
 @login_required(login_url='/')
-def editArchive(request):
+def editArchive(request, archive_id=1):
     c = {}
     c.update(csrf(request))
-    return render_to_response('editArchive.html',c)
+    archive = Archive.objects.get(id=archive_id,status=1)
+    return render_to_response('editArchive.html',{
+                                    'archive':archive,
+                                    'list':Section.objects.filter(Department_id=archive.department_id.id,status=1),
+                                    'files':Files.objects.filter(archive_id=archive_id,status=1),
+                                    },    )
 
 
 @login_required(login_url='/')
