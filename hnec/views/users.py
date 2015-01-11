@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from hnec.models import *
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def logIn(request):
@@ -46,7 +47,18 @@ def users(request):
         c.update(csrf(request))
         c['users']=User.objects.filter(is_active=True)
         c['department']=Department.objects.filter(status=True)
-        return render_to_response('users.html',c)
+
+        objects=c['users']
+        paginator=Paginator(objects,2)
+        page = request.GET.get('page')
+        try:
+            USERS = paginator.page(page)
+        except PageNotAnInteger :
+            USERS = paginator.page(1)
+        except EmptyPage:
+            USERS = paginator.page(paginator.num_pages)
+        # except paginator.page_range
+        return render_to_response('users.html',{"users": USERS})
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
