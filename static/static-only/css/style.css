@@ -1,3 +1,14 @@
 .bodyPaddingTop {
 	padding-top: 113px;
 }
+.dropdown-menu{
+  right: auto;
+<<<<<<< HEAD
+
+}
+label.error {	
+	color: red;
+	font-style: italic;
+  font-size: 90%;
+}
+

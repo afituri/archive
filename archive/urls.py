@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^addUser/$', 'hnec.views.users.addUser'),
     url(r'^logout/$', 'hnec.views.users.logout'),
     url(r'^getSection/(?P<department_id>\d+)/$','hnec.views.archive.getArchive'),
+    url(r'^department/(?P<department_id>\d+)/(?P<section_id>\d+)/$', 'hnec.views.department.folder'),
 
 )
