@@ -93,12 +93,14 @@ def sign(request):
 
 @login_required(login_url='/')
 def users(request):
-    c = {}
-    c.update(csrf(request))
-    c['useres']=User.objects.filter(is_active=True)
-    c['department']=Department.objects.filter(status=True)
-    return render_to_response('useres.html',c)
-
+    if request.user.is_staff:
+        c = {}
+        c.update(csrf(request))
+        c['users']=User.objects.filter(is_active=True)
+        c['department']=Department.objects.filter(status=True)
+        return render_to_response('users.html',c)
+    else:
+        return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
 @login_required(login_url='/')   
 def addUser(request):
@@ -122,10 +124,15 @@ def addUser(request):
         department=Department.objects.get(id=deptname)
         employee=Employee(department_id=department,user=user)
         employee.save()
-    return HttpResponseRedirect('/',)
+    return HttpResponseRedirect('/users/',)
     
 
 @login_required(login_url='/')
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
+
+
+@login_required(login_url='/')
+def addDepartment(request):
+    pass

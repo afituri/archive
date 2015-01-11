@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^department/(?P<department_id>\d+)/$',department),
     url(r'^addDepartment/$', addDepartment),
     url(r'^cpanel/$', cpanel),
-    url(r'^useres/$', users),
+    url(r'^users/$', users),
     url(r'^addUser/$', addUser),
     url(r'^logout/$', logout),
 
