@@ -13,7 +13,7 @@
                 .html('–');
 
             $formGroupClone.find('input').val('');
-            // $formGroupClone.find('.concept').text('Phone');
+            $formGroupClone.find('.concept').text('Phone');
             $formGroupClone.insertAfter($formGroup);
 
             var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
@@ -54,7 +54,7 @@
 
         $(document).on('click', '.btn-add', addFormGroup);
         $(document).on('click', '.btn-remove', removeFormGroup);
-        // $(document).on('click', '.dropdown-menu a', selectFormGroup);
+        $(document).on('click', '.dropdown-menu a', selectFormGroup);
 
     });
 })(jQuery);
