@@ -35,6 +35,13 @@ def addDepartment(request):
 
 
 def logIn(request):
+    print "sssssssssssssssssssssssss"
+    print request.user.is_authenticated()
+    if request.user.is_authenticated():
+        if request.user.is_staff:
+            return HttpResponseRedirect('/cpanel/')
+        else:
+            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
     c = {}
     c.update(csrf(request))
     return render_to_response('logIn.html',c)
@@ -121,7 +128,7 @@ def addUser(request):
         employee=Employee(department_id=department,user=user)
         employee.save()
     return HttpResponseRedirect('/',)
-    
+
 
 @login_required(login_url='/')
 def logout(request):
