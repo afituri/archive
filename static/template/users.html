@@ -12,11 +12,10 @@
                                     <div class="panel-heading panel-responsive">
                                         <div class="row">
                                             <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                                                <font size="4" >الارشـيـف </font></a>
+                                                <font size="4" >المستخدمين </font></a>
                                             </div>
                                             <div class="  col-md-6 col-sm-6 col-xs-6 ">
-                                                <font size="4" >الرقم الاشاري </font></a>
-                                                <input type="text" class="input-sm"p laceholder="البحث">
+                                              
                                             </div>
                                             <div class="  col-md-2 col-sm-2 col-xs-2  ">
                                                 <a href="#addUser" role="button" data-toggle="modal" class="btn btn-success">إضافة مستخدم</a>
@@ -27,21 +26,25 @@
                                         <tr>
                                             <th id="username">إسم المستخدم</th>
                                             <th id="email">البريد اﻹلكتروني</th>
-                                            <th id="first_name">اﻹسم</th>
-                                            <th id="last_name">اللقب</th>
-                                            <th id="section">القسم</th>
                                             <th id="type">النوع</th>
+                                            <th id="section">القسم</th>
+                                            <th id="edit">عـرض</th>
+                                            
                                         </tr>
                                         {% for user in users %}
                                         <tr>
                                             <td headers="username">{{user.username}}</td>
                                             <td headers="email">{{user.email}}</td>
-                                            <td headers="first_name">{{user.first_name}}</td>
-                                            <td headers="last_name">{{user.last_name}}</td>
-                                            <td headers="section">{{user.department_id}}</td>
                                             <td headers="type">
                                                 {% if user.is_staff %} مدير {% else %} مستخدم {% endif %}
                                             </td>
+
+                                            <td headers="section">{{user.employee.department_id.name}}</td>
+                                            <td headers="edit">
+					                            <a href="editUser/{{user.id}}" class="btn btn btn-primary btn-xs">
+					                                <span class="glyphicon glyphicon-eye-open"></span>
+					                            </a>
+					                        </td>   
                                         </tr>
                                         {% endfor %}
                                     </table>

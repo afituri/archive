@@ -31,6 +31,12 @@ class ArchiveAdmin(admin.ModelAdmin):
 	class Meta:
 		model = Archive
 
+class LogAdmin(admin.ModelAdmin):
+	list_display=('action_type',)
+	class Meta:
+		model = Log
+
+admin.site.register(Log, LogAdmin)		
 admin.site.register(Archive, ArchiveAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Section, SectionAdmin)

@@ -16,7 +16,15 @@ $(document).ready(function(){
 				username: {
 					required: true,
 					minlength: 5,
-					// remote: "users.action"
+					// remote: {
+			  //         url :"/username/",
+			  //         type : "post",
+			  //         data: {
+			  //           username: function() {
+			  //             return $( "#username" ).val();
+			  //           }
+			  //         }
+			  //       }
 				},
 				password: {
 					required: true,

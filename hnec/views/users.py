@@ -15,7 +15,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def logIn(request):
     c = {}
     c.update(csrf(request))
-    return render_to_response('logIn.html',c)
+    if request.user.is_authenticated():
+        if request.user.is_staff:
+            return HttpResponseRedirect('/cpanel/')
+        else:
+            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+    else:        
+        return render_to_response('logIn.html',c)
 
 
 @login_required(login_url='/')
@@ -76,6 +82,8 @@ def addUser(request):
     user.is_staff=True
     user.is_superuser=True
     user.save()
+    log = Log(id_user=request.user,action_type='add',tabel='user',desc='add user '+username,tabel_id=user.id,value=username)
+    log.save()
     if int(usertype) > 0: 
         user.is_staff=False
         user.is_superuser=False
@@ -85,7 +93,41 @@ def addUser(request):
         employee=Employee(department_id=department,user=user)
         employee.save()
     return HttpResponseRedirect('/users/',)
-    
+
+@login_required(login_url='/')
+def editUser(request,user_id=1):
+    if request.user.is_staff:
+        c = {}
+        c.update(csrf(request))
+        c['user']=User.objects.get(id=user_id,is_active=True)
+        return render_to_response('editUser.html',c)
+    else:
+       return HttpResponseRedirect('/',) 
+
+@login_required(login_url='/')
+def edit(request):
+    id_u=request.POST['pk']
+    name=request.POST['name']
+    value=request.POST['value']
+    user=User.objects.get(id=id_u)
+    if name == 'username':
+        old=user.username
+        user.username=value
+    elif name == 'first_name':
+        old = user.first_name
+        user.first_name = value
+    elif name == 'last_name':
+        old = user.last_name
+        user.last_name = value
+    elif name == 'email':
+        old = user.email
+        user.email = value
+    user.save()
+    log = Log(id_user=request.user,action_type='edit',tabel='user',desc='edit user '+name+': '+old+' = > '+value,tabel_id=user.id,value=value)
+    log.save()
+    return HttpResponseRedirect('/',)
+
+
 
 @login_required(login_url='/')
 def cpanel(request):
@@ -93,3 +135,15 @@ def cpanel(request):
         return render_to_response('cpanel.html',{'department':Department.objects.all()})
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+
+# not working
+# def checkUsername(request):
+#     # username=request.POST['username']
+#     # user=User.objects.get(username=username)
+#     print "asdfasfasfaf"
+#     return True
+#     # print username
+#     # if user is not None:
+#     #     return False
+#     # else:
+#     #     return True
