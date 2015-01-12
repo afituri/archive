@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     url(r'^users/$', 'hnec.views.users.users'),
     url(r'^addUser/$', 'hnec.views.users.addUser'),
     url(r'^logout/$', 'hnec.views.users.logout'),
+    url(r'^users/editUser/(?P<user_id>\d+)/$', 'hnec.views.users.editUser'),
+    # url(r'^/username/$', 'hnec.views.users.checkUsername'),not working
+    url(r'^users/edit/$', 'hnec.views.users.edit'),
     url(r'^getSection/(?P<department_id>\d+)/$','hnec.views.archive.getArchive'),
     url(r'^department/(?P<department_id>\d+)/(?P<section_id>\d+)/$', 'hnec.views.department.folder'),
     
