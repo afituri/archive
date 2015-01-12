@@ -23,6 +23,16 @@ def editArchive(request, archive_id=1):
 
 
 @login_required(login_url='/')
+def getArchive(request):
+    c = {}
+    c.update(csrf(request))
+    archive = Section.objects.filter( Department_id=department_id,status=1)
+    print "vbufbvriuvbnfsovj"
+    print archive
+    return archive
+
+
+@login_required(login_url='/')
 def addArchive(request, department_id=1):
     c = {}
     c.update(csrf(request))

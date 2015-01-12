@@ -52,8 +52,16 @@
                                 {% block pagination %}
                                     <nav pull-center>
                                         <ul class="pagination">
-                                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                         {% if users.has_previous %}
+                                            <li> <a href="?page={{ users.previous_page_number }}" aria-label="Previous"><span>&laquo;</span></a></li>
+                               	        {% endif %}
+                                	       {% for i in users.paginator.page_range %}
+                                	       
+                                            <li>{% if users.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
+                                	       {% endfor %}
+                        		        {% if users.has_next %}
+                              		          <li> <a href="?page={{users.next_page_number}}" aria-label="next"><span>&raquo;</span></a></li>
+                               	        {% endif %}
                                         </ul>
                                     </nav> 
                                 {% endblock %} <!-- end of block pagination-->
