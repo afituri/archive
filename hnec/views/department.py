@@ -19,7 +19,7 @@ def addFolder(request, department_id=1):
         {'sections':Section.objects.filter(Department_id=department_id)},)
 
 
-@login_required(login_url='/')
+
 def addDepartment(request):
     c = {}
     c.update(csrf(request))

@@ -20,13 +20,15 @@
 {% endblock %}
 
 {% block search %}{% endblock %}
+
 {% block backButton %}
-<row class="col-md-8 col-md-offset-2">
-    <a href="" class="btn btn-primary pull-left" href="#{url}" type="button">
-        رجـــــوع
-    </a> 
-</row>
+    <row class="col-md-8 col-md-offset-2">
+        <a href="" class="btn btn-primary pull-left" href="#{url}" type="button">
+            رجـــــوع
+        </a> 
+    </row>
 {% endblock %}
+
 {% block table %}
     <div class="  col-md-6 col-sm-6 ">
         <!-- <div class="panel panel-default"> -->
@@ -38,7 +40,7 @@
                         </button>
                     </div>
                     <div class="  col-md-6 col-sm-6 col-xs-6  ">
-                        <button id="delete" class="btn btn-danger pull-right" href='#del' data-toggle='modal' value="">
+                        <button id="delete" class="btn btn-danger pull-right" href='#del' data-toggle='modal'  data-target=".bs-example-modal-sm" value="">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </div>
@@ -57,8 +59,7 @@
                             <tr>
                                 <td width='35%'> تاريخ الارشيف</td>
                                 <td width='65%'>
-                                    <a href="#" id="real_date" data-type='text' data-pk='{{archive.real_date}}' data-title='البريد الالكترونب' data-value='{{archive.real_date}}'> {{archive.real_date}}
-                                    </a>
+                                    <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.real_date}}" title="Select date and time"  data-value='{{archive.real_date}}'> {{archive.real_date}}</a>
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +79,7 @@
                             <tr>
                                 <td width='35%'> النوع</td>
                                 <td width='65%'>
-                                    <a href="#" id="type" data-type='select' data-pk='{{archive.section_id.name}}' data-title='النوع' data-value='{{archive.section_id}}'> {{archive.section_id.name}}
+                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.name}}"  data-title="Select status" data-value="{{archive.section_id}}">{{archive.section_id.name}}
                                     </a>
                                 </td>
                             </tr>
@@ -93,17 +94,40 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
- 
-                 {% block script %}
-                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
-                    <script src = "/static/js/bootstrap.min.js"></script>
-                    
-                    <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
-                    <script src = "/static/js/jquery.validate.min.js"></script>
-                    <script src = "/static/js/script_nav.js"></script>
-                   
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-                    <script src = "/static/js/editArchive.js"></script>
 
-                {% endblock %}
+{% block modaleDelete %}
+    <div  id="delete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-headr ">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">هل أنت متأكد من عملية حذف هذا ؟ </h4>
+                </div>
+                <div class="modal-body">
+                    <p> </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+ 
+{% block script %}
+    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+    <script src = "/static/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-editable.min.js"></script>
+    <script src = "/static/js/jquery.validate.min.js"></script>
+    <script src = "/static/js/script_nav.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script src = "/static/js/editArchive.js"></script>
+{% endblock %}
