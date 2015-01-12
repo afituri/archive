@@ -44,9 +44,9 @@
                         <td headers="date">{{archive.real_date}}</td>
                         <td headers="refNum">{{archive.ref_num}}</td>
                         <td headers="edit">
-                            <button class="btn btn-xs btn-primary" href="../editArchive">
+                            <a href="../editArchive/{{archive.id}}" class="btn btn btn-primary btn-xs">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
+                            </a>
                         </td>                    
                     </tr>
                 {% endfor %}
@@ -61,14 +61,5 @@
             <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
         </ul>
     </nav>
-{% endblock %}
-{% block navTwo %}
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1" >
-			<nav class="nav navbar-default">
-				
-			</nav>
-		</div>
-	</div>
 {% endblock %}
 {% block footer %}{% endblock %}

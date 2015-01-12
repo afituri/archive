@@ -1,20 +1,102 @@
 {% extends "base.html" %}
+
+{% block navbarList %}
+    <li><a href="../addFolder">إضـافـة مـجـلـد جديد </a></li>
+    <li><a href="../addArchive">الارشـف</a></li>
+    <li class="active"><a href="">تعديل أرشيف</a></li>
+    <li><a href="../department">قـسم</a></li>
+{% endblock %}
+
 {% block departmentName %}
 	<div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel-body">
                 <nav class="navbar navbar-default">
-					<p class="h3">{{department.name}}</p>
+					<p class="h3">{{archive.id}}</p>
                 </nav>
             </div>
         </div>
     </div>
 {% endblock %}
-{% block table %}{% endblock %}
-{% block pagination %}{% endblock %}
-{% block buttonList %}{% endblock %}
-{% block navbarList %}
-    <li><a href="../addFolder">إضـافـة مـجـلـد جديد </a></li>
-    <li><a href="../addArchive">addArchive</a></li>
-    <li><a href="../department">department</a></li>
+
+{% block search %}{% endblock %}
+{% block backButton %}
+<row class="col-md-8 col-md-offset-2">
+    <a href="" class="btn btn-primary pull-left" href="#{url}" type="button">
+        رجـــــوع
+    </a> 
+</row>
 {% endblock %}
+{% block table %}
+    <div class="  col-md-6 col-sm-6   ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 ">
+                        <button id="enable" class="btn btn-primary" >
+                            تمكــين / تعطـــيل
+                        </button>
+                    </div>
+                    <div class="  col-md-6 col-sm-6 col-xs-6  ">
+                        <button id="delete" class="btn btn-danger pull-right" href='#del' data-toggle='modal' value="">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                    <div class="  col-md-2 col-sm-2 col-xs-2  ">
+
+                    </div>
+                    <table id="user" class="table table-bordered table-striped" style='clear: both'>
+                        <tbody>
+                            <tr>
+                                <td width='35%'>اسم الارشيف</td>
+                                <td width='65%'>
+                                    <a href="#" id="name" data-type='text' data-pk='{{archive.name}}', data-title='اسم الارشيف' data-value='{{archive.name}}'> {{archive.name}}
+                                    </a> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width='35%'> تاريخ الارشيف</td>
+                                <td width='65%'>
+                                    <a href="#" id="real_date" data-type='text' data-pk='{{archive.real_date}}' data-title='البريد الالكترونب' data-value='{{archive.real_date}}'> {{archive.real_date}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width='35%'>الرقم الاشاري</td>
+                                <td width='65%'>
+                                    <a href="#" id="ref_num" data-type='text' data-pk='{{archive.ref_num}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}'> {{archive.ref_num}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width='35%'> النوع</td>
+                                <td width='65%'>
+                                    <a href="#" id="type" data-type='text' data-pk='{{archive.section_id.name}}' data-title='النوع' data-value='{{archive.section_id.name}}'> {{archive.section_id.name}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width='35%'>الوصف</td>
+                                <td width='65%'>
+                                    <a href="#" id="text" data-type='textarea' data-pk='{{archive.text}}' data-title='الوصف' data-value='{{archive.text}}'> {{archive.text}}
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% block pagination %}
+            <nav pull-center>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                </ul>
+            </nav>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+ <script src = "/static/js/editArchive.js"></script>

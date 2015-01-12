@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block navbarList %}{% endblock %}
+{% block search %}{% endblock %}
+{% block rowOne %}
+  {% block list %}{% endblock %}
+
+      {% block table %}
+<div class="container">
+ 
+</div><font size="4" color="black" font="family">
+  <div class="container">
+    <button id="enable" class="btn btn-primary">تمكــين / تعطـــيل</button>
+    <button id="delete" href="#del" data-toggle="modal" value="" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+    <div class="col-lg-1"></div>
+  </div>
+  <div class="container">
+    <div class="form-group">
+      <table id="user" style="clear: both" class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td width="35%">اسم المستخدم</td>
+            <td width="65%"><a id="username" href="#" data-type="text" data-pk="{{user.id}}" data-title="اسم المستخدم" data-value="{{user.username}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.username}}</a></td>
+          </tr>
+          <tr>
+            <td width="35%">الاسم</td>
+            <td width="65%"><a id="first_name" href="#" data-type="text" data-pk="{{user.id}}" data-title="الاسم" data-value="{{user.first_name}}"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.first_name}}</a></td>
+          </tr>
+          <tr>
+            <td width="35%">اللقب</td>
+            <td width="65%"><a id="last_name" href="#" data-type="text" data-pk="{{user.id}}" data-title="اللقب" data-value="{{user.last_name}}"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.last_name}}</a></td>
+          </tr>
+          <tr>
+            <td width="35%">البريد الالكتروني</td>
+            <td width="65%"><a id="email" href="#" data-type="text" data-pk="{{user.id}}" data-title="البريد الالكتروني" data-value="{{user.email}}"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.email}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></font>
+  {% endblock %} {% endblock %}
+
+{% block script %}
+
+                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+                    <script src = "/static/js/bootstrap.min.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
+                    <script src = "/static/js/jquery.validate.min.js"></script>
+                    <script src = "/static/js/script_nav.js"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+                    <script src = "/static/js/editUser.js"></script>
+
+{% endblock %} 
