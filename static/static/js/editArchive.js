@@ -72,8 +72,8 @@ $(document).ready(function(){
             }
         $('#type').editable({
             url: '../../editArchiveEditable/',
-            source: $.resul,
-            
+            source: $.resul
+
             
         });      
     });

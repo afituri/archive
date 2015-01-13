@@ -24,5 +24,6 @@ urlpatterns = patterns('',
     url(r'^getSection/(?P<department_id>\d+)/$','hnec.views.archive.getArchive'),
     url(r'^department/(?P<department_id>\d+)/(?P<section_id>\d+)/$', 'hnec.views.department.folder'),
     url(r'^getArchiveType/(?P<department_id>\d+)/$','hnec.views.archive.getArchiveType'),
+    url(r'^editFolder/$', 'hnec.views.department.editFolder'),
     
 )
