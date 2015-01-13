@@ -26,7 +26,7 @@ def Departments(request):
         c = {}
         c.update(csrf(request))
         objects=Department.objects.filter(status=True)
-        paginator=Paginator(objects,2)
+        paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
             dept = paginator.page(page)
@@ -47,6 +47,8 @@ def addDept(request):
 
 
 
+
+
 @login_required(login_url='/')
 def addDepartment(request):
     c = {}
@@ -57,14 +59,23 @@ def addDepartment(request):
 
 
 @login_required(login_url='/')
-def department(request, department_id=1):
+def department(request, department_id=2):
     c = {}
     c.update(csrf(request))
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
-        return render_to_response('department.html',{
-                                    'department': Archive.objects.filter(department_id=department_id),
-                                    'list':Section.objects.filter(Department_id=department_id),
-                                    },    )
+        objects=Archive.objects.filter(department_id=department_id,status=True)
+        paginator=Paginator(objects,10)
+        page = request.GET.get('page')
+        try:
+            archive = paginator.page(page)
+        except PageNotAnInteger :
+            archive = paginator.page(1)
+        except EmptyPage:
+            archive = paginator.page(paginator.num_pages)
+        # except paginator.page_range
+        c['archive']=archive
+        c['list']=Section.objects.filter(Department_id=department_id)
+        return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 

@@ -55,7 +55,7 @@ def users(request):
         c['department']=Department.objects.filter(status=True)
 
         objects=c['users']
-        paginator=Paginator(objects,2)
+        paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
             USERS = paginator.page(page)
@@ -63,8 +63,9 @@ def users(request):
             USERS = paginator.page(1)
         except EmptyPage:
             USERS = paginator.page(paginator.num_pages)
+        c['users']=USERS
         # except paginator.page_range
-        return render_to_response('users.html',{"users": USERS})
+        return render_to_response('users.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
