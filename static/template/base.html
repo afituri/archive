@@ -199,17 +199,15 @@
                         </div>
                     </div>
                 {% endblock %} <!-- end of block footer-->
+                {% block modaleDelete %}{% endblock %}
                 {% block script %}
                     <script src = "/static/js/jquery-1.11.1.min.js"></script>
                     <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap-editable.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
-                   
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-                    
-
                 {% endblock %} <!-- end of block script-->
             </body>
         {% endblock %}<!-- end of block body-->

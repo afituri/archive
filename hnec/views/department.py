@@ -17,9 +17,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    return render_to_response('addFolder.html',
-        {'sections':Section.objects.filter(Department_id=department_id)},)
+    c['sections']=Section.objects.filter(Department_id=department_id)
+    c['list']=Section.objects.filter(Department_id=department_id)
+    return render_to_response('addFolder.html',c)
 
+@login_required(login_url='/')
+def editFolder(request):
+    c = {}
+    c.update(csrf(request))
+    id_sect=request.POST['pk']
+    name=request.POST['name']
+    value=request.POST['value']  
+    section = Section.objects.get(id=id_sect)
+    section.name = value
+    section.save(update_fields=["name"])
+    return render_to_response('addFolder.html',c)
 
 @login_required(login_url='/')
 def Departments(request):
@@ -50,6 +62,10 @@ def addDept(request):
 
 
 @login_required(login_url='/')
+def deletFolder(request):
+    pass
+
+
 def addDepartment(request):
     c = {}
     c.update(csrf(request))
@@ -95,7 +111,6 @@ def folder(request, department_id=1, section_id=1):
         for  sec_id in Section.objects.filter(Department_id=department_id):
             sec_list.append(sec_id.id)
         if request.user.is_staff or int(section_id) in sec_list:
-            print 'it works so far'
             return render_to_response('folder.html',{
                                         'department': Archive.objects.filter(section_id=section_id),
                                         'list':Section.objects.filter(Department_id=department_id),
