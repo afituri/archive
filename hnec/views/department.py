@@ -31,6 +31,10 @@ def editFolder(request):
     section.save(update_fields=["name"])
     return render_to_response('addFolder.html',c)
 
+@login_required(login_url='/')
+def deletFolder(request):
+    pass
+
 
 def addDepartment(request):
     c = {}
