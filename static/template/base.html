@@ -113,64 +113,63 @@
                 {% block rowOne %}
                     <div class="panel-body">
                         <div class="row" >
-                            {% block list %}
-                            <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
-                                <div class="panel panel-default" >
-                                    <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
-                                    {% block addFolder %}
-                                    <div class="panel-body">
-                                         <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
-                                    </div>
-                                    {% endblock %} <!-- end of block addFolder-->
-                                    <div class="list-group" class="list-block">
-                                        {% for sectidon in list %}
-                                            <a href="{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
-                                        {% endfor %}
-                                    </div>
+                        {% block list %}
+                        <div class=" col-md-2 col-sm-2 col-xs-2 col-md-offset-2 col-sm-offset-2 ">
+                            <div class="panel panel-default" >
+                                <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
+                                {% block addFolder %}
+                                <div class="panel-body">
+                                     <button type="button" class="btn btn-block btn-success "><font size="4" >إضـافـة مـجـلـد جديد </font> </button>
+                                </div>
+                                {% endblock %} <!-- end of block addFolder-->
+                                <div class="list-group" class="list-block">
+                                      {% for sectidon in list %}
+                                        <a href="/department/{{sectidon.Department_id_id}}/{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
+                                    {% endfor %}
                                 </div>
                             </div>
+                        </div>
                             {% endblock %} <!-- end of block list-->
-                            {% block table %}
-                            <div class="  col-md-6 col-sm-6   ">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                                                <font size="4" >الارشـيـف </font></a>
-                                            </div>
-                                            <div class="  col-md-8 col-sm-8 col-xs-8  ">
-                                                <font size="4" >الرقم الاشاري </font></a>
-                                                <input type="text" placeholder="البحث">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <table class="table">
-                                        <tr>
-                                            <th id="name">Name</th>
-                                            <th id="email">Email</th>
-                                            <th id="phone">Phone</th>
-                                            <th id="addr">Address</th>
-                                            <th id="addr">Address</th>
-                                        </tr>
-                                        <tr>
-                                            <td headers="name">John Doe</td>
-                                            <td headers="email">someone@example.com</td>
-                                            <td headers="phone">+45342323</td>
-                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                                            <td headers="addr">Rosevn 56,4300 Sandnes,Norway</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                {% block pagination %}
-                                    <nav pull-center>
-                                        <ul class="pagination">
-                                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        </ul>
-                                    </nav> 
-                                {% endblock %} <!-- end of block pagination-->
-                            </div>
-                            {% endblock %} <!-- end of block table-->
+                            
+{% block table %}
+    <div class="  col-md-6 col-sm-6   ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="  col-md-3 col-sm-3 col-xs-3  ">
+                        <font size="4" >الارشـيـف </font></a>
+                    </div>
+                    <div class="  col-md-8 col-sm-8 col-xs-8  ">
+                        <font size="4" >الرقم الاشاري </font></a>
+                        <input type="text" placeholder="البحث">
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th id="name">الاسـم</th>
+                    <th id="type">النـوع</th>
+                    <th id="date">التـاريـخ</th>
+                    <th id="refNum">الـرقم الاشاري</th>
+                    <th id="edit">عـرض</th>
+                </tr>
+                {% for archive in department %}
+                    <tr>
+                        <td headers="name">{{archive.name}}</td>
+                        <td headers="type">{{archive.section_id.name}}</td>
+                        <td headers="date">{{archive.real_date}}</td>
+                        <td headers="refNum">{{archive.ref_num}}</td>
+                        <td headers="edit">
+                            <a href="../editArchive/{{archive.id}}" class="btn btn btn-primary btn-xs">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>
+                        </td>                    
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
                             {% block buttonList %}
                                 <!-- <div class="col-md-3 col-sm-3 ">
                                     <div class="panel panel-primary" >
@@ -200,16 +199,15 @@
                         </div>
                     </div>
                 {% endblock %} <!-- end of block footer-->
+                {% block modaleDelete %}{% endblock %}
                 {% block script %}
                     <script src = "/static/js/jquery-1.11.1.min.js"></script>
                     <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap-editable.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
-                   
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    
-
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>                    
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
                 {% endblock %} <!-- end of block script-->
             </body>
         {% endblock %}<!-- end of block body-->

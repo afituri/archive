@@ -112,10 +112,10 @@ def editUser(request,user_id=1):
 
 @login_required(login_url='/')
 def edit(request):
-    id_u=request.POST['pk']
-    name=request.POST['name']
-    value=request.POST['value']
-    user=User.objects.get(id=id_u)
+    id_u = request.POST['pk']
+    name = request.POST['name']
+    value = request.POST['value']
+    user = User.objects.get(id=id_u)
     if name == 'username':
         old=user.username
         user.username=value

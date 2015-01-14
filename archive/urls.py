@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^cpanel/$', 'hnec.views.users.cpanel'),
     url(r'^users/$', 'hnec.views.users.users'),
     url(r'^addUser/$', 'hnec.views.users.addUser'),
+    url(r'^Departments/$', 'hnec.views.department.Departments'),
+    url(r'^addDept/$', 'hnec.views.department.addDept'),
     url(r'^logout/$', 'hnec.views.users.logout'),
     url(r'^users/editUser/(?P<user_id>\d+)/$', 'hnec.views.users.editUser'),
     url(r'^/username/$', 'hnec.views.users.checkUsername'),
@@ -24,5 +26,8 @@ urlpatterns = patterns('',
     url(r'^users/deleteUser/(?P<user_id>\d+)/$', 'hnec.views.users.deleteUser'),
     url(r'^getSection/(?P<department_id>\d+)/$','hnec.views.archive.getArchive'),
     url(r'^department/(?P<department_id>\d+)/(?P<section_id>\d+)/$', 'hnec.views.department.folder'),
-
+    url(r'^getArchiveType/(?P<department_id>\d+)/$','hnec.views.archive.getArchiveType'),
+    url(r'^editFolder/$', 'hnec.views.department.editFolder'),
+    url(r'^deletFolder/$', 'hnec.views.department.deletFolder'),
+    
 )
