@@ -9,6 +9,26 @@ $(document).ready(function(){
 			$('#deptname').prop('disabled', true);
 		}
 	});
+  // $.validator.addMethod("checkUsername", function(value, element) {
+  // 		$.ajax({
+  //              type: "POST",
+  //              url: "/username/",
+  //              data: {'username': $('#username').val(), 'csrfmiddlewaretoken': '{{csrf_token}}'},
+  //              dataType: "text",
+  //              success: function(response) {
+  //                     var response = $.parseJSON( response );
+  //                     if (response.success){
+  //                         return true;
+  //                     }
+  //                     else{
+  //                         alert(response.error);
+  //                     }
+  //               },
+  //               error: function(rs, e) {
+  //                      alert(rs.responseText);
+  //               }
+  //         }); 
+  });
   $("#form").validate({ 
 			 rules: {
 				first_name: "required",
@@ -16,15 +36,7 @@ $(document).ready(function(){
 				username: {
 					required: true,
 					minlength: 5,
-					// remote: {
-			  //         url :"/username/",
-			  //         type : "post",
-			  //         data: {
-			  //           username: function() {
-			  //             return $( "#username" ).val();
-			  //           }
-			  //         }
-			  //       }
+			        // checkUsername:true
 				},
 				password: {
 					required: true,
@@ -50,7 +62,7 @@ $(document).ready(function(){
 				username: {
 					required: "الرجاء إدخال اسم المستخدم",
 					minlength: jQuery.validator.format("يجب أن تكون اسم المستخدم الخاصة بك على الأقل 5 أحرف"),
-					// remote: jQuery.validator.format("{0} is already in use")
+					// checkUsername :"هذا الاسم مستخدم "
 				},
 				password: {
 					required: "الرجاء ادخال الرمز البسري",
@@ -70,27 +82,7 @@ $(document).ready(function(){
 				},
 			
 			},
-			// the errorPlacement has to take the table layout into account
-			// errorPlacement: function(error, element) {
-			// 	if (element.is(":radio"))
-			// 		error.appendTo(element.parent().next().next());
-			// 	else if (element.is(":checkbox"))
-			// 		error.appendTo(element.next());
-			// 	else
-			// 		error.appendTo(element.parent().next());
-			// },
-			// // specifying a submitHandler prevents the default submit, good for the demo
-			// submitHandler: function() {
-			// 	alert("submitted!");
-			// },
-			// // set this class to error-labels to indicate valid fields
-			// success: function(label) {
-			// 	// set &nbsp; as text for IE
-			// 	label.html("&nbsp;").addClass("checked");
-			// },
-			// highlight: function(element, errorClass) {
-			// 	$(element).parent().next().find("." + errorClass).removeClass("checked");
-			// }
+	
 		});
   
 });

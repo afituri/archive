@@ -7,60 +7,14 @@ $(document).ready(function(){
   $('#enable').click(function() {
     $('#user .editable').editable('toggleDisabled');
   }); 
-  // $.getJSON("/employee/employee_type", function( json ) {
-  //   var type=json.hnec;
-  //   var type = json.employee;
-  //   var i = 0;
-  //   for(key in json.hnec){
-  //     var k = new Object({id : i,value : key, text : json.hnec[key]});
-  //     i++;
-  //     $.type_h.push(k);
-
-  //   }
-  //   var i = 0;
-  //   for(key in json.employee){
-  //     var k = new Object({id : i,value : key, text : json.employee[key]});
-  //     i++;
-  //     $.type_e.push(k);
-
-  //   }  
-  //   $('#type_h').editable({
-  //       url: '/employee/edit',
-  //       source:$.type_h,
-  //       pk: 1,
-  //       name: 'type',
-  //       validate: function(v) {
-  //         if(!v) return 'الرجاء اختيار صفة الموظف';
-  //       }
-  //   }); 
-  //   $('#type_e').editable({
-  //   url: '/employee/edit',
-  //   source:$.type_e,
-  //   pk: 1,
-  //   name: 'type',
-  //   validate: function(v) {
-  //     if(!v) return 'الرجاء اختيار صفة الموظف';
-  //   }
-  // });    
-  // });
   
-  //   $('#center_idcenter').editable({
-  //       url: '/employee/edit',
-  //       source: $.resul,
-  //       select2: {
-  //         width: 200,
-  //         placeholder: 'Select center',
-  //         allowClear: false
-  //       } 
-  //   });      
-  // });
-  // $('a[id^="p_type"]').editable({
-  //   url: '/users/edit',
-  //   source:[
-  //     {value:"المفوضية",text:"المفوضية"},
-  //     {value:"شخصي",text:"شخصي"},
-  //   ]
-  // });
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    alert(id);
+    $.get('../../deleteUser/'+id, function(result){
+      window.location.href="/users/";
+    });
+  });
   $('#username').editable({
     url: '../../edit/',
     type: 'text',

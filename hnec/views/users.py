@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, RequestContext
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import permission_required
@@ -35,11 +36,16 @@ def auth_view(request):
     password = request.POST.get('password','')
     user = auth.authenticate(username=username, password=password)
     if user is not None:
-        auth.login(request,user) #this login tell django that we want this user to login
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
+        if user.is_active != False:
+            auth.login(request,user) #this login tell django that we want this user to login
+            if request.user.is_staff:
+                return HttpResponseRedirect('/cpanel/')
+            else:
+                return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
         else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+            messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
+        return render_to_response('logIn.html', locals(), 
+        context_instance=RequestContext(request))
     else:
         messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
         return render_to_response('logIn.html', locals(), 
@@ -53,9 +59,8 @@ def users(request):
         c.update(csrf(request))
         c['users']=User.objects.filter(is_active=True)
         c['department']=Department.objects.filter(status=True)
-
         objects=c['users']
-        paginator=Paginator(objects,2)
+        paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
             USERS = paginator.page(page)
@@ -63,8 +68,9 @@ def users(request):
             USERS = paginator.page(1)
         except EmptyPage:
             USERS = paginator.page(paginator.num_pages)
+        c['users'] = USERS
         # except paginator.page_range
-        return render_to_response('users.html',{"users": USERS})
+        return render_to_response('users.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
@@ -136,14 +142,22 @@ def cpanel(request):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
-# not working
-# def checkUsername(request):
-#     # username=request.POST['username']
-#     # user=User.objects.get(username=username)
-#     print "asdfasfasfaf"
-#     return True
-#     # print username
-#     # if user is not None:
-#     #     return False
-#     # else:
-#     #     return True
+@login_required(login_url='/')
+def deleteUser(request,user_id=0):
+    if int(user_id) != 0:
+        user=User.objects.get(id=user_id)
+        user.is_active = False
+        user.save()
+    return HttpResponseRedirect('/',)
+def checkUsername(request):
+    # username=request.POST['username']
+    print "asdfasfasfaf"
+    try:
+        user=User.objects.get(username=username,is_active=True)
+        print user
+        if user is not None:
+            print username+"true"
+            return HttpResponse(False) 
+    except:
+        print username+"sss"
+        return HttpResponse(True)

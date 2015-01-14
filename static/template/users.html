@@ -24,7 +24,7 @@
                                     </div>
                                     <table class="table">
                                         <tr>
-                                            <th id="username">إسم المستخدم</th>
+                                            <th id="userna">إسم المستخدم</th>
                                             <th id="email">البريد اﻹلكتروني</th>
                                             <th id="type">النوع</th>
                                             <th id="section">القسم</th>
@@ -81,7 +81,7 @@
 				            <div class="panel-body">
 			    		<form role="form" id="form" action="/addUser/" method="post">{% csrf_token %}
 			    				<div class="form-group">
-			    				<input type="text" name="username" id="username" class="form-control input-sm" placeholder="اسم المستخدم">
+			    				<input type="text" name="username" id="username" class="form-control input-sm" placeholder="اسم المستخدم" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"value="">
 			    			</div>
 			    			<div class="row">
 
@@ -146,17 +146,19 @@
 				    </div>
 				  </div>
 				</div>
+
+
                             {% endblock %} <!-- end of block table-->
 {% endblock %}
 
 {% block footer %}{% endblock %}
 {% block script %}
+
                     <script src = "/static/js/jquery-1.11.1.min.js"></script>
                     <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
                     <script type="text/javascript" src="/static/js/users.js" charset="UTF-8"></script>
                 {% endblock %} <!

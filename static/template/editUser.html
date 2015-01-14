@@ -37,6 +37,23 @@
       </table>
     </div>
   </div></font>
+  <div id="del" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-headr modal-header-danger">
+                    <p class="h1">هل أنت متأكد من  حدف ؟</p>
+                  </div>
+                  <div class="modal-body">
+                    <p class="h2">هل انت متأكد </p>
+                    <p> </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="confdelete" type="button" data-dismiss="modal" class="btn btn-danger" value="{{user.id}}">حدف</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
+                  </div>
+                </div>
+              </div>
+            </div>
   {% endblock %} {% endblock %}
 
 {% block script %}
@@ -47,7 +64,6 @@
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
                     <script src = "/static/js/editUser.js"></script>
 
 {% endblock %} 
