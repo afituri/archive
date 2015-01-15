@@ -9,6 +9,9 @@ from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from hnec.models import *
+import os
+import datetime
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 @login_required(login_url='/')
@@ -34,12 +37,14 @@ def getArchive(request):
 
 
 @login_required(login_url='/')
-def addArchive(request, department_id=1):
+def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
-    return render_to_response('addArchive.html',{
-                                    'list':Section.objects.filter(Department_id=department_id),
-                                    },    )
+    if int(department_id)!=0: 
+        c['list']=Section.objects.filter(Department_id=department_id)
+        return render_to_response('addArchive.html',c)
+    else:
+        return HttpResponseRedirect('/',)
 
 @login_required(login_url='/')
 def getArchiveType(request, department_id=0):
@@ -76,3 +81,37 @@ def editArchiveEditable(request):
     log = Log(id_user=request.user,action_type='edit',tabel='user',desc='edit user '+name+': '+old+' = > '+value,tabel_id=user.id,value=value)
     log.save()
     return HttpResponseRedirect('/',)
+
+def insertArchive(request):
+    files_name =[]
+    i=0
+    name = request.POST['name']
+    ref_num = request.POST['ref_num']
+    real_date = request.POST['real_date']
+    section_id = Section.objects.get(id=request.POST['section_id'])
+    text = request.POST['text']
+    archive =Archive(name=name,real_date=real_date,section_id=section_id,department_id=section_id.Department_id,ref_num=ref_num,text=text)
+    archive.save()
+    file_name= os.path.join(os.path.dirname(BASE_DIR), "static","Files")
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+real_date[:4]
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+section_id.Department_id.name
+    print file_name
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+name+"_"+str(archive.id)
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    for fil in request.POST['file_name[]']:
+        files_name.append(fil)
+    for files in request.FILES.getlist('file[]'):
+        with open( file_name+"/"+files.name, 'wb+') as destination:
+            for chunk in files.chunks():
+                destination.write(chunk)
+        f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
+        f.save()
+        i=i+1
+ 
