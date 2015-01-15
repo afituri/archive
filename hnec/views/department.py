@@ -60,7 +60,7 @@ def department(request, department_id=2):
         except EmptyPage:
             archive = paginator.page(paginator.num_pages)
         # except paginator.page_range
-        c['archive']=archive
+        c['department']=archive
         c['list']=Section.objects.filter(Department_id=department_id)
         c['dept_id']= request.user.employee.department_id.id
         return render_to_response('department.html',c)
