@@ -29,7 +29,7 @@
                         <font size="4" >المجلدات </font></a>
                     </div>
                     <div class="  col-md-9 col-sm-9 col-xs-9 ">
-                        <button type="submit" class="btn btn-success">إضافة مجلد</button>
+                        <a href="#addNewFolder" role="button" data-toggle="modal" class="btn btn-success">إضافة مجلد</a>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     	</button>
                     </td>
                     <td headers="delete">
-                    	<button id="delete" class="btn btn-danger btn-xs" href='#del' data-toggle='myModalTwo'  value="userIduser">
+                    	<button id="delete" href="#del" data-toggle="modal" value="{{section.id}}" class="btn btn-danger pull-right">
                     		<span class="glyphicon glyphicon-trash"></span>
                     	</button>
                     </td>
@@ -58,6 +58,55 @@
                 {% endfor %}
             </table>
         </div>
+        <!-- modal1 -->
+        <div id="addNewFolder" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+                 <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-headr modal-header-success">
+                        <p class="h1">إضافة مجلد</p>
+                      </div>
+                      <div class="modal-body">
+                        <div class="panel-body">
+                          <div class="table-responsive">
+                            <div class="panel-body">
+                        <form role="form" id="form" action="/addNewFolder/" method="post">{% csrf_token %}
+                                <div class="form-group">
+                                <input type="text" name="Folder" id="Folder" class="form-control input-sm" placeholder="إسم المجلد">
+                                <input type="hidden" value="{{dept_id}}" name="dept_id">
+                            </div>                          
+                            <input type="submit" value="إضـافة " class="btn btn-primary btn-block">
+                        
+                        </form>
+                    </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- endmodal1 -->
+                <!-- modal2 -->
+                <div id="del" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-headr modal-header-danger">
+                    <p class="h1">هل أنت متأكد من  حدف ؟</p>
+                  </div>
+                  <div class="modal-body">
+                    <p class="h2">هل انت متأكد </p>
+                    <p> </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="confdelete" type="button" data-dismiss="modal" class="btn btn-danger" value="">حدف</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+                <!-- endmodal2 -->
         {% block pagination %}
             <nav pull-center>
                 <ul class="pagination">
@@ -67,33 +116,6 @@
             </nav>
         {% endblock %}
     </div>
-{% endblock %}
-
-{% block test %}
-    <!-- Modal -->
-    {% for section in sections %}
-<!--     <div class="modal fade" id="myModal{{section.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">أنقر على الحقل للتعديل</h4>
-                </div>
-                <div class="modal-body">
-
-                    <a id="section{{section.id}}" href="#" data-type="text" data-pk="{{section.id}}" data-title="اسم المستخدم" data-value="{{section.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{section.name}}</a>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">حفـــظ</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    {% endfor %}
 {% endblock %}
 
 {% block script %}
