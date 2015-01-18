@@ -67,12 +67,14 @@ def addDepartment(request):
 
 
 @login_required(login_url='/')
-def department(request, department_id=2):
+def department(request, department_id=0):
     c = {}
     c.update(csrf(request))
+    if int(department_id)==0:
+        return HttpResponseRedirect('/')
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
         objects=Archive.objects.filter(department_id=department_id,status=True)
-        paginator=Paginator(objects,10)
+        paginator=Paginator(objects,4)
         page = request.GET.get('page')
         try:
             archive = paginator.page(page)
@@ -87,10 +89,6 @@ def department(request, department_id=2):
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-
-
-################################### Folder ##############################################
-
 
 @login_required(login_url='/')
 def addFolder(request, department_id=1):
@@ -124,16 +122,22 @@ def folder(request, department_id=1, section_id=1):
         for  sec_id in Section.objects.filter(Department_id=department_id):
             sec_list.append(sec_id.id)
         if request.user.is_staff or int(section_id) in sec_list:
-            return render_to_response('folder.html',{
-                                        'department': Archive.objects.filter(section_id=section_id),
-                                        'list':Section.objects.filter(Department_id=department_id),
-                                            },    )
+            objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
+            paginator=Paginator(objects,4)
+            page = request.GET.get('page')
+            try:
+                archive = paginator.page(page)
+            except PageNotAnInteger :
+                archive = paginator.page(1)
+            except EmptyPage:
+                archive = paginator.page(paginator.num_pages)
+            c['archive'] = archive
+            c['list'] = Section.objects.filter(Department_id=department_id)
+            return render_to_response('folder.html',c)
         else:
             return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-
-
 
 @login_required(login_url='/')   
 def addSection(request):
