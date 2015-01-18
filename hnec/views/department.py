@@ -169,4 +169,3 @@ def deleteFolder(request, folder_id=0):
         section.save()
         print 'this sucks again'
     return HttpResponseRedirect('/',)
->>>>>>> 41307e77a6dac677307e837891f09f575fbcb3c7
