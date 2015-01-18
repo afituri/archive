@@ -24,35 +24,43 @@
         </div>
     </div>
     <br>
-    <form class="form-horizontal">
+    <form class="form-horizontal" id="form" action="/insertArchive/" method="post"  enctype="multipart/form-data">{% csrf_token %}
 
       <div class="form-group">
         <label class="col-sm-4 control-label">إســـم اﻷرشيف</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" name="name" id="name">
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-4 control-label">الرقم اﻹشاري</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" name="ref_num" id="ref_num">
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-4 control-label">تاريخ اﻹصدار</label>
         <div class="col-sm-6">
-          <input type="date" class="form-control">
+          <div class="form-group">
+        <div class='input-group date' id='datetimepicker5'>
+          <!-- data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" -->
+          <input type='text' class="form-control" data-date-format="YYYY/MM/DD" name="real_date" id="real_date"/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
         </div>
       </div>
+      </div>
+    </div>
       
       <div class="form-group">
         <label class="col-sm-4 control-label">المجلد</label>
         <div class="col-sm-6">
-          <select class="form-control">
+          <select class="form-control" name="section_id" id="section_id">
             {% for sectidon in list %}
-                <option>{{sectidon.name}}</option>
+                <option value="{{sectidon.id}}">{{sectidon.name}}</option>
             {% endfor %}
           </select>
         </div>
@@ -61,7 +69,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">ملاحظات</label>
         <div class="col-sm-6">
-          <textarea class="form-control" rows="3"></textarea>
+          <textarea class="form-control" rows="3" name="text" id="text"></textarea>
         </div>
       </div>
             
@@ -71,7 +79,8 @@
             <div class="contacts col-sm-6">
                 <label>إصافة ملف :</label>
                     <div class="form-group multiple-form-group input-group file">
-                        <input type="file" name="contacts['value'][]" class="form-control" name="file">
+                        <input type="file" name="file[]" class="form-control" >
+                        <input type="text" name= "file_name[]" class="form-control" >
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-success btn-add">+</button>
                         </span>
@@ -99,5 +108,15 @@
     <li><a href="../department">قـسم</a></li>
 {% endblock %}
 {% block addFolder %}{% endblock %}
+{% block script %}
 
-<script src = "/static/js/addArchive.js"></script>
+  <script src = "/static/js/jquery-1.11.1.min.js"></script>
+  <script src = "/static/js/bootstrap.min.js"></script>
+  <script src = "/static/js/bootstrap-editable.min.js"></script>
+  <script src = "/static/js/jquery.validate.min.js"></script>
+  <script src = "/static/js/script_nav.js"></script>
+  <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+  <script src = "/static/js/Multiple.js"></script>
+  <script src = "/static/js/addArchive.js"></script>
+
+                {% endblock %} <!

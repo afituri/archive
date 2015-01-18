@@ -14,8 +14,7 @@
     <li><a href="/addFolder">الـمجـلدات</a></li>
     <li><a href="/addArchive">الارشـيف</a></li>
     <li class="active"><a href="/department">قـسم</a></li>
-{% endblock %}
-
+{% endblock %} 
 {% block table %}
     <div class="  col-md-6 col-sm-6   ">
         <div class="panel panel-default">
@@ -45,7 +44,7 @@
                         <td headers="date">{{archive.real_date}}</td>
                         <td headers="refNum">{{archive.ref_num}}</td>
                         <td headers="edit">
-                            <a href="../editArchive/{{archive.id}}" class="btn btn btn-primary btn-xs">
+                            <a href="/editArchive/{{archive.id}}" class="btn btn btn-primary btn-xs">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                             </a>
                         </td>                    

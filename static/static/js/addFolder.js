@@ -17,6 +17,20 @@ $(document).ready(function(){
     }
   });
   
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('../../deleteFolder/'+id, function(result){
+      alert(something);
+      window.location.href="/addFolder/";
+    });
+  });
+  
+  $('body').on('click','#delete', function(){
+    var id = $(this).val();
+    $('#confdelete').val(id);
+
+  });
+
   $('body').on('click','#enable', function(){
     id=$(this).parent().parent().data('id');
     $('#section'+id).editable('toggleDisabled');
