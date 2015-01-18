@@ -26,10 +26,14 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                        <font size="4" >المجلدات </font></a>
+                        <font size="4" >
+                            المجلدات 
+                        </font>
                     </div>
                     <div class="  col-md-9 col-sm-9 col-xs-9 ">
-                        <button type="submit" class="btn btn-success">إضافة مجلد</button>
+                        <a href="#addSection" role="button" data-toggle="modal" class="btn btn-success">
+                            إضافة مجلد
+                        </a>
                     </div>
                 </div>
             </div>
@@ -69,31 +73,37 @@
     </div>
 {% endblock %}
 
-{% block test %}
-    <!-- Modal -->
-    {% for section in sections %}
-<!--     <div class="modal fade" id="myModal{{section.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">أنقر على الحقل للتعديل</h4>
-                </div>
-                <div class="modal-body">
-
-                    <a id="section{{section.id}}" href="#" data-type="text" data-pk="{{section.id}}" data-title="اسم المستخدم" data-value="{{section.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{section.name}}</a>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">حفـــظ</button>
-                </div>
+{% block modalAddFolder %} 
+<div id="addSection" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">
+                    إضافة مجلد
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="form" action="/addSection/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="departmentId" value="{{departmentId}}"> 
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" class="form-control input-sm" placeholder="اسم المجلد" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"value="">
+                    </div>
+                    <input type="submit" value="إضـــــافة" class="btn btn-primary btn-block">
+                </form>
             </div>
         </div>
-    </div> -->
-    {% endfor %}
+    </div>
+</div>
+<!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+ -->
 {% endblock %}
 
 {% block script %}

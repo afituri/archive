@@ -9,6 +9,7 @@ from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from hnec.models import *
+from django.forms.models import model_to_dict
 
 
 @login_required(login_url='/')
@@ -41,15 +42,19 @@ def addArchive(request, department_id=1):
                                     'list':Section.objects.filter(Department_id=department_id),
                                     },    )
 
-@login_required(login_url='/')
-def getArchiveType(request, department_id=0):
-    if int(department_id) != 0 :
-        section = Section.objects.filter(Department_id=department_id,status=True)
-        print section
-        return HttpResponse(section)
-    else:
-        print "False False hbfourebfrefhbrpihnpi;"
-        return HttpResponse(False)
+
+# @login_required(login_url='/')
+# def getArchiveType(request, department_id=0):
+#     if int(department_id) != 0 :
+#         section = Section.objects.filter(Department_id=department_id,status=True)
+#         print section
+#         model_to_dict(section)
+#         # return HttpResponse(section)
+#         return section
+#     else:
+#         print "False False hbfourebfrefhbrpihnpi;"
+#         return HttpResponse(False)#send string only
+
 
 @login_required(login_url='/')
 def editArchiveEditable(request):
@@ -58,21 +63,24 @@ def editArchiveEditable(request):
     name = request.POST['name']
     value = request.POST['value']
 
-    user = User.objects.get(id=id_u)
+    archive = Archive.objects.get(id=id_u)
 
-    if name == 'username':
-        old=user.username
-        user.username=value
-    elif name == 'first_name':
-        old = user.first_name
-        user.first_name = value
-    elif name == 'last_name':
-        old = user.last_name
-        user.last_name = value
-    elif name == 'email':
-        old = user.email
-        user.email = value
-    user.save()
-    log = Log(id_user=request.user,action_type='edit',tabel='user',desc='edit user '+name+': '+old+' = > '+value,tabel_id=user.id,value=value)
+    if name == 'name':
+        old=archive.name
+        archive.name=value
+    elif name == 'real_date':
+        old = archive.real_date
+        archive.real_date = value
+    elif name == 'ref_num':
+        old = archive.ref_num
+        archive.ref_num = value
+    elif name == 'text':
+        old = archive.text
+        archive.text = value
+
+    archive.save()
+
+    log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     log.save()
-    return HttpResponseRedirect('/',)
+    # return HttpResponseRedirect('/',)
+    return True

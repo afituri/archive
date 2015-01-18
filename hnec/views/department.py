@@ -19,6 +19,7 @@ def addFolder(request, department_id=1):
     c.update(csrf(request))
     c['sections']=Section.objects.filter(Department_id=department_id)
     c['list']=Section.objects.filter(Department_id=department_id)
+    c['departmentId']= department_id
     return render_to_response('addFolder.html',c)
 
 @login_required(login_url='/')
@@ -119,3 +120,18 @@ def folder(request, department_id=1, section_id=1):
             return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+
+
+
+@login_required(login_url='/')   
+def addSection(request):
+    sectionName = request.POST['name']
+    department_id=Department.objects.get(id=request.POST['departmentId'])
+    section = Section(name=sectionName,Department_id=department_id)
+
+    section.save()
+    
+    log = Log(id_user=request.user,action_type='add',tabel='section',desc='add section '+sectionName,tabel_id=section.id,value=sectionName)
+    log.save()
+   
+    return HttpResponseRedirect('/users/',)
