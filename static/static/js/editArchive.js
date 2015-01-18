@@ -64,10 +64,10 @@ $(document).ready(function(){
 
 
     $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
-        alert("inside funkbcfekvchovbol");
-        console.log(result);
-            for ( var i = 0 ; i < result.length; i++){
-                var k = new Object({id : i,value : result.id, text : result.name});
+        result=result.split('$');
+        key =(result.length-1)/2;
+            for ( var i = 0 ; i < key; i++){
+                var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
         $('#type').editable({
