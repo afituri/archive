@@ -49,30 +49,37 @@
                     </div>
                     <table id="tableEditArchive" class="table table-bordered " style='clear: both'>
                         <tbody>
+                                {% csrf_token %}
+                                {{ form.as_p }}
                             <tr>
                                 <td width='35%'>اسم الارشيف</td>
                                 <td width='65%'>
-                                    <a href="#" id="name" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{archive.name}}
+                                    <a href="#" id="name" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                        {{archive.name}}
                                     </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td width='35%'> تاريخ الارشيف</td>
                                 <td width='65%'>
-                                    <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{archive.real_date}}</a>
+                                    <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                        {{archive.real_date}}
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td width='35%'>الرقم الاشاري</td>
                                 <td width='65%'>
-                                    <a href="#" id="ref_num" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{archive.ref_num}}
+                                    <a href="#" id="ref_num" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                        {{archive.ref_num}}
                                     </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td width='35%'>الوصف</td>
                                 <td width='65%'>
-                                    <a href="#" id="textarea1" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{archive.text}}
+                                    <a href="#" id="textarea1" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                        {{archive.text}}
                                     </a>
                                 </td>
                             </tr>

@@ -11,9 +11,8 @@ $(document).ready(function(){
   
   $('#confdelete').click(function() {
     var id = $(this).val();
-    alert(id);
     $.get('../../deleteUser/'+id, function(result){
-      window.location.href="/users/";
+      // window.location.href="/users/";
     });
   });
   $('#username').editable({

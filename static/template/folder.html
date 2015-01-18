@@ -37,6 +37,34 @@
                     </div>
                 </form>
             </nav>
+                    <div class="  col-md-8 col-sm-8 col-xs-8  ">
+                        <font size="4" >الرقم الاشاري </font></a>
+                        <input type="text" placeholder="البحث">
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th id="name">الاسـم</th>
+                    <th id="type">النـوع</th>
+                    <th id="date">التـاريـخ</th>
+                    <th id="refNum">الـرقم الاشاري</th>
+                    <th id="edit">عـرض</th>
+                </tr>
+                {% for archive in department %}
+                    <tr>
+                        <td headers="name">{{archive.name}}</td>
+                        <td headers="type">{{archive.section_id.name}}</td>
+                        <td headers="date">{{archive.real_date}}</td>
+                        <td headers="refNum">{{archive.ref_num}}</td>
+                        <td headers="edit">
+                            <a href="/editArchive/{{archive.id}}" class="btn btn btn-primary btn-xs">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>
+                        </td>                    
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>
