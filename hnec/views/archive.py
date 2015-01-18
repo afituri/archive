@@ -96,13 +96,14 @@ def editArchiveEditable(request):
     elif name == 'text':
         old = archive.text
         archive.text = value
+    elif name == 'section_id':
+        old = archive.section_id
+        archive.section_id = value
 
     archive.save()
 
     log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     log.save()
-    # return HttpResponseRedirect('/',)
-    return True
     return HttpResponseRedirect('/',)
 
 def insertArchive(request):

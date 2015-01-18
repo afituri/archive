@@ -51,7 +51,6 @@
                         <tbody>
                                 {% csrf_token %}
                                 {{ form.as_p }}
-
                             <tr>
                                 <td width='35%'>اسم الارشيف</td>
                                 <td width='65%'>
@@ -87,8 +86,7 @@
                             <tr>
                                 <td width='35%'> النوع</td>
                                 <td width='65%'>
-                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{archive.section_id.name}}
-                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{archive.section_id.name}}
                                     </a>
                                 </td>
                             </tr>

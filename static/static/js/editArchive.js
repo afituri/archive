@@ -5,7 +5,6 @@ $(document).ready(function(){
         disabled: true,
     };
 
-
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
@@ -17,10 +16,10 @@ $(document).ready(function(){
         pk: 1,
         name: 'name',
         title: 'Enter archive name',
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الاسم';
+        }
     });
-
-    
-
 
     $('#textarea1').editable({
         url: '../editArchiveEditable/',
@@ -29,9 +28,9 @@ $(document).ready(function(){
         name: 'text',
         title: 'Enter text description',
         rows: 10,
-        // success: function (res, newValue){
-        //   return res.msg;
-        // }
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الوصف';
+        }
     });
 
     $('#ref_num').editable({
@@ -40,9 +39,9 @@ $(document).ready(function(){
         pk: 1,
         name: 'ref_num',
         title: 'Enter ref_num ',
-        // success: function (res, newValue){
-        //   return res.msg;
-        // }
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الرقم الايشاري';
+        }
     });
 
     $('#real_date').editable({
@@ -51,16 +50,16 @@ $(document).ready(function(){
         viewformat: 'dd/mm/yyyy hh:ii',    
         datetimepicker: {
             weekStart: 1
+        },
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال التاريخ';
         }
     });
-
- 
 
     $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
         result=result.split('$');
         key =(result.length-1)/2;
             for ( var i = 0 ; i < key; i++){
-                alert(result[i]);
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
