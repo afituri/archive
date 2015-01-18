@@ -49,9 +49,12 @@ def addArchive(request, department_id=0):
 @login_required(login_url='/')
 def getArchiveType(request, department_id=0):
     if int(department_id) != 0 :
-        section = Section.objects.filter(Department_id=department_id,status=True)
-        print section
-        return HttpResponse(section)
+        name=""
+        ids=""
+        for section in Section.objects.filter(Department_id=department_id,status=True):
+            name=name+section.name+"$"
+            ids=ids+str(section.id)+"$"
+        return HttpResponse(name+ids)
     else:
         print "False False hbfourebfrefhbrpihnpi;"
         return HttpResponse(False)
