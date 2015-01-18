@@ -142,6 +142,7 @@ def cpanel(request):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
+
 @login_required(login_url='/')
 def deleteUser(request,user_id=0):
     if int(user_id) != 0:
@@ -149,6 +150,8 @@ def deleteUser(request,user_id=0):
         user.is_active = False
         user.save()
     return HttpResponseRedirect('/',)
+
+
 def checkUsername(request):
     # username=request.POST['username']
     print "asdfasfasfaf"

@@ -6,32 +6,31 @@ $(document).ready(function(){
     };
 
 
-
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
     }); 
     
     $('#name').editable({
-        url: '../../editArchiveEditable/',
+        url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'name',
         title: 'Enter archive name',
     });
 
-    // $('#type').editable({
-    //     url: '../../editArchiveEditable/',
-    //     value: 2,    
-    //     source: [
-    //         {value: 1, text: 'Active'},
-    //         {value: 2, text: 'Blocked'},
-    //         {value: 3, text: 'Deleted'}
-    //     ]
-    // });
+    $('#type').editable({
+        url: '../editArchiveEditable/',
+        value: 2,    
+        source: [
+            {value: 1, text: 'Active'},
+            {value: 2, text: 'Blocked'},
+            {value: 3, text: 'Deleted'}
+        ]
+    });
 
     $('#textarea1').editable({
-        url: '../../editArchiveEditable/',
+        url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'text',
@@ -43,7 +42,7 @@ $(document).ready(function(){
     });
 
     $('#ref_num').editable({
-        url: '../../editArchiveEditable/',
+        url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'ref_num',
@@ -54,7 +53,7 @@ $(document).ready(function(){
     });
 
     $('#real_date').editable({
-        url: '../../editArchiveEditable/',
+        url: '../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
         datetimepicker: {
@@ -62,6 +61,7 @@ $(document).ready(function(){
         }
     });
 
+<<<<<<< HEAD
 
     $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
         result=result.split('$');
@@ -79,4 +79,18 @@ $(document).ready(function(){
     });
   
 
+=======
+    // $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
+    //     alert("inside funkbcfekvchovbol");
+    //     console.log(result);
+    //         for ( var i = 0 ; i < result.length; i++){
+    //             var k = new Object({id : i,value : result.id, text : result.name});
+    //             $.resul.push(k);
+    //         }
+    //     $('#type').editable({
+    //         url: '../../editArchiveEditable/',
+    //         source: $.resul     
+    //     });      
+    // });
+>>>>>>> b11b0182397993ff7d846c7df6d392518b6d86ce
 });
