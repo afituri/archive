@@ -19,15 +19,8 @@ $(document).ready(function(){
         title: 'Enter archive name',
     });
 
-    $('#type').editable({
-        url: '../editArchiveEditable/',
-        value: 2,    
-        source: [
-            {value: 1, text: 'Active'},
-            {value: 2, text: 'Blocked'},
-            {value: 3, text: 'Deleted'}
-        ]
-    });
+    
+
 
     $('#textarea1').editable({
         url: '../editArchiveEditable/',
@@ -61,12 +54,13 @@ $(document).ready(function(){
         }
     });
 
-<<<<<<< HEAD
+ 
 
     $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
         result=result.split('$');
         key =(result.length-1)/2;
             for ( var i = 0 ; i < key; i++){
+                alert(result[i]);
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
@@ -78,19 +72,4 @@ $(document).ready(function(){
         });      
     });
   
-
-=======
-    // $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
-    //     alert("inside funkbcfekvchovbol");
-    //     console.log(result);
-    //         for ( var i = 0 ; i < result.length; i++){
-    //             var k = new Object({id : i,value : result.id, text : result.name});
-    //             $.resul.push(k);
-    //         }
-    //     $('#type').editable({
-    //         url: '../../editArchiveEditable/',
-    //         source: $.resul     
-    //     });      
-    // });
->>>>>>> b11b0182397993ff7d846c7df6d392518b6d86ce
 });

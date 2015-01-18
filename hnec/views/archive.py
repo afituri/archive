@@ -49,6 +49,7 @@ def addArchive(request, department_id=0):
 
 @login_required(login_url='/')
 def getArchiveType(request, department_id=0):
+    print "asflnafkn"
     if int(department_id) != 0 :
         name=""
         ids=""
