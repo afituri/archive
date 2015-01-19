@@ -10,7 +10,7 @@ $(document).ready(function(){
         $('#tableEditArchive .editable').editable('toggleDisabled');
     }); 
     
-    $('#name').editable({
+    $('#name1').editable({
         url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -33,7 +33,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#ref_num').editable({
+    $('#ref_num1').editable({
         url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -44,7 +44,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#real_date').editable({
+    $('#real_date1').editable({
         url: '../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
@@ -63,12 +63,11 @@ $(document).ready(function(){
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
-        $('#type').editable({
+        $('#type1').editable({
             url: '../../editArchiveEditable/',
             source: $.resul
 
             
         });      
     });
-  
 });
