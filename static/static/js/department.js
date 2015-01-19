@@ -1,8 +1,6 @@
 $(document).ready(function(){
-    $('#search').on('input', function(){
-        $.get('/search/'+$(this).val(), function(result){
-            
-        });
+    $('#search').on('click', function(){
+        window.location.href="/department/"+$('#dept_id').val()+"/?q="+$('#query').val();
     });
 
 

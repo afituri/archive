@@ -53,7 +53,12 @@ def department(request, department_id=0):
     if int(department_id)==0:
         return HttpResponseRedirect('/')
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
-        objects=Archive.objects.filter(department_id=department_id,status=True)
+        q = request.GET.get('q')
+        if q is not None:
+            objects=Archive.objects.filter(department_id=department_id,status=True,ref_num__contains=q)
+        else:
+            q=''
+            objects=Archive.objects.filter(department_id=department_id,status=True)
         paginator=Paginator(objects,4)
         page = request.GET.get('page')
         try:
@@ -66,6 +71,7 @@ def department(request, department_id=0):
         c['department']=archive
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
+        c['q']=q
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
