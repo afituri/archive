@@ -147,9 +147,12 @@ def cpanel(request):
 def deleteUser(request,user_id=0):
     if int(user_id) != 0:
         user=User.objects.get(id=user_id)
+        name=user.username
         user.is_active = False
         user.save()
-    return HttpResponseRedirect('/',)
+        log = Log(id_user=request.user,action_type='delete',tabel='user',desc='delete user '+name,tabel_id=user.id,value=name)
+        log.save()
+        return HttpResponseRedirect('/users',)
 
 
 def checkUsername(request):

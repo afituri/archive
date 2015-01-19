@@ -12,11 +12,14 @@ $(document).ready(function(){
     }); 
     
     $('#name').editable({
-        url: '../editArchiveEditable/',
+        url: '../../editArchiveEditable',
         type: 'text',
         pk: 1,
         name: 'name',
         title: 'Enter archive name',
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الحقل';
+        }
     });
 
     
@@ -60,7 +63,6 @@ $(document).ready(function(){
         result=result.split('$');
         key =(result.length-1)/2;
             for ( var i = 0 ; i < key; i++){
-                alert(result[i]);
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }

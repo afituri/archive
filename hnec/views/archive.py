@@ -42,14 +42,13 @@ def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
     if int(department_id)!=0: 
-        c['list']=Section.objects.filter(Department_id=department_id)
+        c['list']=Section.objects.filter(Department_id=department_id,status=True)
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
 
 @login_required(login_url='/')
 def getArchiveType(request, department_id=0):
-    print "asflnafkn"
     if int(department_id) != 0 :
         name=""
         ids=""
@@ -77,7 +76,7 @@ def getArchiveType(request, department_id=0):
 
 @login_required(login_url='/')
 def editArchiveEditable(request):
-
+    print "asfasf"
     id_u = request.POST['pk']
     name = request.POST['name']
     value = request.POST['value']
@@ -137,4 +136,5 @@ def insertArchive(request):
         f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
         f.save()
         i=i+1
+    return HttpResponseRedirect('/department/%s/' %section_id.Department_id.id)
  

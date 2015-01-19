@@ -25,7 +25,7 @@
                     </div>
                     <div class="  col-md-8 col-sm-8 col-xs-8  ">
                         <font size="4" >الرقم الاشاري </font></a>
-                        <input type="text" placeholder="البحث">
+                        <input id="search" type="text" placeholder="البحث" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                     </div>
                 </div>
             </div>
@@ -63,3 +63,13 @@
     </nav>
 {% endblock %}
 {% block footer %}{% endblock %}
+{% block script %}
+
+                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+                    <script src = "/static/js/bootstrap.min.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
+                    <script src = "/static/js/jquery.validate.min.js"></script>
+                    <script src = "/static/js/script_nav.js"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="/static/js/department.js" charset="UTF-8"></script>
+                {% endblock %} <!
