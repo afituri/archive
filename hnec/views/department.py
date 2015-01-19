@@ -158,5 +158,4 @@ def deleteFolder(request, folder_id=0):
         log = Log(id_user=request.user,action_type='delete',tabel='section',desc='delete section '+section.name,tabel_id=section.id,value=section.name)
         log.save()
     return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
-        print 'this sucks again'
-    return HttpResponseRedirect('/',)
+    

@@ -4,18 +4,6 @@
     <li><a href="/addArchive">الارشـيف</a></li>
     <li class="active"><a href="/department">قـسم</a></li>
 {% endblock %} 
-{% block table %}
-    <div class="  col-md-6 col-sm-6   ">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                        <font size="4" >الارشـيـف </font></a>
-                    </div>
-                    <div class="  col-md-8 col-sm-8 col-xs-8  ">
-                        <font size="4" >الرقم الاشاري </font></a>
-                        <input id="search" type="text" placeholder="البحث" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-{% endblock %}
 {% block search %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -62,7 +50,7 @@
                             </div>
                             <div class="  col-md-8 col-sm-8 col-xs-8  ">
                                 <font size="4" >الرقم الاشاري </font></a>
-                                <input type="text" placeholder="البحث">
+                                <input id="search"type="text" placeholder="البحث"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                             </div>
                         </div>
                     </div>
@@ -106,14 +94,7 @@
     {% endblock %} <!-- end of block pagination-->
 </div>
 {% endblock %}
-{% block pagination %}
-    <nav pull-center>
-        <ul class="pagination">
-            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-        </ul>
-    </nav>
-{% endblock %}
+
 {% block footer %}{% endblock %}
 {% block script %}
 
