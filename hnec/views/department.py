@@ -85,7 +85,7 @@ def department(request, department_id=0):
         # except paginator.page_range
         c['department']=archive
         c['list']=Section.objects.filter(Department_id=department_id)
-        c['dept_id']= request.user.employee.department_id.id
+        c['dept_id']= department_id
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
