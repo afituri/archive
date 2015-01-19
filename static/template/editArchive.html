@@ -31,73 +31,68 @@
 
 {% block table %}
     <div class="  col-md-6 col-sm-6 ">
-        <!-- <div class="panel panel-default"> -->
-            <!-- <div class="panel-heading"> -->
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-3 ">
-                        <button id="enable" class="btn btn-primary" >
-                            تمكــين / تعطـــيل
-                        </button>
-                    </div>
-                    <div class="  col-md-6 col-sm-6 col-xs-6  ">
-                        <button id="delete" class="btn btn-danger pull-right" href='#del' data-toggle='modal'  data-target=".bs-example-modal-sm" value="">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <div class="  col-md-2 col-sm-2 col-xs-2  ">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-3 ">
+                <button id="enable" class="btn btn-primary" >
+                    تمكــين / تعطـــيل
+                </button>
+            </div>
+            <div class="  col-md-6 col-sm-6 col-xs-6  ">
+                <button id="delete" class="btn btn-danger pull-right" href='#del' data-toggle='modal'  data-target=".bs-example-modal-sm" value="">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+            <div class="  col-md-2 col-sm-2 col-xs-2  ">
 
-                    </div>
-                    <table id="tableEditArchive" class="table table-bordered " style='clear: both'>
-                        <tbody>
-                                {% csrf_token %}
-                                {{ form.as_p }}
-
-                            <tr>
-                                <td width='35%'>اسم الارشيف</td>
-                                <td width='65%'>
-                                    <a href="#" id="name" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                        {{archive.name}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width='35%'> تاريخ الارشيف</td>
-                                <td width='65%'>
-                                    <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                        {{archive.real_date}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width='35%'>الرقم الاشاري</td>
-                                <td width='65%'>
-                                    <a href="#" id="ref_num" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                        {{archive.ref_num}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width='35%'>الوصف</td>
-                                <td width='65%'>
-                                    <a href="#" id="textarea1" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                        {{archive.text}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width='35%'> النوع</td>
-                                <td width='65%'>
-                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{archive.section_id.name}}
-                                    <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                    </a>
-                                </td>
-                            </tr>
-                            <input type="hidden" value="{{archive.department_id.id}}" id="idDept" >
-                        </tbody>
-                    </table>
-                </div>
-            <!-- </div> -->
-        <!-- </div> -->
+            </div>
+            <table id="tableEditArchive" class="table table-bordered " style='clear: both'>
+                <tbody>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    <tr>
+                        <td width='35%'>اسم الارشيف</td>
+                        <td width='65%'>
+                            <a href="#" id="name1" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.name}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='35%'> تاريخ الارشيف</td>
+                        <td width='65%'>
+                            <a href="#" id="real_date1" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.real_date}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='35%'>الرقم الاشاري</td>
+                        <td width='65%'>
+                            <a href="#" id="ref_num1" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.ref_num}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='35%'>الوصف</td>
+                        <td width='65%'>
+                            <a href="#" id="textarea1" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.text}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='35%'> النوع</td>
+                        <td width='65%'>
+                            <a href="#" id="type1" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.section_id.name}}
+                            </a>
+                        </td>
+                    </tr>
+                    <input type="hidden" value="{{archive.department_id.id}}" id="idDept" >
+                </tbody>
+            </table>
+        </div>
         {% block pagination %}{% endblock %}
     </div>
 {% endblock %}

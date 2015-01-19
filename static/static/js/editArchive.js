@@ -5,14 +5,13 @@ $(document).ready(function(){
         disabled: true,
     };
 
-
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
     }); 
     
-    $('#name').editable({
-        url: '../../editArchiveEditable',
+    $('#name1').editable({
+        url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'name',
@@ -22,9 +21,6 @@ $(document).ready(function(){
         }
     });
 
-    
-
-
     $('#textarea1').editable({
         url: '../editArchiveEditable/',
         type: 'text',
@@ -32,32 +28,33 @@ $(document).ready(function(){
         name: 'text',
         title: 'Enter text description',
         rows: 10,
-        // success: function (res, newValue){
-        //   return res.msg;
-        // }
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الوصف';
+        }
     });
 
-    $('#ref_num').editable({
+    $('#ref_num1').editable({
         url: '../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'ref_num',
         title: 'Enter ref_num ',
-        // success: function (res, newValue){
-        //   return res.msg;
-        // }
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال الرقم الايشاري';
+        }
     });
 
-    $('#real_date').editable({
+    $('#real_date1').editable({
         url: '../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
         datetimepicker: {
             weekStart: 1
+        },
+        validate: function(v) {
+            if(!v) return 'الرجاء ادخال التاريخ';
         }
     });
-
- 
 
     $.get('../../getArchiveType/'+$("#idDept").val(),function(result){
         result=result.split('$');
@@ -66,12 +63,11 @@ $(document).ready(function(){
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
-        $('#type').editable({
+        $('#type1').editable({
             url: '../../editArchiveEditable/',
             source: $.resul
 
             
         });      
     });
-  
 });

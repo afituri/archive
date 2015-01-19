@@ -29,7 +29,7 @@
                                             <th id="view"> عرض</th>
                                             <th id="delete">حدف</th>
                                         </tr>
-                                        {% for dept in department %}
+                                        {% for dept in departmentk %}
                                         <tr>
                                             <td headers="deptname">{{dept.name}}</td>
                                             <td>   <button type="button" class="btn btn-primary btn-xs"> <span class="glyphicon glyphicon-edit">تعديل</span> </button></td>
@@ -39,22 +39,22 @@
                                         {% endfor %}
                                     </table>
                                 </div>
-                                {% block pagination %}
-                                    <nav pull-center>
-                                        <ul class="pagination">
-                                         
-                                            <li> {% if department.has_previous %} <a href="?page={{ department.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
-                               	        
-                                	       {% for i in department.paginator.page_range %}
-                                	       
-                                            <li>{% if department.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
-                                	       {% endfor %}
-                        		        
-                              		          <li>{% if department.has_next %} <a href="?page={{department.next_page_number}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
-                               	        
-                                        </ul>
-                                    </nav> 
-                                {% endblock %} <!-- end of block pagination-->
+                            {% block pagination %}
+                                <nav pull-center>
+                                    <ul class="pagination">
+                                        <li> {% if department.has_previous %} <a href="?page={{ department.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
+                                    
+                                       {% for i in department.paginator.page_range %}
+                                       
+                                        <li>{% if department.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
+                                       {% endfor %}
+                                    
+                                          <li>{% if department.has_next %} <a href="?page={{department.next_page_number}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
+                                    
+                                    </ul>
+                                </nav> 
+                            {% endblock %} <!-- end of block pagination-->
+
                             </div>
                             <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
                         </div>
