@@ -112,10 +112,6 @@ def folder(request, department_id=1, section_id=1):
         for  sec_id in Section.objects.filter(Department_id=department_id):
             sec_list.append(sec_id.id)
         if request.user.is_staff or int(section_id) in sec_list:
-            return render_to_response('folder.html',{
-                                        'department': Archive.objects.filter(section_id=section_id,status=True),
-                                        'list':Section.objects.filter(Department_id=department_id,status=True),
-                                            },    )
             objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
             paginator=Paginator(objects,4)
             page = request.GET.get('page')
