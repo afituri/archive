@@ -10,8 +10,8 @@ $(document).ready(function(){
         $('#tableEditArchive .editable').editable('toggleDisabled');
     }); 
     
-    $('#name1').editable({
-        url: '../editArchiveEditable/',
+    $('#name').editable({
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'name',
@@ -21,8 +21,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#textarea1').editable({
-        url: '../editArchiveEditable/',
+    $('#textarea').editable({
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'text',
@@ -33,8 +33,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#ref_num1').editable({
-        url: '../editArchiveEditable/',
+    $('#ref_num').editable({
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
         name: 'ref_num',
@@ -44,8 +44,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#real_date1').editable({
-        url: '../editArchiveEditable/',
+    $('#real_date').editable({
+        url: '../../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
         datetimepicker: {
@@ -63,8 +63,9 @@ $(document).ready(function(){
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
-        $('#type1').editable({
+        $('#type').editable({
             url: '../../editArchiveEditable/',
+            params:$('#type').data('params'),
             source: $.resul
 
             

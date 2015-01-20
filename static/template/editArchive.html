@@ -52,7 +52,7 @@
                     <tr>
                         <td width='35%'>اسم الارشيف</td>
                         <td width='65%'>
-                            <a href="#" id="name1" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                            <a href="#" id="name" data-type='text' data-pk='{{archive.id}}' data-title='اسم الارشيف' data-value='{{archive.name}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.name}}
                             </a>
                         </td>
@@ -60,7 +60,7 @@
                     <tr>
                         <td width='35%'> تاريخ الارشيف</td>
                         <td width='65%'>
-                            <a href="#" id="real_date1" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                            <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.real_date}}
                             </a>
                         </td>
@@ -68,7 +68,7 @@
                     <tr>
                         <td width='35%'>الرقم الاشاري</td>
                         <td width='65%'>
-                            <a href="#" id="ref_num1" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                            <a href="#" id="ref_num" data-type='text' data-pk='{{archive.id}}' data-title='الرقم الاشاري' data-value='{{archive.ref_num}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.ref_num}}
                             </a>
                         </td>
@@ -76,7 +76,7 @@
                     <tr>
                         <td width='35%'>الوصف</td>
                         <td width='65%'>
-                            <a href="#" id="textarea1" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                            <a href="#" id="textarea" data-type='textarea' data-pk='{{archive.id}}' data-title='الوصف' data-value='{{archive.text}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.text}}
                             </a>
                         </td>
@@ -84,13 +84,26 @@
                     <tr>
                         <td width='35%'> النوع</td>
                         <td width='65%'>
-                            <a href="#" id="type1" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                            <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.section_id.name}}
                             </a>
                         </td>
                     </tr>
                     <input type="hidden" value="{{archive.department_id.id}}" id="idDept" >
                 </tbody>
+            </table>
+            <table id="FILE" style="clear: both" class="table table-bordered table-striped">
+              <tbody>
+                {% for fil in files%}
+                    <tr id="{{fil.id}}">
+                      <td width="55%"><a href="/{{fil.path}}">{{fil.name}}</a> </td>
+                      <td width="10%"> </td>
+                      <td width="10%">
+                        <button id="deletePhone" data-toggle="modal" value="" data-target="#phone" data-placement="top" rel="tooltip" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> </span></button>
+                      </td>
+                    </tr>
+                {%endfor%}
+              </tbody>
             </table>
         </div>
         {% block pagination %}{% endblock %}
