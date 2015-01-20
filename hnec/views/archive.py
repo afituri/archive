@@ -46,6 +46,7 @@ def addArchive(request, department_id=0):
     c.update(csrf(request))
     if int(department_id)!=0: 
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
+        c['dept_id']= department_id
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
