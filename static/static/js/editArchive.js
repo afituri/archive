@@ -8,7 +8,7 @@ $(document).ready(function(){
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
-    }); 
+    });
     
     $('#name1').editable({
         url: '../../editArchiveEditable/',

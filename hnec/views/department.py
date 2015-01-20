@@ -39,6 +39,26 @@ def addDept(request):
     return  redirect('../Departments/')
 
 
+@login_required(login_url='/')   
+def editDepartment(request):
+    c = {}
+    c.update(csrf(request))
+    
+    id_department = request.POST['pk']
+    name = request.POST['name']
+    value = request.POST['value']  
+    department = Department.objects.get(id=id_department)
+    old = department.name
+    department.name = value
+
+    department.save()
+
+    log = Log(id_user=request.user,action_type='edit',tabel='department',desc='edit department name :'+old+' = >'+department.name,tabel_id=department.id,value=department.name)
+    log.save()
+    return render_to_response('Departments.html',c)
+
+
+
 def addDepartment(request):
     c = {}
     c.update(csrf(request))
@@ -161,3 +181,13 @@ def deleteFolder(request, folder_id=0):
         log.save()
     return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
     
+
+@login_required(login_url='/')
+def deleteDepartment(request, department_id=0):
+    if int(department_id) != 0:
+        department = Department.objects.get(id=department_id)
+        department.status = False
+        department.save()
+        log = Log(id_user=request.user,action_type='delete',tabel='department',desc='delete department '+department.name,tabel_id=department.id,value=department.name)
+        log.save()
+    return HttpResponseRedirect('/Department/%s/' %department.id,)
