@@ -16,7 +16,7 @@ $(document).ready(function(){
         pk: 1,
         title: 'Enter archive name',
         validate: function(v) {
-            if(!v) return 'الرجاء ادخال الاسم';
+            if(!v) return 'الرجاء ادخال الحقل';
         }
     });
 

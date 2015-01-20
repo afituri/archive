@@ -12,7 +12,7 @@ $(document).ready(function(){
   $('#confdelete').click(function() {
     var id = $(this).val();
     $.get('../../deleteUser/'+id, function(result){
-      // window.location.href="/users/";
+      window.location.href="/users/";
     });
   });
   $('#username').editable({

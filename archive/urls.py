@@ -7,7 +7,6 @@ urlpatterns = patterns('',
 
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^$', 'hnec.views.users.logIn'),
-    url(r'^department/$', 'hnec.views.department.department'),
     url(r'^addArchive/(?P<department_id>\d+)/$', 'hnec.views.archive.addArchive'),
     url(r'^editArchive/(?P<archive_id>\d+)/$', 'hnec.views.archive.editArchive'),
     url(r'^addFolder/(?P<department_id>\d+)/$', 'hnec.views.department.addFolder'),

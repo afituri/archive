@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response,redirect
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import permission_required
@@ -11,27 +12,6 @@ from hnec.models import *
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-
-@login_required(login_url='/')
-def addFolder(request, department_id=1):
-    c = {}
-    c.update(csrf(request))
-    c['sections']=Section.objects.filter(Department_id=department_id)
-    c['list']=Section.objects.filter(Department_id=department_id)
-    c['departmentId']= department_id
-    return render_to_response('addFolder.html',c)
-
-@login_required(login_url='/')
-def editFolder(request):
-    c = {}
-    c.update(csrf(request))
-    id_sect=request.POST['pk']
-    name=request.POST['name']
-    value=request.POST['value']  
-    section = Section.objects.get(id=id_sect)
-    section.name = value
-    section.save(update_fields=["name"])
-    return render_to_response('addFolder.html',c)
 
 @login_required(login_url='/')
 def Departments(request):
@@ -73,7 +53,12 @@ def department(request, department_id=0):
     if int(department_id)==0:
         return HttpResponseRedirect('/')
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
-        objects=Archive.objects.filter(department_id=department_id,status=True)
+        q = request.GET.get('q')
+        if q is not None:
+            objects=Archive.objects.filter(department_id=department_id,status=True,ref_num__contains=q)
+        else:
+            q=''
+            objects=Archive.objects.filter(department_id=department_id,status=True)
         paginator=Paginator(objects,4)
         page = request.GET.get('page')
         try:
@@ -84,8 +69,9 @@ def department(request, department_id=0):
             archive = paginator.page(paginator.num_pages)
         # except paginator.page_range
         c['department']=archive
-        c['list']=Section.objects.filter(Department_id=department_id)
-        c['dept_id']= request.user.employee.department_id.id
+        c['list']=Section.objects.filter(Department_id=department_id,status=True)
+        c['dept_id']= department_id
+        c['q']=q
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
@@ -96,7 +82,7 @@ def addFolder(request, department_id=1):
     c.update(csrf(request))
     c['sections']=Section.objects.filter(Department_id=department_id, status=True)
     c['list']=Section.objects.filter(Department_id=department_id, status=True)
-    c['dept_id']=request.user.employee.department_id.id
+    c['dept_id']=department_id
     return render_to_response('addFolder.html',c)
 
 
@@ -108,8 +94,12 @@ def editFolder(request):
     name=request.POST['name']
     value=request.POST['value']  
     section = Section.objects.get(id=id_sect)
+    old=section.name
     section.name = value
     section.save(update_fields=["name"])
+    log = Log(id_user=request.user,action_type='edit',tabel='section',desc='edit section name :'+old+' = >'+section.name,tabel_id=section.id,value=section.name)
+   
+    log.save()
     return render_to_response('addFolder.html',c)
 
 # dispalys section
@@ -141,8 +131,9 @@ def folder(request, department_id=1, section_id=1):
 
 @login_required(login_url='/')   
 def addSection(request):
+
     sectionName = request.POST['name']
-    department_id=Department.objects.get(id=request.POST['departmentId'])
+    department_id=Department.objects.get(id=request.POST['dept_id'])
     section = Section(name=sectionName,Department_id=department_id)
 
     section.save()
@@ -150,7 +141,7 @@ def addSection(request):
     log = Log(id_user=request.user,action_type='add',tabel='section',desc='add section '+sectionName,tabel_id=section.id,value=sectionName)
     log.save()
    
-    return HttpResponseRedirect('/users/',)
+    return HttpResponseRedirect('/addFolder/%s/' %department_id.id,)
 @login_required(login_url='/')
 def addNewFolder(request):
     name = request.POST.get('Folder','')
@@ -162,10 +153,11 @@ def addNewFolder(request):
 
 @login_required(login_url='/')
 def deleteFolder(request, folder_id=0):
-    print 'this sucks'
     if int(folder_id) != 0:
         section = Section.objects.get(id=folder_id)
         section.status = False
         section.save()
-        print 'this sucks again'
-    return HttpResponseRedirect('/',)
+        log = Log(id_user=request.user,action_type='delete',tabel='section',desc='delete section '+section.name,tabel_id=section.id,value=section.name)
+        log.save()
+    return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
+    

@@ -10,6 +10,9 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate
 from hnec.models import *
 from django.forms.models import model_to_dict
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json
+from django.core import serializers
 import os
 import datetime
 from django.shortcuts import render_to_response, RequestContext
@@ -47,7 +50,7 @@ def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
     if int(department_id)!=0: 
-        c['list']=Section.objects.filter(Department_id=department_id)
+        c['list']=Section.objects.filter(Department_id=department_id,status=True)
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
@@ -82,6 +85,7 @@ def getArchiveType(request, department_id=0):
 @login_required(login_url='/')
 def editArchiveEditable(request):
     print "ssssssssssdsdgm;sgdm"
+    print "asfasf"
     id_u = request.POST['pk']
     name = request.POST['name']
     value = request.POST['value']
@@ -145,4 +149,5 @@ def insertArchive(request):
         f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
         f.save()
         i=i+1
+    return HttpResponseRedirect('/department/%s/' %section_id.Department_id.id)
  

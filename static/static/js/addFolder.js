@@ -8,7 +8,7 @@ $(document).ready(function(){
   // }); 
  
   $('a[id^="section"]').editable({
-    url: '../editFolder/',
+    url: '../../editFolder/',
     type: 'text',
     pk: 1,
     name: 'sectionName',
