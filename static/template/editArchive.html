@@ -47,8 +47,6 @@
             </div>
             <table id="tableEditArchive" class="table table-bordered " style='clear: both'>
                 <tbody>
-                        {% csrf_token %}
-                        {{ form.as_p }}
                     <tr>
                         <td width='35%'>اسم الارشيف</td>
                         <td width='65%'>
@@ -111,6 +109,7 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
+
 {% block modaleDelete %}
     <div  id="delete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">

@@ -15,6 +15,11 @@ import json
 from django.core import serializers
 import os
 import datetime
+from django.shortcuts import render_to_response, RequestContext
+from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# -*- coding: utf-8 -*-
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -44,6 +49,7 @@ def addArchive(request, department_id=0):
     c.update(csrf(request))
     if int(department_id)!=0: 
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
+        c['dept_id']= department_id
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
@@ -98,7 +104,6 @@ def editArchiveEditable(request):
         old = Section.objects.get(id=archive.section_id.id)
         new=Section.objects.get(id=int(value))
         archive.section_id = int(value)
-    
     archive.save()
     # log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     # log.save()

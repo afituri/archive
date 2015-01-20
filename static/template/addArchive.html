@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block navbarList %}
+    <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
+    <li class="active"><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
+    <li><a href="/department/{{dept_id}}">قـسم</a></li>
+{% endblock %} 
 {% block departmentName %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -102,11 +107,6 @@
 {% block pagination %}{% endblock %}
 {% block buttonList %}{% endblock %}
 {% block search %}{% endblock %}
-{% block navbarList %}
-    <li><a href="../addFolder">الـمجـلدات</a></li>
-    <li class="active"><a href="../addArchive">الارشـيف</a></li>
-    <li><a href="../department">قـسم</a></li>
-{% endblock %}
 {% block addFolder %}{% endblock %}
 {% block script %}
 
