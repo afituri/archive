@@ -11,10 +11,9 @@ $(document).ready(function(){
     }); 
     
     $('#name1').editable({
-        url: '../editArchiveEditable/',
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
-        name: 'name',
         title: 'Enter archive name',
         validate: function(v) {
             if(!v) return 'الرجاء ادخال الاسم';
@@ -22,10 +21,9 @@ $(document).ready(function(){
     });
 
     $('#textarea1').editable({
-        url: '../editArchiveEditable/',
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
-        name: 'text',
         title: 'Enter text description',
         rows: 10,
         validate: function(v) {
@@ -34,10 +32,9 @@ $(document).ready(function(){
     });
 
     $('#ref_num1').editable({
-        url: '../editArchiveEditable/',
+        url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
-        name: 'ref_num',
         title: 'Enter ref_num ',
         validate: function(v) {
             if(!v) return 'الرجاء ادخال الرقم الايشاري';
@@ -45,7 +42,7 @@ $(document).ready(function(){
     });
 
     $('#real_date1').editable({
-        url: '../editArchiveEditable/',
+        url: '../../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
         datetimepicker: {
@@ -66,8 +63,6 @@ $(document).ready(function(){
         $('#type1').editable({
             url: '../../editArchiveEditable/',
             source: $.resul
-
-            
         });      
     });
 });

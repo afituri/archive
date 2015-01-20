@@ -12,6 +12,11 @@ from hnec.models import *
 from django.forms.models import model_to_dict
 import os
 import datetime
+from django.shortcuts import render_to_response, RequestContext
+from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# -*- coding: utf-8 -*-
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -49,7 +54,6 @@ def addArchive(request, department_id=0):
 
 @login_required(login_url='/')
 def getArchiveType(request, department_id=0):
-    print "asflnafkn"
     if int(department_id) != 0 :
         name=""
         ids=""
@@ -77,26 +81,29 @@ def getArchiveType(request, department_id=0):
 
 @login_required(login_url='/')
 def editArchiveEditable(request):
-
+    print "ssssssssssdsdgm;sgdm"
     id_u = request.POST['pk']
     name = request.POST['name']
     value = request.POST['value']
+    print id_u
+    print name
+    print value
 
     archive = Archive.objects.get(id=id_u)
 
-    if name == 'name':
+    if name == 'name1':
         old=archive.name
         archive.name=value
-    elif name == 'real_date':
+    elif name == 'real_date1':
         old = archive.real_date
         archive.real_date = value
-    elif name == 'ref_num':
+    elif name == 'ref_num1':
         old = archive.ref_num
         archive.ref_num = value
-    elif name == 'text':
+    elif name == 'text1':
         old = archive.text
         archive.text = value
-    elif name == 'section_id':
+    elif name == 'section_id1':
         old = archive.section_id
         archive.section_id = value
 
