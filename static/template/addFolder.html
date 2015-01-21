@@ -42,10 +42,10 @@
                     <th id="edit">تعديل</th>
                     <th id="delete">حذف</th>
                 </tr>
-                {% for section in sections %}
-                <tr data-id="{{section.id}}">
+                {% for sectn in sections %}
+                <tr data-id="{{sectn.id}}">
                     <td headers="name" >
-                         <a id="section{{section.id}}" href="#" data-type="text" data-pk="{{section.id}}" data-title="تغيير إسم المجلد" data-value="{{section.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{section.name}}</a>
+                         <a id="section{{sectn.id}}" href="#" data-type="text" data-pk="{{sectn.id}}" data-title="تغيير إسم المجلد" data-value="{{sectn.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{sectn.name}}</a>
                     </td>
                     <td headers="edit">
                     	<button type="button" class="btn btn-xs btn-primary" id="enable"> 
@@ -53,7 +53,7 @@
                     	</button>
                     </td>
                     <td headers="delete">
-                    	<button id="delete" href="#del" data-toggle="modal" value="{{section.id}}" class="btn btn-xs btn-danger pull-right">
+                    	<button id="delete" href="#del" data-toggle="modal" value="{{sectn.id}}" class="btn btn-xs btn-danger pull-right">
                     		<span class="glyphicon glyphicon-trash"></span>
                     	</button>
                     </td>
@@ -81,14 +81,19 @@
               </div>
             </div>
                 <!-- endmodal2 -->
-        {% block pagination %}
-            <nav pull-center>
-                <ul class="pagination">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                </ul>
-            </nav>
-        {% endblock %}
+            {% block pagination %}
+                <nav pull-center>
+                    <ul class="pagination">
+                        <li> {% if sections.has_previous %} <a  href="?page={{ section.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
+                       {% for i in sections.paginator.page_range %}
+                       
+                        <li>{% if sections.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
+                       {% endfor %}
+                    
+                          <li>{% if sections.has_next %} <a href="?page={{section.next_page_number}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
+                    </ul>
+                </nav> 
+            {% endblock %} <!-- end of block pagination-->
     </div>
 {% endblock %}
 
