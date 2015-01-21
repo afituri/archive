@@ -2,11 +2,10 @@
 {% block departmentName %}
 {% endblock %}
 {% block navbarList %}
-    <li><a href="/addFolder">الـمجـلدات</a></li>
-    <li><a href="/addArchive">الارشـيف</a></li>
-    <li class="active"><a href="/department">قـسم</a></li>
-{% endblock %}
-
+    <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
+    <li><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
+    <li class="active"><a href="/department/{{dept_id}}">قـسم</a></li>
+{% endblock %} 
 {% block search %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
