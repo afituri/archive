@@ -91,19 +91,15 @@ def department(request, department_id=0):
         q = request.GET.get('q')
         from_date = request.GET.get('start_date')
         to_date = request.GET.get('end_date')
-        print("===== START DATE IS : ======")
-        start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10]))
-        print(start_date)
-        print("===== END DATE IS : ======")
-        end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10]))
-        print(end_date)
         if q is not None:
             objects=Archive.objects.filter(department_id=department_id,status=True,ref_num__contains=q)
         else:
             q=''
             objects=Archive.objects.filter(department_id=department_id,status=True)
         # DateTime
-        if start_date is not None and end_date is not None:
+        if from_date is not None and to_date is not None:
+            start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10]))
+            end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10]))
             objects=Archive.objects.filter(department_id=department_id,status=True,real_date__range=(start_date, end_date))
         else:
             start_date=''
