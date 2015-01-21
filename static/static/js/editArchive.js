@@ -69,4 +69,20 @@ $(document).ready(function(){
             source: $.resul
         });      
     });
+    $('body').on('click','#deletefil', function(){
+        var id = $(this).val();
+        $('#fildelet').val(id);
+    });
+    $('#fildelet').click(function() {
+    var id = $(this).val();
+    $.get('../../deleteFile/'+id, function(result){
+        $('#file'+id).remove()
+    });
+  });
+
+    $('#dle').click(function() {
+        $.get('../../deleteArchive/'+$('#dle').val(), function(result){
+            window.location.href="/department/"+result;
+    });
+    });
 });

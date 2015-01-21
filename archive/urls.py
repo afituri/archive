@@ -33,4 +33,7 @@ urlpatterns = patterns('',
     url(r'^deleteFolder/(?P<folder_id>\d+)/$', 'hnec.views.department.deleteFolder'),
     url(r'^addNewFolder/$', 'hnec.views.department.addNewFolder'),
     url(r'^insertArchive/$','hnec.views.archive.insertArchive'),
+    url(r'^deleteFile/(?P<file_id>\d+)/$','hnec.views.archive.deleteFile'),
+    url(r'^deleteArchive/(?P<archive_id>\d+)/$','hnec.views.archive.deleteArchive'),
+    url(r'^addFile/$','hnec.views.archive.addFile'),
 )
