@@ -69,6 +69,7 @@ def users(request):
         except EmptyPage:
             USERS = paginator.page(paginator.num_pages)
         c['users'] = USERS
+        c['userid']=request.user.id
         # except paginator.page_range
         return render_to_response('users.html',c)
     else:
@@ -106,6 +107,7 @@ def editUser(request,user_id=1):
         c = {}
         c.update(csrf(request))
         c['user']=User.objects.get(id=user_id,is_active=True)
+        c['userid']=request.user.id
         return render_to_response('editUser.html',c)
     else:
        return HttpResponseRedirect('/',) 
