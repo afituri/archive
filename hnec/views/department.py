@@ -116,6 +116,7 @@ def department(request, department_id=0):
         c['end_date']= end_date
         c['q']=q
         c['userid']=request.user.id
+        c['departmentName']=Department.objects.get(id=department_id,status=True)
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
@@ -139,6 +140,7 @@ def addFolder(request, department_id=1):
     c['list']=objects
     c['dept_id']=department_id
     c['userid']=request.user.id
+    c['departmentName']=Department.objects.get(id=department_id,status=True)
     return render_to_response('addFolder.html',c)
 
 

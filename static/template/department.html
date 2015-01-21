@@ -4,6 +4,17 @@
     <li><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
     <li class="active"><a href="/department/{{dept_id}}">قـسم</a></li>
 {% endblock %} 
+{% block departmentName %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel-body">
+                <nav class="navbar navbar-default">
+                    <p class="h3"><strong>{{departmentName.name}}</strong></p>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block search %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -110,14 +121,14 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
-{% block script %}
 
-                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
-                    <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap-editable.min.js"></script>
-                    <script src = "/static/js/jquery.validate.min.js"></script>
-                    <script src = "/static/js/script_nav.js"></script>
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="/static/js/department.js" charset="UTF-8"></script>
-                {% endblock %} <!
+{% block script %}
+    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+    <script src = "/static/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-editable.min.js"></script>
+    <script src = "/static/js/jquery.validate.min.js"></script>
+    <script src = "/static/js/script_nav.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/department.js" charset="UTF-8"></script>
+{% endblock %}
 

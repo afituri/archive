@@ -51,6 +51,7 @@ def addArchive(request, department_id=0):
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
         c['userid']=request.user.id
+        c['departmentName']=Department.objects.get(id=department_id,status=True)
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
