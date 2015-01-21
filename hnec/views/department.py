@@ -28,6 +28,7 @@ def Departments(request):
             dept = paginator.page(paginator.num_pages)
         # except paginator.page_range
         c['department']=dept
+        c['userid']=request.user.id
         return render_to_response('Departments.html',c)
 
 
@@ -39,12 +40,25 @@ def addDept(request):
     return  redirect('../Departments/')
 
 
-def addDepartment(request):
+def addDepartment(request , department_id=0):
     c = {}
     c.update(csrf(request))
-    return render_to_response('addFolder.html',
-        {'sections':Section.objects.filter(Department_id=department_id)},)
 
+    objects=Section.objects.filter(Department_id=department_id,status=True)
+
+    paginator=Paginator(objects,4)
+    page = request.GET.get('page')
+    try:
+        section = paginator.page(page)
+    except PageNotAnInteger :
+        section = paginator.page(1)
+    except EmptyPage:
+        section = paginator.page(paginator.num_pages)
+    # except paginator.page_range
+    c['sections']=section
+    c['list']=objects
+    c['userid']=request.user.id
+    return render_to_response('addFolder.html',c)
 
 @login_required(login_url='/')
 def department(request, department_id=0):
@@ -72,6 +86,7 @@ def department(request, department_id=0):
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
         c['q']=q
+        c['userid']=request.user.id
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
@@ -80,9 +95,20 @@ def department(request, department_id=0):
 def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    c['sections']=Section.objects.filter(Department_id=department_id, status=True)
-    c['list']=Section.objects.filter(Department_id=department_id, status=True)
+    objects=Section.objects.filter(Department_id=department_id, status=True)
+    paginator=Paginator(objects,4)
+    page = request.GET.get('page')
+    try:
+        archive = paginator.page(page)
+    except PageNotAnInteger :
+        archive = paginator.page(1)
+    except EmptyPage:
+        archive = paginator.page(paginator.num_pages)
+    # except paginator.page_range
+    c['sections']=archive
+    c['list']=objects
     c['dept_id']=department_id
+    c['userid']=request.user.id
     return render_to_response('addFolder.html',c)
 
 
@@ -123,6 +149,8 @@ def folder(request, department_id=1, section_id=1):
                 archive = paginator.page(paginator.num_pages)
             c['archive'] = archive
             c['list'] = Section.objects.filter(Department_id=department_id)
+            c['dept_id']=department_id
+            c['userid']=request.user.id
             return render_to_response('folder.html',c)
         else:
             return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    
