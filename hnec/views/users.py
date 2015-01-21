@@ -140,7 +140,7 @@ def edit(request):
 @login_required(login_url='/')
 def cpanel(request):
     if request.user.is_staff:
-        return render_to_response('cpanel.html',{'department':Department.objects.all()})
+        return render_to_response('cpanel.html',{'department':Department.objects.filter(status=True)})
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 

@@ -43,22 +43,16 @@ def addDept(request):
 
 @login_required(login_url='/')   
 def editDepartment(request):
-    c = {}
-    c.update(csrf(request))
-    
     id_department = request.POST['pk']
     name = request.POST['name']
     value = request.POST['value']  
     department = Department.objects.get(id=id_department)
     old = department.name
     department.name = value
-
     department.save()
-
     log = Log(id_user=request.user,action_type='edit',tabel='department',desc='edit department name :'+old+' = >'+department.name,tabel_id=department.id,value=department.name)
     log.save()
-    return render_to_response('Departments.html',c)
-
+    return  redirect('../Departments/')
 
 
 def addDepartment(request):
@@ -91,19 +85,15 @@ def department(request, department_id=0):
         q = request.GET.get('q')
         from_date = request.GET.get('start_date')
         to_date = request.GET.get('end_date')
-        print("===== START DATE IS : ======")
-        start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10]))
-        print(start_date)
-        print("===== END DATE IS : ======")
-        end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10]))
-        print(end_date)
         if q is not None:
             objects=Archive.objects.filter(department_id=department_id,status=True,ref_num__contains=q)
         else:
             q=''
             objects=Archive.objects.filter(department_id=department_id,status=True)
         # DateTime
-        if start_date is not None and end_date is not None:
+        if from_date is not None and to_date is not None:
+            start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10]))
+            end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10]))
             objects=Archive.objects.filter(department_id=department_id,status=True,real_date__range=(start_date, end_date))
         else:
             start_date=''
@@ -129,6 +119,7 @@ def department(request, department_id=0):
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+
 
 @login_required(login_url='/')
 def addFolder(request, department_id=1):
@@ -162,8 +153,7 @@ def editFolder(request):
     old=section.name
     section.name = value
     section.save(update_fields=["name"])
-    log = Log(id_user=request.user,action_type='edit',tabel='section',desc='edit section name :'+old+' = >'+section.name,tabel_id=section.id,value=section.name)
-   
+    log = Log(id_user=request.user,action_type='edit',tabel='section',desc='edit section name :'+old+' = >'+section.name,tabel_id=section.id,value=section.name)   
     log.save()
     return render_to_response('addFolder.html',c)
 
@@ -203,19 +193,18 @@ def folder(request, department_id=1, section_id=1):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
+
 @login_required(login_url='/')   
 def addSection(request):
-
     sectionName = request.POST['name']
     department_id=Department.objects.get(id=request.POST['dept_id'])
     section = Section(name=sectionName,Department_id=department_id)
-
     section.save()
-    
     log = Log(id_user=request.user,action_type='add',tabel='section',desc='add section '+sectionName,tabel_id=section.id,value=sectionName)
     log.save()
-   
     return HttpResponseRedirect('/addFolder/%s/' %department_id.id,)
+
+
 @login_required(login_url='/')
 def addNewFolder(request):
     name = request.POST.get('Folder','')
@@ -244,4 +233,4 @@ def deleteDepartment(request, department_id=0):
         department.save()
         log = Log(id_user=request.user,action_type='delete',tabel='department',desc='delete department '+department.name,tabel_id=department.id,value=department.name)
         log.save()
-    return HttpResponseRedirect('/Department/%s/' %department.id,)
+    return  HttpResponse(True)

@@ -104,7 +104,7 @@ def editArchiveEditable(request):
     elif name == 'type':
         old = Section.objects.get(id=archive.section_id.id)
         new=Section.objects.get(id=int(value))
-        archive.section_id = int(value)
+        archive.section_id = new
     archive.save()
     # log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     # log.save()
@@ -120,6 +120,8 @@ def insertArchive(request):
     text = request.POST['text']
     archive =Archive(name=name,real_date=real_date,section_id=section_id,department_id=section_id.Department_id,ref_num=ref_num,text=text)
     archive.save()
+    log = Log(id_user=request.user,action_type='add',tabel='Archive',desc='add Archive '+name,tabel_id=archive.id,value=name)
+    log.save()
     file_name= os.path.join("static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
@@ -140,6 +142,61 @@ def insertArchive(request):
                 destination.write(chunk)
         f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
         f.save()
+        log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
+        log.save()
         i=i+1
     return HttpResponseRedirect('/department/%s/' %section_id.Department_id.id)
+
+def deleteFile(request,file_id=0):
+    fil = Files.objects.get(id=file_id)
+    fil.status = False
+    fil.save()
+    log = Log(id_user=request.user,action_type='delete',tabel='Files',desc='delete File '+fil.name,tabel_id=fil.id,value=fil.name)
+    log.save()
+    return HttpResponseRedirect('/',)
+
+def deleteArchive(request,archive_id=0):
+    archive = Archive.objects.get(id=archive_id)
+    archive.status = False
+    archive.save()
+    log = Log(id_user=request.user,action_type='delete',tabel='archive',desc='delete archive '+archive.name,tabel_id=archive.id,value=archive.name)
+    log.save()
+    for fil in Files.objects.filter(archive_id=archive.id,status=True):
+        fil.status = False
+        fil.save()
+        log = Log(id_user=request.user,action_type='delete',tabel='Files',desc='delete File '+fil.name,tabel_id=fil.id,value=fil.name)
+        log.save()
+    return HttpResponse(archive.department_id.id)
+
+def addFile(request):
+    files_name =[]
+    i=0
+    archive_id = request.POST['archive_id']
+    archive =Archive.objects.get(id=archive_id)
+    file_name= os.path.join("static","Files")
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+str(archive.real_date)[:4]
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+archive.department_id.name
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    file_name = file_name+"/"+archive.name+"_"+str(archive.id)
+    if not os.path.exists(file_name):
+        os.mkdir(file_name)
+    for fil in request.POST.getlist('file_name[]'):
+        files_name.append(fil)
+    print request.FILES.getlist('file[]')
+    for files in request.FILES.getlist('file[]'):
+        print "im her"
+        with open( file_name+"/"+files.name, 'wb+') as destination:
+            for chunk in files.chunks():
+                destination.write(chunk)
+        f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
+        f.save()
+        log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
+        log.save()
+        i=i+1
+    return HttpResponseRedirect('/editArchive/%s/' %archive.id)
  
