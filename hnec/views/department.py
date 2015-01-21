@@ -40,7 +40,27 @@ def addDept(request):
     return  redirect('../Departments/')
 
 
-def addDepartment(request , department_id=0):
+@login_required(login_url='/')   
+def editDepartment(request):
+    c = {}
+    c.update(csrf(request))
+    
+    id_department = request.POST['pk']
+    name = request.POST['name']
+    value = request.POST['value']  
+    department = Department.objects.get(id=id_department)
+    old = department.name
+    department.name = value
+
+    department.save()
+
+    log = Log(id_user=request.user,action_type='edit',tabel='department',desc='edit department name :'+old+' = >'+department.name,tabel_id=department.id,value=department.name)
+    log.save()
+    return render_to_response('Departments.html',c)
+
+
+
+def addDepartment(request):
     c = {}
     c.update(csrf(request))
 
@@ -138,7 +158,12 @@ def folder(request, department_id=1, section_id=1):
         for  sec_id in Section.objects.filter(Department_id=department_id):
             sec_list.append(sec_id.id)
         if request.user.is_staff or int(section_id) in sec_list:
-            objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
+            q = request.GET.get('q')
+            if q is not None:
+                objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id,ref_num__contains=q)
+            else:
+                q=''
+                objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
             paginator=Paginator(objects,4)
             page = request.GET.get('page')
             try:
@@ -151,6 +176,8 @@ def folder(request, department_id=1, section_id=1):
             c['list'] = Section.objects.filter(Department_id=department_id)
             c['dept_id']=department_id
             c['userid']=request.user.id
+            c['list'] = Section.objects.filter(Department_id=department_id,status=True)
+            c['q']=q
             return render_to_response('folder.html',c)
         else:
             return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    
@@ -189,3 +216,13 @@ def deleteFolder(request, folder_id=0):
         log.save()
     return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
     
+
+@login_required(login_url='/')
+def deleteDepartment(request, department_id=0):
+    if int(department_id) != 0:
+        department = Department.objects.get(id=department_id)
+        department.status = False
+        department.save()
+        log = Log(id_user=request.user,action_type='delete',tabel='department',desc='delete department '+department.name,tabel_id=department.id,value=department.name)
+        log.save()
+    return HttpResponseRedirect('/Department/%s/' %department.id,)

@@ -8,9 +8,9 @@ $(document).ready(function(){
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
-    }); 
+    });
     
-    $('#name1').editable({
+    $('#name').editable({
         url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -20,7 +20,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#textarea1').editable({
+    $('#textarea').editable({
+
         url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -31,7 +32,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#ref_num1').editable({
+    $('#ref_num').editable({
+
         url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -41,7 +43,8 @@ $(document).ready(function(){
         }
     });
 
-    $('#real_date1').editable({
+    $('#real_date').editable({
+
         url: '../../editArchiveEditable/',
         format: 'yyyy-mm-dd hh:ii',    
         viewformat: 'dd/mm/yyyy hh:ii',    
@@ -60,8 +63,9 @@ $(document).ready(function(){
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
-        $('#type1').editable({
+        $('#type').editable({
             url: '../../editArchiveEditable/',
+            params:$('#type').data('params'),
             source: $.resul
         });      
     });

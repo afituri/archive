@@ -2,101 +2,160 @@
 {% block navbarList %}{% endblock %}
 {% block search %}{% endblock %}
 {% block rowOne %}
- 	{% block list %} {% endblock %}
-
-    	{% block table %}
-    	 				<div class='row'>
-                              <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
-                            <div class="col-md-6 col-sm-8 col-xs-10">
-                                <div class="panel panel-default table-responsive">
-                                    <div class="panel-heading panel-responsive">
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-3 col-xs-3  ">
-                                                <font size="4" >  الأقسام </font></a>
-                                            </div>
-                                            <div class="  col-md-6 col-sm-6 col-xs-6 ">
-                                                <font size="4" >قسم  </font></a>
-                                                <input type="text" class="input-sm"p laceholder="البحث">
-                                            </div>
-                                            <div class="  col-md-2 col-sm-2 col-xs-2  ">
-                                                <a href="#addDept" role="button" data-toggle="modal" class="btn btn-success">إضافة قسم</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <table class="table">
-                                        <tr>
-                                            <th id="depName">إسم القسم</th>
-                                            <th id="view"> عرض</th>
-                                            <th id="delete">حدف</th>
-                                        </tr>
-                                        {% for dept in department %}
-                                        <tr>
-                                            <td headers="deptname">{{dept.name}}</td>
-                                            <td>   <button type="button" class="btn btn-primary btn-xs"> <span class="glyphicon glyphicon-edit">تعديل</span> </button></td>
-                                            <td>
-                                              <button type="button" class="btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove">حدف</span> </button></td>
-                                        </tr>
-                                        {% endfor %}
-                                    </table>
+{% block list %}{% endblock %}
+{% block table %}
+		<div class='row'>
+            <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
+                <div class="col-md-6 col-sm-8 col-xs-10">
+                    <div class="panel panel-default table-responsive">
+                        <div class="panel-heading panel-responsive">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-3  ">
+                                    <font size="4" > 
+                                        الأقسام
+                                    </font>
                                 </div>
-                            {% block pagination %}
-                                <nav pull-center>
-                                    <ul class="pagination">
-                                        <li> {% if department.has_previous %} <a href="?page={{ department.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
-                                    
-                                       {% for i in department.paginator.page_range %}
-                                       
-                                        <li>{% if department.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
-                                       {% endfor %}
-                                    
-                                          <li>{% if department.has_next %} <a href="?page={{department.next_page_number}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
-                                    
-                                    </ul>
-                                </nav> 
-                            {% endblock %} <!-- end of block pagination-->
-
+                                <div class="  col-md-6 col-sm-6 col-xs-6 ">
+                                    <font size="4" >
+                                        قسم
+                                    </font>
+                                    <input type="text" class="input-sm"p laceholder="البحث">
+                                </div>
+                                <div class="  col-md-2 col-sm-2 col-xs-2  ">
+                                    <a href="#addDept" role="button" data-toggle="modal" class="btn btn-success">
+                                        إضافة قسم
+                                    </a>
+                                </div>
                             </div>
-                            <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
                         </div>
+                        <table class="table" id="department" >
+                            <tr>
+                                <th id="depName">إسم القسم</th>
+                                <th id="view"> عرض</th>
+                                <th id="delete">حدف</th>
+                            </tr>
+                            {% for department in department %}
+                            <tr data-id="{{department.id}}">
+                                <td headers="name" >
+                                    <a id="department{{department.id}}" href="#" data-type="text" data-pk="{{department.id}}" data-title="تغيير إسم المجلد" data-value="{{department.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                        {{department.name}}
+                                    </a>
+                                </td>
+                                <td headers="edit">
+                                    <button type="button" class="btn btn-xs btn-primary" id="enable">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </button>
+                                </td>
+                                <td headers="delete">
+                                    <button href="#del" id="delete" type="button" class="btn btn-danger btn-xs" data-toggle="modal" value="{{department.id}}">
+                                        <span class="glyphicon glyphicon-remove">
+                                        حدف
+                                        </span>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% block pagination %}
+                    <nav pull-center>
+                        <ul class="pagination">
+                            <li>
+                                {% if department.has_previous %}
+                                <a href="?page={{ department.previous_page_number }}" aria-label="Previous">
+                                    {% endif %}
+                                    <span>&laquo;</span>
+                                </a>
+                            </li>
+                           {% for i in department.paginator.page_range %}
+                            <li>
+                                {% if department.number == i %}
+                                <li class="active"> {% endif%}
+                                    <a href="?page={{i}}">
+                                        {{i}} 
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            <li>
+                                {% if department.has_next %} 
+                                <a href="?page={{department.next_page_number}}" aria-label="next">
+                                    {% endif %}
+                                    <span>&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav> 
+                {% endblock %} <!-- end of block pagination-->
+                </div>
+                <div class="col-md-3 col-sm-2 col-xs-1"></div>
+            </div>
 
-                        <div id="addDept" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-headr modal-header-success">
-				        <p class="h1">اضافة قسم</p>
-				      </div>
-				      <div class="modal-body">
-				        <div class="panel-body">
-				          <div class="table-responsive">
-				            <div class="panel-body">
-			    		<form role="form" id="form" action="/addDept/" method="post">{% csrf_token %}
-			    				<div class="form-group">
-			    				<input type="text" name="Deptname" id="Deptname" class="form-control input-sm" placeholder="اسم القسم">
-			    			</div>			    			
-			    			<input type="submit" value="إضـافة " class="btn btn-primary btn-block">
-			    		
-			    		</form>
-			    	</div>
-				          </div>
-				        </div>
-				      </div>
-				      <div class="modal-footer">
-				        <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-	{% endblock %} <!-- end of block table-->
-	{% endblock %}
 
-	{% block footer %}{% endblock %}
-	{% block script %}
-                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
-                    <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap.bootstrap-editable.js"></script>
-                    <script src = "/static/js/jquery.validate.min.js"></script>
-                    <script src = "/static/js/script_nav.js"></script>
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="/static/js/users.js" charset="UTF-8"></script>
-                {% endblock %} <!
+        <div id="addDept" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-headr modal-header-success">
+                        <p class="h1">اضافة قسم</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="panel-body">
+                                    <form role="form" id="form" action="/addDept/" method="post">{% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="Deptname" id="Deptname" class="form-control input-sm" placeholder="اسم القسم">
+                                        </div>
+                                        <input type="submit" value="إضـافة" class="btn btn-primary btn-block">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" type="button" class="btn btn-danger">
+                            إلغاء
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- module delete  -->
+    <div id="del" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-headr modal-header-danger">
+                    <p class="h1">هل أنت متأكد من  حدف ؟</p>
+                </div>
+                <div class="modal-body">
+                    <p class="h2">هل انت متأكد </p>
+                    <p> </p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confdelete" type="button" data-dismiss="modal" class="btn btn-danger" value="">
+                        حدف
+                    </button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %} <!-- end of block table-->
+{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block script %}
+    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+    <script src = "/static/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-editable.min.js"></script>
+    <script src = "/static/js/jquery.validate.min.js"></script>
+    <script src = "/static/js/script_nav.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script src = "/static/js/departments.js"></script>
+
+
+{% endblock %}

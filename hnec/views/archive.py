@@ -27,12 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 def editArchive(request, archive_id=1):
     c = {}
     c.update(csrf(request))
-    archive = Archive.objects.get(id=archive_id,status=1)
-    return render_to_response('editArchive.html',{
-                                    'archive':archive,
-                                    'list':Section.objects.filter(Department_id=archive.department_id.id,status=1),
-                                    'files':Files.objects.filter(archive_id=archive_id,status=1),
-                                    },    )
+    c['archive'] = Archive.objects.get(id=archive_id,status=1)
+    c['list']=Section.objects.filter(Department_id=c['archive'] .department_id.id,status=1)
+    c['files']=Files.objects.filter(archive_id=archive_id,status=1)
+    return render_to_response('editArchive.html',c)
 
 
 @login_required(login_url='/')
@@ -86,37 +84,30 @@ def getArchiveType(request, department_id=0):
 
 @login_required(login_url='/')
 def editArchiveEditable(request):
-    print "ssssssssssdsdgm;sgdm"
-    print "asfasf"
     id_u = request.POST['pk']
     name = request.POST['name']
     value = request.POST['value']
-    print id_u
-    print name
-    print value
-
     archive = Archive.objects.get(id=id_u)
-
-    if name == 'name1':
+    print value
+    if name == 'name':
         old=archive.name
         archive.name=value
-    elif name == 'real_date1':
+    elif name == 'real_date':
         old = archive.real_date
         archive.real_date = value
-    elif name == 'ref_num1':
+    elif name == 'ref_num':
         old = archive.ref_num
         archive.ref_num = value
-    elif name == 'text1':
+    elif name == 'text':
         old = archive.text
         archive.text = value
-    elif name == 'section_id1':
-        old = archive.section_id
-        archive.section_id = value
-
+    elif name == 'type':
+        old = Section.objects.get(id=archive.section_id.id)
+        new=Section.objects.get(id=int(value))
+        archive.section_id = int(value)
     archive.save()
-
-    log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
-    log.save()
+    # log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
+    # log.save()
     return HttpResponseRedirect('/',)
 
 def insertArchive(request):
@@ -129,20 +120,19 @@ def insertArchive(request):
     text = request.POST['text']
     archive =Archive(name=name,real_date=real_date,section_id=section_id,department_id=section_id.Department_id,ref_num=ref_num,text=text)
     archive.save()
-    file_name= os.path.join(os.path.dirname(BASE_DIR), "static","Files")
+    file_name= os.path.join("static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+real_date[:4]
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+section_id.Department_id.name
-    print file_name
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+name+"_"+str(archive.id)
     if not os.path.exists(file_name):
         os.mkdir(file_name)
-    for fil in request.POST['file_name[]']:
+    for fil in request.POST.getlist('file_name[]'):
         files_name.append(fil)
     for files in request.FILES.getlist('file[]'):
         with open( file_name+"/"+files.name, 'wb+') as destination:
