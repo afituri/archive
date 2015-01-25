@@ -21,7 +21,6 @@ $(document).ready(function(){
     });
 
     $('#textarea').editable({
-
         url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
@@ -33,7 +32,6 @@ $(document).ready(function(){
     });
 
     $('#ref_num').editable({
-
         url: '../../editArchiveEditable/',
         type: 'text',
         pk: 1,
