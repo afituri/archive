@@ -20,8 +20,14 @@ $(document).ready(function(){
   $('#confdelete').click(function() {
     var id = $(this).val();
     $.get('../../deleteFolder/'+id, function(result){
-      alert(something);
-      window.location.href="/addFolder/";
+      result=result.split('$');
+      if(result[0]=="True"){
+        $("#massege").removeClass("hidden");
+      }else{
+        window.location.href="/addFolder/"+result[1];
+
+      }
+        
     });
   });
   
