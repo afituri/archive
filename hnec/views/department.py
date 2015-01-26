@@ -116,6 +116,7 @@ def department(request, department_id=0):
         c['end_date']= end_date
         c['q']=q
         c['userid']=request.user.id
+        c['departmentName']=Department.objects.get(id=department_id,status=True)
         return render_to_response('department.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
@@ -139,6 +140,7 @@ def addFolder(request, department_id=1):
     c['list']=objects
     c['dept_id']=department_id
     c['userid']=request.user.id
+    c['departmentName']=Department.objects.get(id=department_id,status=True)
     return render_to_response('addFolder.html',c)
 
 
@@ -227,17 +229,39 @@ def addNewFolder(request):
     return  redirect('../addFolder/%s/' %dept_id)
 
 
+# @login_required(login_url='/')
+# def deleteFolder(request, folder_id=0):
+#     if int(folder_id) != 0:
+#         section = Section.objects.get(id=folder_id)
+#         section.status = False
+#         section.save()
+#         log = Log(id_user=request.user,action_type='delete',tabel='section',desc='delete section '+section.name,tabel_id=section.id,value=section.name)
+#         log.save()
+#     return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
+    
 @login_required(login_url='/')
 def deleteFolder(request, folder_id=0):
+    c = {}
+    c.update(csrf(request))
+    flag = False
     if int(folder_id) != 0:
-        section = Section.objects.get(id=folder_id)
-        section.status = False
-        section.save()
-        log = Log(id_user=request.user,action_type='delete',tabel='section',desc='delete section '+section.name,tabel_id=section.id,value=section.name)
-        log.save()
-    return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,)
-    
+        archive = Archive.objects.filter(section_id=folder_id)
+        for archive in archive:
+            if archive.status == True:
+                flag = True
+                break
 
+        if flag == False :
+            section = Section.objects.get(id=folder_id)
+            section.status = False
+            section.save()
+            log = Log(id_user=request.user,action_type='delete',tabel='section',desc='delete section '+section.name,tabel_id=section.id,value=section.name)
+            log.save()
+            # return HttpResponseRedirect('/addFolder/%s/' %section.Department_id.id,c,)
+    flag=str(flag)+"$"+str(Section.objects.get(id=folder_id).Department_id.id)
+    return HttpResponse(flag)
+
+  
 @login_required(login_url='/')
 def deleteDepartment(request, department_id=0):
     if int(department_id) != 0:

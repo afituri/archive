@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block navbarList %}
-    <li><a href="../addFolder">إضـافـة مـجـلـد جديد </a></li>
-    <li><a href="../addArchive">الارشـف</a></li>
+    <li><a href="../../addFolder">إضـافـة مـجـلـد جديد </a></li>
+    <li><a href="../../addArchive">الارشـف</a></li>
     <li class="active"><a href="">تعديل أرشيف</a></li>
-    <li><a href="../department">قـسم</a></li>
+    <li><a href="../../department">قـسم</a></li>
 {% endblock %}
 
 {% block departmentName %}
-	<!-- <div class="row">
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel-body">
                 <nav class="navbar navbar-default">
-					<p class="h3">{{archive.name}}</p>
+                    <p class="h3"><strong>{{departmentName}}</strong></p>
                 </nav>
             </div>
         </div>
-    </div> -->
+    </div>
 {% endblock %}
 
 {% block search %}{% endblock %}

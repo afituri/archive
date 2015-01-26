@@ -3,12 +3,19 @@
 {% block addFolder %}{% endblock %}
 
 {% block departmentName %}
-	<div class="row">
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel-body">
                 <nav class="navbar navbar-default">
-					<p class="h3">{{department.name}}</p>
+                    <p class="h3"><strong>{{departmentName.name}}</strong></p>
                 </nav>
+            </div>
+        </div>
+    </div>
+     <div class='row hidden' id="massege" >
+        <div class='col-md-8 col-md-offset-2'>
+            <div class="panel-body">
+                <p class="alert alert-danger text-center">ﻻتستطيع مسح هذا المجلد اﻻ ان يتم مسح كافة الارشيف الموجوده به</p>
             </div>
         </div>
     </div>
@@ -18,7 +25,8 @@
     <li class="active"><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
     <li><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
     <li><a href="/department/{{dept_id}}">قـسم</a></li>
-{% endblock %} 
+{% endblock %}
+
 {% block table %}	
     <div class="  col-md-6 col-sm-6   ">
         <div class="panel panel-default">
@@ -61,39 +69,60 @@
                 {% endfor %}
             </table>
         </div>
-       
-                <!-- modal2 -->
-                <div id="del" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-headr modal-header-danger">
+<!-- modal2 -->
+    <div id="del" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-headr modal-header-danger">
                     <p class="h1">هل أنت متأكد من  حدف ؟</p>
-                  </div>
-                  <div class="modal-body">
+                </div>
+                <div class="modal-body">
                     <p class="h2">هل انت متأكد </p>
                     <p> </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="confdelete" type="button" data-dismiss="modal" class="btn btn-danger" value="">حدف</button>
-                    <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
-                  </div>
                 </div>
-              </div>
+                <div class="modal-footer">
+                    <button id="confdelete" type="button" data-dismiss="modal" class="btn btn-danger" value="">
+                        حدف
+                    </button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">
+                        إلغاء
+                    </button>
+                </div>
             </div>
-                <!-- endmodal2 -->
-            {% block pagination %}
-                <nav pull-center>
-                    <ul class="pagination">
-                        <li> {% if sections.has_previous %} <a  href="?page={{ section.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
-                       {% for i in sections.paginator.page_range %}
-                       
-                        <li>{% if sections.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
-                       {% endfor %}
-                    
-                          <li>{% if sections.has_next %} <a href="?page={{section.next_page_number}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
-                    </ul>
-                </nav> 
-            {% endblock %} <!-- end of block pagination-->
+        </div>
+    </div>
+<!-- endmodal2 -->
+{% block pagination %}
+    <nav pull-center>
+        <ul class="pagination">
+            <li> 
+                {% if sections.has_previous %} 
+                <a  href="?page={{ section.previous_page_number }}" aria-label="Previous">
+                {% endif %} 
+                <span>&laquo;</span>
+                </a>
+            </li>
+            {% for i in sections.paginator.page_range %}
+            <li>
+                {% if sections.number == i %}
+                <li class="active">
+                {% endif%}
+                <a href="?page={{i}}">
+                    {{i}} 
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+           {% endfor %}
+            <li>
+                {% if sections.has_next %}
+                <a href="?page={{section.next_page_number}}" aria-label="next">
+                    {% endif %}
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav> 
+{% endblock %} <!-- end of block pagination-->
     </div>
 {% endblock %}
 
@@ -122,23 +151,16 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
-      </div>
-      <div class="modal-body">
- -->
 {% endblock %}
 
 {% block script %}
-
-                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
-                    <script src = "/static/js/bootstrap.min.js"></script>
-                    <script src = "/static/js/bootstrap-editable.min.js"></script>
-                    <script src = "/static/js/jquery.validate.min.js"></script>
-                    <script src = "/static/js/script_nav.js"></script>
-                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-                    <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-                    <script src = "/static/js/addFolder.js"></script>
-                    <script type="text/javascript">
+    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+    <script src = "/static/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-editable.min.js"></script>
+    <script src = "/static/js/jquery.validate.min.js"></script>
+    <script src = "/static/js/script_nav.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script src = "/static/js/addFolder.js"></script>
+    <script type="text/javascript">
 {% endblock %}

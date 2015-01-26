@@ -28,8 +28,9 @@ def editArchive(request, archive_id=1):
     c = {}
     c.update(csrf(request))
     c['archive'] = Archive.objects.get(id=archive_id,status=1)
-    c['list']=Section.objects.filter(Department_id=c['archive'] .department_id.id,status=1)
+    c['list']=Section.objects.filter(Department_id=c['archive'].department_id.id,status=1)
     c['files']=Files.objects.filter(archive_id=archive_id,status=1)
+    c['departmentName']= c['archive'].department_id.name
     return render_to_response('editArchive.html',c)
 
 
@@ -51,6 +52,7 @@ def addArchive(request, department_id=0):
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
         c['userid']=request.user.id
+        c['departmentName']=Department.objects.get(id=department_id,status=True)
         return render_to_response('addArchive.html',c)
     else:
         return HttpResponseRedirect('/',)
