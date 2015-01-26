@@ -118,6 +118,7 @@ def insertArchive(request):
     real_date = request.POST['real_date']
     section_id = Section.objects.get(id=request.POST['section_id'])
     text = request.POST['text']
+    print real_date
     archive =Archive(name=name,real_date=real_date,section_id=section_id,department_id=section_id.Department_id,ref_num=ref_num,text=text)
     archive.save()
     log = Log(id_user=request.user,action_type='add',tabel='Archive',desc='add Archive '+name,tabel_id=archive.id,value=name)

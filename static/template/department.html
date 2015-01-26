@@ -15,7 +15,7 @@
                             <button type="button" class="btn btn-default btn-lg" disabled="disabled">البحث</button>
                             <div class="form-group">
                                 <div class='input-group date' id='datetimepicker5'>
-                                    <input type='text' class="form-control" data-format="YYYY/MM/DD" id="start_date" placeholder="من"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{start_date}}"/>
+                                    <input type='text' class="form-control" format="yyyy-mm-dd" id="start_date" placeholder="من"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <div class='input-group date' id='datetimepicker6'>
-                                    <input type='text' class="form-control" data-format="YYYY/MM/DD" id="end_date" placeholder="إلى"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{end_date}}"/>
+                                    <input type='text' class="form-control" data-format="yyyy-mm-dd" id="end_date" placeholder="إلى"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{end_date}}"/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -119,5 +119,13 @@
                     <script src = "/static/js/script_nav.js"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
                     <script type="text/javascript" src="/static/js/department.js" charset="UTF-8"></script>
+                    {% if start_date != '' %}
+                    <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#datetimepicker5').datetimepicker('update', new Date('{{start_date}}'));
+                        $('#datetimepicker6').datetimepicker('update', new Date('{{end_date}}'));
+                        });
+                    </script>
+                    {%endif%}
                 {% endblock %} <!
 

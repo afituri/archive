@@ -12,6 +12,7 @@ from hnec.models import *
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime, timedelta
+import time
 
 
 @login_required(login_url='/')
@@ -86,20 +87,19 @@ def department(request, department_id=0):
         from_date = request.GET.get('start_date')
         to_date = request.GET.get('end_date')
         if q is not None:
+            start_date=''
+            end_date=''
             objects=Archive.objects.filter(department_id=department_id,status=True,ref_num__contains=q)
-        else:
+        elif from_date is not None and to_date is not None and from_date != '' and to_date != '':
             q=''
-            objects=Archive.objects.filter(department_id=department_id,status=True)
-        # DateTime
-        if from_date is not None and to_date is not None:
-            start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10]))
-            end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10]))
+            start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10])).date()
+            end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10])).date()
             objects=Archive.objects.filter(department_id=department_id,status=True,real_date__range=(start_date, end_date))
         else:
             start_date=''
             end_date=''
+            q=''
             objects=Archive.objects.filter(department_id=department_id,status=True)
-
         paginator=Paginator(objects,4)
         page = request.GET.get('page')
         try:
@@ -168,11 +168,23 @@ def folder(request, department_id=1, section_id=1):
             sec_list.append(sec_id.id)
         if request.user.is_staff or int(section_id) in sec_list:
             q = request.GET.get('q')
+            from_date = request.GET.get('start_date')
+            to_date = request.GET.get('end_date')
             if q is not None:
+                start_date=''
+                end_date=''
                 objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id,ref_num__contains=q)
+            elif from_date is not None and to_date is not None and from_date != '' and to_date != '':
+                q=''
+                start_date = datetime(year=int(from_date[0:4]), month=int(from_date[5:7]), day=int(from_date[8:10])).date()
+                end_date = datetime(year=int(to_date[0:4]), month=int(to_date[5:7]), day=int(to_date[8:10])).date()
+                objects=Archive.objects.filter(section_id=section_id,department_id=department_id,status=True,real_date__range=(start_date, end_date))
             else:
+                start_date=''
+                end_date=''
                 q=''
                 objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
+
             paginator=Paginator(objects,4)
             page = request.GET.get('page')
             try:
@@ -182,11 +194,12 @@ def folder(request, department_id=1, section_id=1):
             except EmptyPage:
                 archive = paginator.page(paginator.num_pages)
             c['archive'] = archive
-            c['list'] = Section.objects.filter(Department_id=department_id)
             c['dept_id']=department_id
             c['userid']=request.user.id
             c['list'] = Section.objects.filter(Department_id=department_id,status=True)
             c['q']=q
+            c['start_date']= start_date
+            c['end_date']= end_date
             return render_to_response('folder.html',c)
         else:
             return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    

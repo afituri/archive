@@ -26,7 +26,7 @@ class Archive(models.Model):
     name = models.CharField(max_length = 50)
     modify_date = models.DateTimeField(auto_now=True,auto_now_add=False)
     create_date = models.DateTimeField(auto_now=False,auto_now_add=True)
-    real_date = models.DateTimeField()
+    real_date = models.DateField()
     section_id = models.ForeignKey(Section)
     department_id = models.ForeignKey(Department)
     ref_num = models.CharField(max_length = 50)

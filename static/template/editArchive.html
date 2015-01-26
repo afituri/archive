@@ -55,14 +55,7 @@
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td width='35%'> تاريخ الارشيف</td>
-                        <td width='65%'>
-                            <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time"  data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
-                                {{archive.real_date}}
-                            </a>
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td width='35%'>الرقم الاشاري</td>
                         <td width='65%'>
@@ -71,6 +64,7 @@
                             </a>
                         </td>
                     </tr>
+
                     <tr>
                         <td width='35%'>الوصف</td>
                         <td width='65%'>
@@ -84,6 +78,14 @@
                         <td width='65%'>
                             <a href="#" id="type" data-type="select" data-pk="{{archive.section_id.id}}"  data-title="Select status" data-value="{{archive.section_id}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                 {{archive.section_id.name}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='35%'> تاريخ الارشيف</td>
+                        <td width='65%'>
+                            <a href="#" id="real_date" data-type="datetime" data-pk="{{archive.id}}" title="Select date and time" class=" table-condensed" data-value='{{archive.real_date}}' data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                {{archive.real_date}}
                             </a>
                         </td>
                     </tr>

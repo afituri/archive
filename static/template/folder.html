@@ -13,26 +13,29 @@
             <nav class="navbar navbar-default">
                 <form class="form-inline">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <button type="button" class="btn btn-default btn-lg" disabled="disabled">البحث من</button>
                             <div class="form-group">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" data-date-format="YYYY/MM/DD"/>
+                                <div class='input-group date' id='datetimepicker5'>
+                                    <input type='text' class="form-control" format="yyyy-mm-dd" id="start_date" placeholder="من"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default btn-lg" disabled="disabled">إلى</button>
                             <div class="form-group">
-                                <div class='input-group date' id='datetimepicker3'>
-                                    <input type='text' class="form-control" data-date-format="YYYY/MM/DD"/>
+                                <div class='input-group date' id='datetimepicker6'>
+                                    <input type='text' class="form-control" data-format="yyyy-mm-dd" id="end_date" placeholder="إلى"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{end_date}}"/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
+                                        <div class="input-group-btn">
+                                            <div id="date" type="button" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </div>
+                                         </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </form>
             </nav>
@@ -107,11 +110,19 @@
 {% block footer %}{% endblock %}
 {% block script %}
 
-                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+                     <script src = "/static/js/jquery-1.11.1.min.js"></script>
                     <script src = "/static/js/bootstrap.min.js"></script>
                     <script src = "/static/js/bootstrap-editable.min.js"></script>
                     <script src = "/static/js/jquery.validate.min.js"></script>
                     <script src = "/static/js/script_nav.js"></script>
                     <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
                     <script type="text/javascript" src="/static/js/folder.js" charset="UTF-8"></script>
+                    {% if start_date != '' %}
+                    <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#datetimepicker5').datetimepicker('update', new Date('{{start_date}}'));
+                        $('#datetimepicker6').datetimepicker('update', new Date('{{end_date}}'));
+                        });
+                    </script>
+                    {%endif%}
                 {% endblock %} <!

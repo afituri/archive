@@ -156,14 +156,9 @@ def deleteUser(request,user_id=0):
 
 
 def checkUsername(request):
-    # username=request.POST['username']
-    print "asdfasfasfaf"
-    try:
-        user=User.objects.get(username=username,is_active=True)
-        print user
-        if user is not None:
-            print username+"true"
-            return HttpResponse(False) 
-    except:
-        print username+"sss"
-        return HttpResponse(True)
+    username=request.POST['username']
+    user=User.objects.filter(username=username,is_active=True).exists()
+    if user :
+        return HttpResponse('false') 
+    else:
+        return HttpResponse('true')

@@ -46,10 +46,11 @@ $(document).ready(function(){
     $('#real_date').editable({
 
         url: '../../editArchiveEditable/',
-        format: 'yyyy-mm-dd hh:ii',    
-        viewformat: 'dd/mm/yyyy hh:ii',    
+        format: 'yyyy-mm-dd',    
+        viewformat: 'yyyy-mm-dd',    
         datetimepicker: {
-            weekStart: 1
+            weekStart: 1,
+            format: "yyyy-mm-dd",
         },
         validate: function(v) {
             if(!v) return 'الرجاء ادخال التاريخ';

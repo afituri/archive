@@ -10,25 +10,26 @@ $(document).ready(function(){
 		}
 	});
   // $.validator.addMethod("checkUsername", function(value, element) {
+  // 	$.resul=new Array();
   // 		$.ajax({
   //              type: "POST",
-  //              url: "/username/",
-  //              data: {'username': $('#username').val(), 'csrfmiddlewaretoken': '{{csrf_token}}'},
+  //              url: "username/",
+  //              data: {'username': $('#username').val(), 'csrfmiddlewaretoken': $('#username').data('params')},
   //              dataType: "text",
   //              success: function(response) {
-  //                     var response = $.parseJSON( response );
-  //                     if (response.success){
+  //              	alert(response);
+  //                     if (response=='True'){
   //                         return true;
   //                     }
-  //                     else{
-  //                         alert(response.error);
-  //                     }
+  //                     else{ 
+		// 					return false;                 
+		// 			}
   //               },
-  //               error: function(rs, e) {
-  //                      alert(rs.responseText);
+  //               error: function(rs,e) {
+  //                      return false;
   //               }
-  //         }); 
-  });
+  //         });
+  // });
   $("#form").validate({ 
 			 rules: {
 				first_name: "required",
@@ -36,7 +37,13 @@ $(document).ready(function(){
 				username: {
 					required: true,
 					minlength: 5,
-			        // checkUsername:true
+			        // checkUsername:true,
+			        remote: {
+			        	type: "POST",
+		                url: "username/",
+		                data: {username:function() {return $('#username').val()}, csrfmiddlewaretoken:function() {return $('#username').data('params')}},
+
+			        },
 				},
 				password: {
 					required: true,
@@ -62,7 +69,7 @@ $(document).ready(function(){
 				username: {
 					required: "الرجاء إدخال اسم المستخدم",
 					minlength: jQuery.validator.format("يجب أن تكون اسم المستخدم الخاصة بك على الأقل 5 أحرف"),
-					// checkUsername :"هذا الاسم مستخدم "
+					remote :"هذا الاسم مستخدم "
 				},
 				password: {
 					required: "الرجاء ادخال الرمز البسري",
