@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block departmentName %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel-body">
+                    <nav class="navbar navbar-default">
+                        <p class="h3"><strong>{{departmentName.name}}</strong></p>
+                    </nav>
+                </div>
+            </div>
+        </div>
 {% endblock %}
 {% block navbarList %}
     <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
@@ -50,39 +59,41 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                                <font size="4" >الارشـيـف </font></a>
+                                <font size="4" > الأرشيف </font></a>
                             </div>
-                            <div class="  col-md-8 col-sm-8 col-xs-8  ">
-                                <font size="4" >الرقم الاشاري </font></a>
-                                <div  class="input-group panel-title pull-right col-xs-6">
-                                <input id="query" type="text" placeholder="البحث"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{q}}" class="form-control">
+                            <div class="  col-md-6 col-sm-6 col-xs-6  ">
+                                <div  class="input-group panel-title pull-right col-xs-8">
+                                <input id="query" type="text" placeholder="البحث بالرقم الأشاري"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{q}}" class="form-control">
                                 <input type="hidden" value="{{dept_id}}" id="dept_id">
-                              <div class="input-group-btn">
-                                <div id="search" type="button" class="btn btn-default">
-                                  <spen class="glyphicon glyphicon-search"></spen>
+                                <div class="input-group-btn">
+                                    <div id="search" type="button" class="btn btn-default">
+                                      <spen class="glyphicon glyphicon-search"></spen>
                                 </div>
-                              </div>
-                            </div>
                             </div>
                         </div>
                     </div>
-                    <table class="table">
-                        <tr>
+                    <div class"col-md-12 col-sm-12 col-xs-12 "> 
+                        <a class="btn  btn-success " href="/addArchive/{{dept_id}}"><font size="3" >أرشيف <span class="glyphicon glyphicon-plus"> </span> </font> </a>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
 
-                            <th id="name">الاسـم</th>
-                            <th id="type">النـوع</th>
-                            <th id="date">التـاريـخ</th>
-                            <th id="refNum">الـرقم الاشاري</th>
-                            <th id="edit">عـرض</th>
-                        </tr>
-                        {% for arch in archive %}
-                            <tr>
-                                <td headers="name">{{arch.name}}</td>
-                                <td headers="type">{{arch.section_id.name}}</td>
-                                <td headers="date">{{arch.real_date}}</td>
-                                <td headers="refNum">{{arch.ref_num}}</td>
-                                <td headers="edit">
-                                    <a href="/editArchive/{{arch.id}}" class="btn btn btn-primary btn-xs">
+                    <th id="name">الاسـم</th>
+                    <th id="type">النـوع</th>
+                    <th id="date">التـاريـخ</th>
+                    <th id="refNum">الـرقم الاشاري</th>
+                    <th id="edit">عـرض</th>
+                </tr>
+                {% for arch in archive %}
+                    <tr>
+                        <td headers="name">{{arch.name}}</td>
+                        <td headers="type">{{arch.section_id.name}}</td>
+                        <td headers="date">{{arch.real_date}}</td>
+                        <td headers="refNum">{{arch.ref_num}}</td>
+                        <td headers="edit">
+                            <a href="/editArchive/{{arch.id}}" class="btn btn btn-primary btn-xs">
                                         <span class="glyphicon glyphicon-eye-open"></span>
                                     </a>
                                 </td>                    

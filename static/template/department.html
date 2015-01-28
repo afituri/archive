@@ -2,7 +2,7 @@
 {% block navbarList %}
     <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
     <li><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
-    <li class="active"><a href="/department/{{dept_id}}">قـسم</a></li>
+    <li class="active"><a href="/department/{{dept_id}}">القسـم</a></li>
 {% endblock %} 
 {% block departmentName %}
     <div class="row">
@@ -60,23 +60,25 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                                <font size="4" >الارشـيـف </font></a>
+                            <div class=" col-md-3 col-sm-3 col-xs-3">
+                                <font size="4" > الأرشيف  </font></a>
                             </div>
-
-                            <div class="  col-md-8 col-sm-8 col-xs-8  ">
-                                <font size="4" >الرقم الاشاري </font></a>
-                                    <div  class="input-group panel-title pull-right col-xs-6">
-                                <input id="query" type="text" placeholder="البحث"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{q}}" class="form-control">
-                                <input type="hidden" value="{{dept_id}}" id="dept_id">
-                              <div class="input-group-btn">
-                                <div id="search" type="button" class="btn btn-default">
-                                  <spen class="glyphicon glyphicon-search"></spen>
-                                </div>
-                              </div>
-                            </div>
+                            <div class="  col-md-6 col-sm-6 col-xs-6 ">
                                  
+                                <div  class="input-group panel-title pull-right col-xs-8">
+
+                                    <input id="query" type="text" placeholder="البحث"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" value="{{q}}" class="form-control"> 
+                                    <input type="hidden" value="{{dept_id}}" id="dept_id">
+                                        <div class="input-group-btn">
+                                            <div id="search" type="button" class="btn btn-default">
+                                                <spen class="glyphicon glyphicon-search"></spen>
+                                            </div>
+                                        </div>
+                                </div>
                             </div>
+                                <div class"col-md-12 col-sm-12 col-xs-12 "> 
+                                    <a class="btn  btn-success " href="/addArchive/{{dept_id}}"><font size="3" >أرشيف <span class="glyphicon glyphicon-plus"> </span> </font> </a>
+                                </div>
                         </div>
                     </div>
                     <table class="table">
@@ -102,23 +104,23 @@
                         {% endfor %}
                     </table>
                 </div>
-    {% block pagination %}
-        <nav pull-center>
-            <ul class="pagination">
-                <li> {% if archive.has_previous %} <a  href="?page={{ department.previous_page_number }}&q={{q}}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
-            
-               {% for i in department.paginator.page_range %}
-               
-                <li>{% if department.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}&q={{q}}">{{i}} <span class="sr-only">(current)</span></a></li>
-               {% endfor %}
-            
-                  <li>{% if department.has_next %} <a href="?page={{department.next_page_number}}&q={{q}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
-            
-            </ul>
-        </nav> 
-    {% endblock %} <!-- end of block pagination-->
-</div>
-{% endblock %}
+                {% block pagination %}
+                    <nav pull-center>
+                        <ul class="pagination">
+                            <li> {% if archive.has_previous %} <a  href="?page={{ department.previous_page_number }}&q={{q}}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
+                        
+                           {% for i in department.paginator.page_range %}
+                           
+                            <li>{% if department.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}&q={{q}}">{{i}} <span class="sr-only">(current)</span></a></li>
+                           {% endfor %}
+                        
+                              <li>{% if department.has_next %} <a href="?page={{department.next_page_number}}&q={{q}}" aria-label="next">{% endif %}<span>&raquo;</span></a></li>
+                        
+                        </ul>
+                    </nav> 
+                {% endblock %} <!-- end of block pagination-->
+                </div>
+{% endblock %} <!-- end of block table -->
 
 {% block footer %}{% endblock %}
 {% block script %}
