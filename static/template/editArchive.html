@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
 {% block navbarList %}
-    <li><a href="/addFolder/{{archive.department_id.id}}">إضافة مجلد</a></li>
     <li><a href="/">الصفحة الرئيسية </a></li>
-    <li><a href="../../addFolder">إضـافـة مـجـلـد جديد </a></li>
-    <li><a href="../../addArchive">الارشـف</a></li>
+    <li><a href="/addFolder/{{archive.department_id.id}}">إضافة مجلد</a></li>
     <li class="active"><a href="">تعديل أرشيف</a></li>
     <li><a href="/addArchive/{{archive.department_id.id}}">الارشـيف</a></li>
     <li><a href="/department/{{archive.department_id.id}}">قـسم</a></li>
