@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 
 {% block navbarList %}
-    <li><a href="../../addFolder">إضـافـة مـجـلـد جديد </a></li>
-    <li><a href="../../addArchive">الارشـف</a></li>
+    <li><a href="/">الصفحة الرئيسية </a></li>
+    <li><a href="/addFolder/{{archive.department_id.id}}">إضافة مجلد</a></li>
     <li class="active"><a href="">تعديل أرشيف</a></li>
-    <li><a href="../../department">قـسم</a></li>
-{% endblock %}
+    <li><a href="/addArchive/{{archive.department_id.id}}">الارشـيف</a></li>
+    <li><a href="/department/{{archive.department_id.id}}">قـسم</a></li>
+{% endblock %} 
 
 {% block departmentName %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel-body">
                 <nav class="navbar navbar-default">
-                    <p class="h3"><strong>{{departmentName}}</strong></p>
+                    <p class="h3">
+                        <strong>
+                            {{archive.department_id.name}}
+                        </strong>
+                    </p>
                 </nav>
             </div>
         </div>
@@ -55,7 +60,6 @@
                             </a>
                         </td>
                     </tr>
-                    
                     <tr>
                         <td width='35%'>الرقم الاشاري</td>
                         <td width='65%'>
@@ -64,7 +68,6 @@
                             </a>
                         </td>
                     </tr>
-
                     <tr>
                         <td width='35%'>الوصف</td>
                         <td width='65%'>
@@ -106,86 +109,100 @@
                         </div>
                     </div>
             <table id="FILE" style="clear: both" class="table table-bordered table-striped">
-              <tbody>
+                <tbody>
                 {% for fil in files%}
                     <tr id="file{{fil.id}}">
-                      <td width="55%"><a href="/{{fil.path}}">{{fil.name}}</a> </td>
-                      <td width="10%">
-                        <button id="deletefil" data-toggle="modal" value="{{fil.id}}" data-target="#codeletefil" data-placement="top" rel="tooltip" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> </span></button>
-                      </td>
+                        <td width="55%">
+                            <a href="/{{fil.path}}">{{fil.name}}</a>
+                        </td>
+                        <td width="10%">
+                            <button id="deletefil" data-toggle="modal" value="{{fil.id}}" data-target="#codeletefil" data-placement="top" rel="tooltip" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-trash"> </span>
+                            </button>
+                        </td>
                     </tr>
                 {%endfor%}
-              </tbody>
-            </table>
-        </div>
-        </div>
-        {% block pagination %}{% endblock %}
+            </tbody>
+        </table>
     </div>
+</div>
+{% block pagination %}{% endblock %}
+</div>
 {% endblock %}
-
-{% block footer %}{% endblock %}
 
 {% block modaleDelete %}
     <div  id="codeletefil" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-headr modal-header-danger">
+            <div class="modal-content">
+                <div class="modal-headr modal-header-danger">
                     <p class="h1">هل أنت متأكد من  حدف ؟</p>
-                  </div>
-                  <div class="modal-body">
-                    <p class="h2">هل انت متأكد </p>
-                    <p> </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="fildelet" type="button" data-dismiss="modal" class="btn btn-danger" value="">حدف</button>
-                    <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
-                  </div>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <p class="h2">هل انت متأكد </p>
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="fildelet" type="button" data-dismiss="modal" class="btn btn-danger" value="">
+                        حدف
+                    </button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <div  id="del" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-headr modal-header-danger">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-headr modal-header-danger">
                     <p class="h1">هل أنت متأكد من  حدف ؟</p>
-                  </div>
-                  <div class="modal-body">
-                    <p class="h2">هل انت متأكد </p>
-                    <p> </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="dle" type="button" data-dismiss="modal" class="btn btn-danger" value="{{archive.id}}">حدف</button>
-                    <button data-dismiss="modal" type="button" class="btn btn-success">إلغاء</button>
-                  </div>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <p class="h2">هل انت متأكد </p>
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="dle" type="button" data-dismiss="modal" class="btn btn-danger" value="{{archive.id}}">
+                        حدف
+                    </button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success">
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <div  id="addFile" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-headr modal-header-success">
+            <div class="modal-content">
+                <div class="modal-headr modal-header-success">
                     <p class="h1">اضافة ملف</p>
-                  </div>
-                  <div class="modal-body">
-                    <form role="form" id="form" action="/addFile/" method="post" enctype="multipart/form-data">{% csrf_token %}
-                        
-                        <div class="form-group multiple-form-group input-group file">
-                        <input type="file" name="file[]" class="form-control" >
-                        <input type="text" name= "file_name[]" class="form-control" >
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-success btn-add">+</button>
-                        </span>
-                            </div>
-                            <input type="hidden" value="{{archive.id}}" name="archive_id">
-                        <input type="submit" value="حــــفظ" class="btn btn-primary ">
-                    </form>
-                  </div>
-                 
                 </div>
-              </div>
+                <div class="modal-body">
+                    <form role="form" id="form" action="/addFile/" method="post" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="form-group multiple-form-group input-group file">
+                            <input type="file" name="file[]" class="form-control" >
+                            <input type="text" name= "file_name[]" class="form-control" >
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success btn-add">+</button>
+                            </span>
+                        </div>
+                        <input type="hidden" value="{{archive.id}}" name="archive_id">
+                        <input type="submit" value="حــــفظ" class="btn btn-primary ">
+                        <button data-dismiss="modal" type="button" class="btn btn-danger pull-left">
+                        إلغاء
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
- 
+
+{% block footer %}{% endblock %}
+{% block addFolder %}{% endblock %}
+
 {% block script %}
     <script src = "/static/js/jquery-1.11.1.min.js"></script>
     <script src = "/static/js/bootstrap.min.js"></script>
