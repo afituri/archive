@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+
 {% block navbarList %}
     <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
     <li class="active"><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
     <li><a href="/department/{{dept_id}}">قـسم</a></li>
-{% endblock %} 
+{% endblock %}
+
 {% block departmentName %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -15,6 +17,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block table %}
 <div class="  col-md-6 col-sm-6   ">
    <div class="panel panel-default">
@@ -104,12 +107,13 @@
     </form>
 </div>
 {% endblock %}
+
 {% block pagination %}{% endblock %}
 {% block buttonList %}{% endblock %}
 {% block search %}{% endblock %}
 {% block addFolder %}{% endblock %}
-{% block script %}
 
+{% block script %}
   <script src = "/static/js/jquery-1.11.1.min.js"></script>
   <script src = "/static/js/bootstrap.min.js"></script>
   <script src = "/static/js/bootstrap-editable.min.js"></script>
@@ -118,5 +122,4 @@
   <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
   <script src = "/static/js/Multiple.js"></script>
   <script src = "/static/js/addArchive.js"></script>
-
-                {% endblock %} <!
+{% endblock %}

@@ -30,18 +30,7 @@ def editArchive(request, archive_id=1):
     c['archive'] = Archive.objects.get(id=archive_id,status=1)
     c['list']=Section.objects.filter(Department_id=c['archive'].department_id.id,status=1)
     c['files']=Files.objects.filter(archive_id=archive_id,status=1)
-    c['departmentName']= c['archive'].department_id.name
     return render_to_response('editArchive.html',c)
-
-
-@login_required(login_url='/')
-def getArchive(request):
-    c = {}
-    c.update(csrf(request))
-    archive = Section.objects.filter( Department_id=department_id,status=True)
-    print "vbufbvriuvbnfsovj"
-    print archive
-    return archive
 
 
 @login_required(login_url='/')
@@ -69,20 +58,6 @@ def getArchiveType(request, department_id=0):
     else:
         print "False False hbfourebfrefhbrpihnpi;"
         return HttpResponse(False)
-
-
-# @login_required(login_url='/')
-# def getArchiveType(request, department_id=0):
-#     if int(department_id) != 0 :
-#         section = Section.objects.filter(Department_id=department_id,status=True)
-#         print section
-#         model_to_dict(section)
-#         # return HttpResponse(section)
-#         return section
-#     else:
-#         print "False False hbfourebfrefhbrpihnpi;"
-#         return HttpResponse(False)#send string only
-
 
 @login_required(login_url='/')
 def editArchiveEditable(request):
