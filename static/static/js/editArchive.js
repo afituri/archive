@@ -4,7 +4,7 @@ $(document).ready(function(){
         var defaults = {
         disabled: true,
     };
-
+    
     $.extend($.fn.editable.defaults, defaults);
         $('#enable').click(function() {
         $('#tableEditArchive .editable').editable('toggleDisabled');
@@ -48,6 +48,7 @@ $(document).ready(function(){
         viewformat: 'yyyy-mm-dd',    
         datetimepicker: {
             weekStart: 1,
+            pickTime: false,
             format: "yyyy-mm-dd",
         },
         validate: function(v) {
@@ -62,10 +63,13 @@ $(document).ready(function(){
                 var k = new Object({id : i,value : result[key+i], text : result[i]});
                 $.resul.push(k);
             }
-        $('#type').editable({
+        $('#typesec').editable({
             url: '../../editArchiveEditable/',
-            params:$('#type').data('params'),
-            source: $.resul
+            params:$('#typesec').data('params'),
+            source: $.resul,
+            success: function(response, newValue) {
+                console.log(newValue);
+            }
         });      
     });
     $('body').on('click','#deletefil', function(){

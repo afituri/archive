@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block navbarList %}
+<li><a href="/">الصفحة الرئيسية </a></li>
+{% endblock %}
+{% block search %}{% endblock %}
+{% block rowOne %}
+ 	{% block list %}{% endblock %}
+
+    	{% block table %}
+    	 				<div class='row'>
+                              <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
+                            <div class="col-md-6 col-sm-8 col-xs-10">
+                                <div class="panel panel-default table-responsive">
+                                    <div class="panel-heading panel-responsive">
+                                        <div class="row">
+                                            <div class="  col-md-3 col-sm-3 col-xs-3  ">
+                                                <font size="4" > </font></a>
+                                            </div>
+                                            <div class="  col-md-6 col-sm-6 col-xs-6 ">
+                                              
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <tr>
+                                            <th>إسم المستخدم</th>
+                                            <th>نوع التعديل</th>
+                                            <th>مكان التعديل</th>
+                                            <th>الوصف</th>
+                                            <th>التاريخ</th>
+                                            <th>الحقل</th>
+                                            
+                                        </tr>
+                                        {% for rep in report %}
+                                        <tr>
+                                            <td headers="username">{{rep.id_user.username}}</td>
+                                            <td headers="username">{{rep.action_type}}</td>
+                                            <td headers="email">{{rep.tabel}}</td>
+                                            <td headers="username">{{rep.desc}}</td>
+                                                
+
+                                            <td headers="username">{{rep.create_date}}</td>
+                                            <td headers="section">{{rep.create_date}}</td>
+                                               
+                                        </tr>
+                                        {%endfor%}
+                                    </table>
+                                </div>
+                               {% block pagination %}
+                                    <nav pull-center>
+                                        <ul class="pagination">
+                                         
+                                            <li> {% if report.has_previous %} <a href="?page={{ users.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
+                               	       
+                                	       {% for i in report.paginator.page_range %}
+                                	       
+                                            <li>{% if report.number == i %} <li class="active"> {% endif%}<a href="?page={{i}}">{{i}} <span class="sr-only">(current)</span></a></li>
+                                	       {% endfor %}
+                        		        
+                              		          <li> {% if report.has_next %} <a href="?page={{users.next_page_number}}" aria-label="next"> {% endif %} <span>&raquo;</span></a>  </li>
+                               	        
+                                        </ul>
+                                    </nav> 
+                                {% endblock %} <!-- end of block pagination-->
+                            </div>
+                            <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
+                        </div>
+
+                        
+                            {% endblock %} <!-- end of block table-->
+			{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block script %}
+
+                    <script src = "/static/js/jquery-1.11.1.min.js"></script>
+                    <script src = "/static/js/bootstrap.min.js"></script>
+                    <script src = "/static/js/bootstrap-editable.min.js"></script>
+                    <script src = "/static/js/jquery.validate.min.js"></script>
+                    <script src = "/static/js/script_nav.js"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="/static/js/users.js" charset="UTF-8"></script>
+                {% endblock %} <!

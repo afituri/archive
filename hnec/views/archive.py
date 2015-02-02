@@ -78,7 +78,7 @@ def editArchiveEditable(request):
     name = request.POST['name']
     value = request.POST['value']
     archive = Archive.objects.get(id=id_u)
-    print value
+    print archive.id
     if name == 'name':
         old=archive.name
         archive.name=value
@@ -88,14 +88,15 @@ def editArchiveEditable(request):
     elif name == 'ref_num':
         old = archive.ref_num
         archive.ref_num = value
-    elif name == 'text':
+    elif name == 'textarea':
         old = archive.text
         archive.text = value
-    elif name == 'type':
-        old = Section.objects.get(id=archive.section_id.id)
-        new=Section.objects.get(id=int(value))
+    elif name == 'typesec':
+        new = Section.objects.get(id=value)
         archive.section_id = new
+        
     archive.save()
+
     # log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     # log.save()
     return HttpResponseRedirect('/',)
@@ -131,6 +132,8 @@ def insertArchive(request):
         with open( file_name+"/"+files.name, 'wb+') as destination:
             for chunk in files.chunks():
                 destination.write(chunk)
+        if files_name[i] == '':
+            files_name[i]=files.name
         f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
         f.save()
         log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
@@ -180,10 +183,11 @@ def addFile(request):
         files_name.append(fil)
     print request.FILES.getlist('file[]')
     for files in request.FILES.getlist('file[]'):
-        print "im her"
         with open( file_name+"/"+files.name, 'wb+') as destination:
             for chunk in files.chunks():
                 destination.write(chunk)
+            if files_name[i] == '':
+                files_name[i]=files.name
         f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
         f.save()
         log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
