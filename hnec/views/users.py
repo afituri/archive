@@ -57,9 +57,8 @@ def users(request):
     if request.user.is_staff:
         c = {}
         c.update(csrf(request))
-        c['users']=User.objects.filter(is_active=True)
+        objects=User.objects.filter(is_active=True)
         c['department']=Department.objects.filter(status=True)
-        objects=c['users']
         paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
@@ -164,3 +163,22 @@ def checkUsername(request):
         return HttpResponse('false') 
     else:
         return HttpResponse('true')
+
+@login_required(login_url='/')
+def report(request):
+    c = {}
+    c.update(csrf(request))
+    if request.user.is_staff:
+        objects=Log.objects.all()
+        paginator=Paginator(objects,10)
+        page = request.GET.get('page')
+        try:
+            rep = paginator.page(page)
+        except PageNotAnInteger :
+            rep = paginator.page(1)
+        except EmptyPage:
+            rep = paginator.page(paginator.num_pages)
+        c['report'] = rep
+        return render_to_response('report.html',c)
+    else:
+        return HttpResponseRedirect('/',)

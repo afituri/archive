@@ -38,5 +38,5 @@ urlpatterns = patterns('',
     url(r'^addFile/$','hnec.views.archive.addFile'),
     url(r'^editDepartment/$', 'hnec.views.department.editDepartment'),
     url(r'^deleteDepartment/(?P<department_id>\d+)/$', 'hnec.views.department.deleteDepartment'),
-    
+    url(r'^report/$', 'hnec.views.users.report'),
 )
