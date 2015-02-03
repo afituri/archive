@@ -223,6 +223,8 @@ def addNewFolder(request):
     dept_id = request.POST.get('dept_id','')
     section = Section(name = name, status = True, Department_id = Department.objects.get(id=dept_id))
     section.save()
+    log = Log(id_user=request.user,action_type='add',tabel='section',desc='add section '+name,tabel_id=section.id,value=name)
+    log.save()
     return  redirect('../addFolder/%s/' %dept_id)
 
 @login_required(login_url='/')

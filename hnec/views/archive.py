@@ -84,6 +84,8 @@ def editArchiveEditable(request):
         archive.section_id = new
         
     archive.save()
+    log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
+    log.save()
     return HttpResponseRedirect('/',)
 
 @login_required(login_url='/')

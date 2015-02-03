@@ -152,6 +152,7 @@ def deleteUser(request,user_id=0):
         user=User.objects.get(id=user_id)
         name=user.username
         user.is_active = False
+        user.username=user.username+'@#$'+str(user.id)
         user.save()
         log = Log(id_user=request.user,action_type='delete',tabel='user',desc='delete user '+name,tabel_id=user.id,value=name)
         log.save()
@@ -172,7 +173,7 @@ def report(request):
     c = {}
     c.update(csrf(request))
     if request.user.is_staff:
-        objects=Log.objects.all()
+        objects=Log.objects.all().order_by('-id')
         paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
