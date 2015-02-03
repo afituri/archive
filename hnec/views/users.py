@@ -74,17 +74,10 @@ def users(request):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
-
+@login_required(login_url='/')
 def addUser(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     username=request.POST['username']
     first_name=request.POST['first_name']
     last_name=request.POST['last_name']
@@ -165,6 +158,7 @@ def deleteUser(request,user_id=0):
         return HttpResponseRedirect('/users',)
 
 
+@login_required(login_url='/')
 def checkUsername(request):
     username=request.POST['username']
     user=User.objects.filter(username=username,is_active=True).exists()

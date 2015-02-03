@@ -14,17 +14,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime, timedelta
 import time
 
-
+@login_required(login_url='/')
 def Departments(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     objects=Department.objects.filter(status=True)
     paginator=Paginator(objects,10)
     page = request.GET.get('page')
@@ -34,13 +27,12 @@ def Departments(request):
         dept = paginator.page(1)
     except EmptyPage:
         dept = paginator.page(paginator.num_pages)
-    # except paginator.page_range
     c['department']=dept
     c['userid']=request.user.id
     return render_to_response('Departments.html',c)
 
 
-@login_required(login_url='/')   
+@login_required(login_url='/')
 def addDept(request):
     name = request.POST.get('Deptname','')
     dep = Department(name = name, status = True)
@@ -61,18 +53,10 @@ def editDepartment(request):
     log.save()
     return  redirect('../Departments/')
 
-
+@login_required(login_url='/')
 def addDepartment(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
-
     objects=Section.objects.filter(Department_id=department_id,status=True)
 
     paginator=Paginator(objects,4)
@@ -83,7 +67,6 @@ def addDepartment(request):
         section = paginator.page(1)
     except EmptyPage:
         section = paginator.page(paginator.num_pages)
-    # except paginator.page_range
     c['sections']=section
     c['list']=objects
     c['userid']=request.user.id
@@ -134,17 +117,10 @@ def department(request, department_id=0):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
-
+@login_required(login_url='/')
 def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     objects=Section.objects.filter(Department_id=department_id, status=True)
     paginator=Paginator(objects,4)
     page = request.GET.get('page')
@@ -162,17 +138,10 @@ def addFolder(request, department_id=1):
     c['departmentName']=Department.objects.get(id=department_id,status=True)
     return render_to_response('addFolder.html',c)
 
-
+@login_required(login_url='/')
 def editFolder(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     id_sect=request.POST['pk']
     name=request.POST['name']
     value=request.POST['value']  
@@ -185,16 +154,10 @@ def editFolder(request):
     return render_to_response('addFolder.html',c)
 
 # dispalys section
+@login_required(login_url='/')
 def folder(request, department_id=1, section_id=1):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     sec_list = []
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
         for  sec_id in Section.objects.filter(Department_id=department_id):
@@ -240,17 +203,10 @@ def folder(request, department_id=1, section_id=1):
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
-   
+@login_required(login_url='/')
 def addSection(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     sectionName = request.POST['name']
     department_id=Department.objects.get(id=request.POST['dept_id'])
     section = Section(name=sectionName,Department_id=department_id)
@@ -259,17 +215,10 @@ def addSection(request):
     log.save()
     return HttpResponseRedirect('/addFolder/%s/' %department_id.id,)
 
-
+@login_required(login_url='/')
 def addNewFolder(request):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     name = request.POST.get('Folder','')
     dept_id = request.POST.get('dept_id','')
     section = Section(name = name, status = True, Department_id = Department.objects.get(id=dept_id))

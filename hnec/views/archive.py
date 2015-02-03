@@ -35,17 +35,10 @@ def editArchive(request, archive_id=1):
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
     
 
-
+@login_required(login_url='/')
 def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     if int(department_id)!=0: 
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
@@ -65,7 +58,6 @@ def getArchiveType(request, department_id=0):
             ids=ids+str(section.id)+"$"
         return HttpResponse(name+ids)
     else:
-        print "False False hbfourebfrefhbrpihnpi;"
         return HttpResponse(False)
 
 @login_required(login_url='/')
@@ -92,11 +84,9 @@ def editArchiveEditable(request):
         archive.section_id = new
         
     archive.save()
-
-    # log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
-    # log.save()
     return HttpResponseRedirect('/',)
 
+@login_required(login_url='/')
 def insertArchive(request):
     files_name =[]
     i=0
@@ -137,6 +127,7 @@ def insertArchive(request):
         i=i+1
     return HttpResponseRedirect('/department/%s/' %section_id.Department_id.id)
 
+
 @login_required(login_url='/')
 def deleteFile(request,file_id=0):
     fil = Files.objects.get(id=file_id)
@@ -145,6 +136,7 @@ def deleteFile(request,file_id=0):
     log = Log(id_user=request.user,action_type='delete',tabel='Files',desc='delete File '+fil.name,tabel_id=fil.id,value=fil.name)
     log.save()
     return HttpResponseRedirect('/',)
+
 
 @login_required(login_url='/')
 def deleteArchive(request,archive_id=0):
@@ -159,6 +151,7 @@ def deleteArchive(request,archive_id=0):
         log = Log(id_user=request.user,action_type='delete',tabel='Files',desc='delete File '+fil.name,tabel_id=fil.id,value=fil.name)
         log.save()
     return HttpResponse(archive.department_id.id)
+
 
 @login_required(login_url='/')
 def addFile(request):
