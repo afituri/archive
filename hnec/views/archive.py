@@ -39,7 +39,6 @@ def editArchive(request, archive_id=1):
     return render_to_response('editArchive.html',c)
 
 
-@login_required(login_url='/')
 def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
@@ -141,6 +140,7 @@ def insertArchive(request):
         i=i+1
     return HttpResponseRedirect('/department/%s/' %section_id.Department_id.id)
 
+@login_required(login_url='/')
 def deleteFile(request,file_id=0):
     fil = Files.objects.get(id=file_id)
     fil.status = False
@@ -149,6 +149,7 @@ def deleteFile(request,file_id=0):
     log.save()
     return HttpResponseRedirect('/',)
 
+@login_required(login_url='/')
 def deleteArchive(request,archive_id=0):
     archive = Archive.objects.get(id=archive_id)
     archive.status = False
@@ -162,6 +163,7 @@ def deleteArchive(request,archive_id=0):
         log.save()
     return HttpResponse(archive.department_id.id)
 
+@login_required(login_url='/')
 def addFile(request):
     files_name =[]
     i=0
