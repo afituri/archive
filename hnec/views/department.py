@@ -31,7 +31,6 @@ def Departments(request):
     c['userid']=request.user.id
     return render_to_response('Departments.html',c)
 
-
 @login_required(login_url='/')
 def addDept(request):
     name = request.POST.get('Deptname','')
