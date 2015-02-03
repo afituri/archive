@@ -22,21 +22,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
+@login_required(login_url='/')
 def editArchive(request, archive_id=1):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     c['archive'] = Archive.objects.get(id=archive_id,status=1)
-    c['list']=Section.objects.filter(Department_id=c['archive'].department_id.id,status=1)
-    c['files']=Files.objects.filter(archive_id=archive_id,status=1)
-    return render_to_response('editArchive.html',c)
+    if request.user.is_staff or int(c['archive'].department_id.id) == int(request.user.employee.department_id.id):
+        c['list']=Section.objects.filter(Department_id=c['archive'].department_id.id,status=1)
+        c['files']=Files.objects.filter(archive_id=archive_id,status=1)
+        return render_to_response('editArchive.html',c)
+    else:
+        return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+    
 
 
 def addArchive(request, department_id=0):

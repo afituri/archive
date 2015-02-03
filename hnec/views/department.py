@@ -89,17 +89,10 @@ def addDepartment(request):
     c['userid']=request.user.id
     return render_to_response('addFolder.html',c)
 
-
+@login_required(login_url='/') 
 def department(request, department_id=0):
     c = {}
     c.update(csrf(request))
-    if request.user.is_authenticated():
-        if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
-        else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
-    else:        
-        return render_to_response('logIn.html',c)
     if int(department_id)==0:
         return HttpResponseRedirect('/')
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
