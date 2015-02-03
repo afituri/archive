@@ -88,7 +88,11 @@ def editArchiveEditable(request):
         old = archive.text
         archive.text = value
     elif name == 'typesec':
+        name='section_id'
+        old=Section.objects.get(id=int(archive.section_id.id)).name
         new = Section.objects.get(id=value)
+        value=new.name
+        print value
         archive.section_id = new
         
     archive.save()

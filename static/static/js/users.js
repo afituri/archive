@@ -1,7 +1,7 @@
 $(document).ready(function(){
   // validate signup form on keyup and submit
   $('#deptname').prop('disabled', true);
-  $('#usertype').click(function() {
+  $('#usertype').on('change',function() {
 		var id = $('#usertype').val();
 		if(id >0){
 			$('#deptname').prop('disabled', false);
@@ -9,27 +9,7 @@ $(document).ready(function(){
 			$('#deptname').prop('disabled', true);
 		}
 	});
-  // $.validator.addMethod("checkUsername", function(value, element) {
-  // 	$.resul=new Array();
-  // 		$.ajax({
-  //              type: "POST",
-  //              url: "username/",
-  //              data: {'username': $('#username').val(), 'csrfmiddlewaretoken': $('#username').data('params')},
-  //              dataType: "text",
-  //              success: function(response) {
-  //              	alert(response);
-  //                     if (response=='True'){
-  //                         return true;
-  //                     }
-  //                     else{ 
-		// 					return false;                 
-		// 			}
-  //               },
-  //               error: function(rs,e) {
-  //                      return false;
-  //               }
-  //         });
-  // });
+ 
   $("#form").validate({ 
 			 rules: {
 				first_name: "required",
