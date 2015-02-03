@@ -57,7 +57,7 @@ class Log(models.Model):
     id_user = models.ForeignKey(User)
     action_type = models.CharField(max_length = 50)
     tabel = models.CharField(max_length = 50)
-    desc = models.CharField(max_length = 50)
+    desc = models.TextField()
     create_date = models.DateTimeField(auto_now=False,auto_now_add=True)
     tabel_id = models.IntegerField()
     value = models.CharField(max_length = 50)

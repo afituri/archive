@@ -18,7 +18,6 @@ import datetime
 from django.shortcuts import render_to_response, RequestContext
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# -*- coding: utf-8 -*-
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -66,7 +65,6 @@ def editArchiveEditable(request):
     name = request.POST['name']
     value = request.POST['value']
     archive = Archive.objects.get(id=id_u)
-    print archive.id
     if name == 'name':
         old=archive.name
         archive.name=value
@@ -84,9 +82,7 @@ def editArchiveEditable(request):
         old=Section.objects.get(id=int(archive.section_id.id)).name
         new = Section.objects.get(id=value)
         value=new.name
-        print value
         archive.section_id = new
-        
     archive.save()
     log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
     log.save()
