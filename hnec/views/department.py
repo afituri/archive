@@ -121,22 +121,25 @@ def department(request, department_id=0):
 def addFolder(request, department_id=1):
     c = {}
     c.update(csrf(request))
-    objects=Section.objects.filter(Department_id=department_id, status=True)
-    paginator=Paginator(objects,4)
-    page = request.GET.get('page')
-    try:
-        archive = paginator.page(page)
-    except PageNotAnInteger :
-        archive = paginator.page(1)
-    except EmptyPage:
-        archive = paginator.page(paginator.num_pages)
-    # except paginator.page_range
-    c['sections']=archive
-    c['list']=objects
-    c['dept_id']=department_id
-    c['userid']=request.user.id
-    c['departmentName']=Department.objects.get(id=department_id,status=True)
-    return render_to_response('addFolder.html',c)
+    if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
+        objects=Section.objects.filter(Department_id=department_id, status=True)
+        paginator=Paginator(objects,4)
+        page = request.GET.get('page')
+        try:
+            archive = paginator.page(page)
+        except PageNotAnInteger :
+            archive = paginator.page(1)
+        except EmptyPage:
+            archive = paginator.page(paginator.num_pages)
+        # except paginator.page_range
+        c['sections']=archive
+        c['list']=objects
+        c['dept_id']=department_id
+        c['userid']=request.user.id
+        c['departmentName']=Department.objects.get(id=department_id,status=True)
+        return render_to_response('addFolder.html',c)
+    else:
+        return HttpResponseRedirect('/addFolder/%s/' %request.user.employee.department_id.id)
 
 @login_required(login_url='/')
 def editFolder(request):
