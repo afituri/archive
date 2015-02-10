@@ -8,13 +8,13 @@
 
     	{% block table %}
     	 				<div class='row'>
-                              <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
+                            <div class="col-md-3 col-sm-2 col-xs-1"></div>
                             <div class="col-md-6 col-sm-8 col-xs-10">
                                 <div class="panel panel-default table-responsive">
                                     <div class="panel-heading panel-responsive">
                                         <div class="row">
                                             <div class="  col-md-3 col-sm-3 col-xs-3  ">
-                                                <font size="4" >المستخدمين </font></a>
+                                                <font size="4" >المستخدمين </font>
                                             </div>
                                             <div class="  col-md-6 col-sm-6 col-xs-6 ">
                                               
@@ -52,7 +52,7 @@
                                     </table>
                                 </div>
                                 {% block pagination %}
-                                    <nav pull-center>
+                                    <nav class="pull-center">
                                         <ul class="pagination">
                                          
                                             <li> {% if users.has_previous %} <a href="?page={{ users.previous_page_number }}" aria-label="Previous"> {% endif %} <span>&laquo;</span></a></li>
@@ -68,7 +68,7 @@
                                     </nav> 
                                 {% endblock %} <!-- end of block pagination-->
                             </div>
-                            <div 	class="col-md-3 col-sm-2 col-xs-1"></div>
+                            <div class="col-md-3 col-sm-2 col-xs-1"></div>
                         </div>
 
                         <div id="addUser" data-width="760" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true" class="modal fade">

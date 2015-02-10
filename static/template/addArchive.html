@@ -69,7 +69,12 @@
         <div class="col-sm-6">
           <select class="form-control" name="section_id" id="section_id">
             {% for sectidon in list %}
-                <option value="{{sectidon.id}}">{{sectidon.name}}</option>
+              {% if sectidon.id == sec %}  
+                <option value="{{sectidon.id}}" selected>{{sectidon.name}}</option>
+              {%else%} 
+                <option value="{{sectidon.id}}" >{{sectidon.name}}</option>
+              {% endif%}
+                
             {% endfor %}
           </select>
         </div>

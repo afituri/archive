@@ -38,9 +38,11 @@ def editArchive(request, archive_id=1):
 def addArchive(request, department_id=0):
     c = {}
     c.update(csrf(request))
+    sec = request.GET.get('sec','0')
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id): 
         c['list']=Section.objects.filter(Department_id=department_id,status=True)
         c['dept_id']= department_id
+        c['sec']=int(sec)
         c['userid']=request.user.id
         c['departmentName']=Department.objects.get(id=department_id,status=True)
         return render_to_response('addArchive.html',c)
