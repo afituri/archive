@@ -17,10 +17,11 @@ def logIn(request):
     c = {}
     c.update(csrf(request))
     if request.user.is_authenticated():
+        c['userid']=request.user.id
         if request.user.is_staff:
-            return HttpResponseRedirect('/cpanel/')
+            return HttpResponseRedirect('/cpanel/',c)
         else:
-            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+            return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id,c)
     else:        
         return render_to_response('logIn.html',c)
 
@@ -34,14 +35,17 @@ def logout(request):
 def auth_view(request):
     username = request.POST.get('username','')
     password = request.POST.get('password','')
+    c = {}
+    c.update(csrf(request))
     user = auth.authenticate(username=username, password=password)
     if user is not None:
         if user.is_active != False:
             auth.login(request,user) #this login tell django that we want this user to login
+            c['userid']=user.id
             if request.user.is_staff:
-                return HttpResponseRedirect('/cpanel/')
+                return HttpResponseRedirect('/cpanel/',c)
             else:
-                return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
+                return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id,c)
         else:
             messages.warning(request, 'إسم المستخدم أو كلمة المرور غير صحيحة')
         return render_to_response('logIn.html', locals(), 
@@ -104,7 +108,7 @@ def addUser(request):
 
 @login_required(login_url='/')
 def editUser(request,user_id=1):
-    if request.user.is_staff:
+    if request.user.is_staff or int(user_id) == int(request.user.id) :
         c = {}
         c.update(csrf(request))
         c['user']=User.objects.get(id=user_id,is_active=True)
@@ -144,7 +148,11 @@ def edit(request):
 @login_required(login_url='/')
 def cpanel(request):
     if request.user.is_staff:
-        return render_to_response('cpanel.html',{'department':Department.objects.filter(status=True)})
+        c = {}
+        c.update(csrf(request))
+        c['userid']=request.user.id
+        c['department']=Department.objects.filter(status=True)
+        return render_to_response('cpanel.html',c)
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 
@@ -186,6 +194,7 @@ def report(request):
         except EmptyPage:
             rep = paginator.page(paginator.num_pages)
         c['report'] = rep
+        c['userid']=request.user.id
         return render_to_response('report.html',c)
     else:
         return HttpResponseRedirect('/',)
