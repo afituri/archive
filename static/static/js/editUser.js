@@ -25,6 +25,16 @@ $(document).ready(function(){
       if(!v) return 'الرجاء ادخال اسم المستخدم';
     }
   });
+  $('#password').editable({
+    url: '../../edit/',
+    type: 'password',
+    pk: 1,
+    name: 'password',
+    title: 'Enter username',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال hgرمز السري';
+    }
+  });
   $('#first_name').editable({
     url: '../../edit/',
     type: 'text',

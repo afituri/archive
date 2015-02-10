@@ -24,6 +24,10 @@
             <td width="65%"><a id="username" href="#" data-type="text" data-pk="{{user.id}}" data-title="اسم المستخدم" data-value="{{user.username}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.username}}</a></td>
           </tr>
           <tr>
+            <td width="35%">الرمز السري</td>
+            <td width="65%"><a id="password" href="#" data-type="password" data-pk="{{user.id}}" data-title="اسم المستخدم" data-value="" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> ***************</a></td>
+          </tr>
+          <tr>
             <td width="35%">الاسم</td>
             <td width="65%"><a id="first_name" href="#" data-type="text" data-pk="{{user.id}}" data-title="الاسم" data-value="{{user.first_name}}"data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"> {{user.first_name}}</a></td>
           </tr>

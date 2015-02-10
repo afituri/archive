@@ -131,6 +131,9 @@ def edit(request):
     elif name == 'email':
         old = user.email
         user.email = value
+    elif name == 'password':
+        old = user.password
+        user.set_password(value)
     user.save()
     log = Log(id_user=request.user,action_type='edit',tabel='user',desc='edit user '+name+': '+old+' = > '+value,tabel_id=user.id,value=value)
     log.save()
