@@ -2,18 +2,7 @@
 
 {% block navbarList %}
     <li><a href="/">الصفحة الرئيسية </a></li>
-{% endblock %}
-
-{% block departmentName %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel-body">
-                <nav class="navbar navbar-default">
-                    <p class="h3"><strong>{{departmentName.name}}</strong></p>
-                </nav>
-            </div>
-        </div>
-    </div>
+    <li><a href="#">{{departmentName.name}}</a></li>
 {% endblock %}
 
 {% block table %}

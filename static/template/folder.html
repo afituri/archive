@@ -1,21 +1,10 @@
 {% extends "base.html" %}
-{% block departmentName %}
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel-body">
-                    <nav class="navbar navbar-default">
-                        <p class="h3"><strong>{{departmentName.name}}</strong></p>
-                    </nav>
-                </div>
-            </div>
-        </div>
-{% endblock %}
+
 {% block navbarList %}
     <li><a href="/">الصفحة الرئيسية </a></li>
-    <li><a href="/addFolder/{{dept_id}}">إضافة مجلد</a></li>
-    <li><a href="/addArchive/{{dept_id}}">الارشـيف</a></li>
-    <li class="active"><a href="/department/{{dept_id}}">قـسم</a></li>
+    <li><a href="#">{{departmentName.name}}</a></li>
 {% endblock %} 
+
 {% block search %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
