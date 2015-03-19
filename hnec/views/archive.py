@@ -104,7 +104,7 @@ def insertArchive(request):
     archive.save()
     log = Log(id_user=request.user,action_type='add',tabel='Archive',desc='add Archive '+name,tabel_id=archive.id,value=name)
     log.save()
-    file_name= os.path.join("static","Files")
+    file_name= os.path.join("static","static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+real_date[:4]
@@ -163,7 +163,7 @@ def addFile(request):
     i=0
     archive_id = request.POST['archive_id']
     archive =Archive.objects.get(id=archive_id)
-    file_name= os.path.join("static","Files")
+    file_name= os.path.join("static","static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+str(archive.real_date)[:4]

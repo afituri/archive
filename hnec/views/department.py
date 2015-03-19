@@ -197,13 +197,13 @@ def folder(request, department_id=1, section_id=1):
             c['userid']=request.user.id
             c['list'] = Section.objects.filter(Department_id=department_id,status=True)
             c['q']=q
-            c['section_id']=section_id
+            c['section_id']=int(section_id)
             c['start_date']= start_date
             c['end_date']= end_date
             c['departmentName']=Department.objects.get(id=department_id,status=True)
             return render_to_response('folder.html',c)
         else:
-            return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))    
+            return HttpResponseRedirect('/department/%s/%s' %(request.user.employee.department_id.id, sec_list[0]))
     else:
         return HttpResponseRedirect('/department/%s/' %request.user.employee.department_id.id)
 

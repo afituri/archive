@@ -36,7 +36,7 @@
                             {% for department in department %}
                             <tr data-id="{{department.id}}">
                                 <td headers="name" >
-                                    <a id="department{{department.id}}" href="#" data-type="text" data-pk="{{department.id}}" data-title="تغيير إسم المجلد" data-value="{{department.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+                                    <a id="department{{department.id}}" href="#" data-type="text" data-pk="{{department.id}}" data-title="تغيير إسم القسم" data-value="{{department.name}}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
                                         {{department.name}}
                                     </a>
                                 </td>

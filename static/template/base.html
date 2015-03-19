@@ -121,17 +121,26 @@
                                 <div class="panel-heading "><font size="4" >أنـواع المجلدات</font> </div>
                                 {% block addFolder %}
                                 <div class="panel-body">
-                                     <a class="btn btn-block btn-success " href="/addFolder/{{dept_id}}"><font size="4" >إضـافـة مـجـلـد جديد </font> </a>
+                                     <a class="btn btn-block btn-success " href="/addFolder/{{dept_id}}"><font size="4" >إضافـة مجـلـد جديد </font> </a>
                                 </div>
                                 {% endblock %} <!-- end of block addFolder-->
-                                <div class="list-group" class="list-block">
-                                      {% for sectidon in list %}
-                                        <a href="/department/{{sectidon.Department_id_id}}/{{sectidon.id}}" class="list-group-item"><font size="4" >{{sectidon.name}}</font></a>
+                                <div class="list-group list-block">
+                                    {% for sectidon in list %}
+                                        {% if sectidon.id == section_id %}
+                                            <a  href="/department/{{sectidon.Department_id_id}}/{{sectidon.id}}" class="list-group-item active " >
+                                                <font size="4" >{{sectidon.name}}</font>
+                                            </a>
+                                        {% else %}
+                                            <a  href="/department/{{sectidon.Department_id_id}}/{{sectidon.id}}" class="list-group-item " >
+                                                <font size="4" >{{sectidon.name}}</font>
+                                            </a>
+                                        {% endif %}
+                                        
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
-                            {% endblock %} <!-- end of block list-->
+                        {% endblock %} <!-- end of block list-->
                             
                                 {% block table %}
                                     <div class="  col-md-6 col-sm-6   ">
