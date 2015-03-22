@@ -105,15 +105,19 @@ def insertArchive(request):
     log = Log(id_user=request.user,action_type='add',tabel='Archive',desc='add Archive '+name,tabel_id=archive.id,value=name)
     log.save()
     file_name= os.path.join("static","static","Files")
+    name_path=os.path.join("static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+real_date[:4]
+    name_path= name_path+"/"+real_date[:4]
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+section_id.Department_id.name
+    name_path= name_path+"/"+section_id.Department_id.name
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+name+"_"+str(archive.id)
+    name_path= name_path+"/"+name+"_"+str(archive.id)
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     for fil in request.POST.getlist('file_name[]'):
@@ -124,7 +128,7 @@ def insertArchive(request):
                 destination.write(chunk)
         if files_name[i] == '':
             files_name[i]=files.name
-        f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
+        f = Files(name = files_name[i] ,path =name_path+"/"+files.name,archive_id=archive )
         f.save()
         log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
         log.save()
@@ -164,15 +168,19 @@ def addFile(request):
     archive_id = request.POST['archive_id']
     archive =Archive.objects.get(id=archive_id)
     file_name= os.path.join("static","static","Files")
+    name_path=os.path.join("static","Files")
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+str(archive.real_date)[:4]
+    name_path=name_path+"/"+str(archive.real_date)[:4]
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+archive.department_id.name
+    name_path=name_path+"/"+archive.department_id.name
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     file_name = file_name+"/"+archive.name+"_"+str(archive.id)
+    name_path=name_path+"/"+archive.name+"_"+str(archive.id)
     if not os.path.exists(file_name):
         os.mkdir(file_name)
     for fil in request.POST.getlist('file_name[]'):
@@ -184,7 +192,7 @@ def addFile(request):
                 destination.write(chunk)
             if files_name[i] == '':
                 files_name[i]=files.name
-        f = Files(name = files_name[i] ,path =file_name+"/"+files.name,archive_id=archive )
+        f = Files(name = files_name[i] ,path =name_path+"/"+files.name,archive_id=archive )
         f.save()
         log = Log(id_user=request.user,action_type='add',tabel='Files',desc='add Files '+files_name[i],tabel_id=f.id,value=files_name[i])
         log.save()
