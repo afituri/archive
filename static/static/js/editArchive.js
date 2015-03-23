@@ -48,8 +48,15 @@ $(document).ready(function(){
         viewformat: 'yyyy-mm-dd',    
         datetimepicker: {
             weekStart: 1,
-            pickTime: false,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
             format: "yyyy-mm-dd",
+            viewMode: "months", 
+            minViewMode: "months"
         },
         validate: function(v) {
             if(!v) return 'الرجاء ادخال التاريخ';

@@ -15,6 +15,7 @@ import json
 from django.core import serializers
 import os
 import datetime
+from datetime import datetime, timedelta
 from django.shortcuts import render_to_response, RequestContext
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -72,7 +73,9 @@ def editArchiveEditable(request):
         archive.name=value
     elif name == 'real_date':
         old = archive.real_date
-        archive.real_date = value
+        nwe= value.split('-')
+        rel = datetime(year=int(nwe[0]), month=int(nwe[1]), day=int(nwe[2])).date()
+        archive.real_date = rel
     elif name == 'ref_num':
         old = archive.ref_num
         archive.ref_num = value
@@ -86,7 +89,7 @@ def editArchiveEditable(request):
         value=new.name
         archive.section_id = new
     archive.save()
-    log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+old+' = > '+value,tabel_id=archive.id,value=value)
+    log = Log(id_user=request.user,action_type='edit',tabel='archive',desc='edit archive '+name+': '+str(old)+' = > '+value,tabel_id=archive.id,value=value)
     log.save()
     return HttpResponseRedirect('/',)
 
