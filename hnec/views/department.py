@@ -59,7 +59,7 @@ def addDepartment(request):
     c.update(csrf(request))
     objects=Section.objects.filter(Department_id=department_id,status=True)
 
-    paginator=Paginator(objects,4)
+    paginator=Paginator(objects,10)
     page = request.GET.get('page')
     try:
         section = paginator.page(page)
@@ -96,7 +96,7 @@ def department(request, department_id=0):
             end_date=''
             q=''
             objects=Archive.objects.filter(department_id=department_id,status=True)
-        paginator=Paginator(objects,4)
+        paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
             archive = paginator.page(page)
@@ -123,7 +123,7 @@ def addFolder(request, department_id=1):
     c.update(csrf(request))
     if request.user.is_staff or int(department_id) == int(request.user.employee.department_id.id):
         objects=Section.objects.filter(Department_id=department_id, status=True)
-        paginator=Paginator(objects,4)
+        paginator=Paginator(objects,10)
         page = request.GET.get('page')
         try:
             archive = paginator.page(page)
@@ -184,7 +184,7 @@ def folder(request, department_id=1, section_id=1):
                 q=''
                 objects=Archive.objects.filter(department_id=department_id,status=True,section_id=section_id)
 
-            paginator=Paginator(objects,4)
+            paginator=Paginator(objects,10)
             page = request.GET.get('page')
             try:
                 archive = paginator.page(page)
